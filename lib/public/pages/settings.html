@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script
+      src="https://kit.fontawesome.com/5be346f7c3.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>KPROXY</title>
+    <link rel="stylesheet" href="./css/settings.css" />
+    <link rel="stylesheet" href="./css/req.css" />
+    <link id="ficon" rel="icon" type="image/x-icon" href="" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <i class="fa-solid fa-chevron-right menu-icon"></i>
+      <ul class="nav-links">
+        <li>
+          <a href="/">
+            <i class="fa-solid fa-house innericon">
+              <p class="innerlabel">Home</p>
+            </i>
+          </a>
+        </li>
+        <li>
+          <a href="settings">
+            <i class="fa-solid fa-gear innericon">
+              <p class="innerlabel">Settings</p>
+            </i>
+          </a>
+        </li>
+        <li>
+          <a href="apps">
+            <i class="fa-solid fa-table-cells innericon">
+              <p class="innerlabel">Apps</p>
+            </i>
+          </a>
+        </li>
+        <li>
+          <a href="games">
+            <i class="fa-solid fa-gamepad innericon">
+              <p class="innerlabel">Games</p>
+            </i>
+          </a>
+        </li>
+        <li>
+          <a href="documentation">
+            <i class="fa-solid fa-file innericon">
+              <p class="innerlabel">Documentation</p>
+            </i>
+          </a>
+        </li>
+        <li>
+          <a href="changelog">
+            <i class="fa-solid fa-circle-info innericon">
+              <p class="innerlabel">Changelog</p>
+            </i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <h1 id="title">Settings</h1>
+    <div class="center-wrapping">
+      <div class="sections-container">
+        <div class="sections">
+          <div class="settingdesc">
+            <h3>Tab Cloak</h3>
+            <p class="smalldesc">Changes the appearence of the tab.</p>
+          </div>
+          <div class="right-items">
+            <select id="cloakselect" onchange="settitle()">
+              <option selected="true" disabled value="">Select a Cloak</option>
+              <option value="Google Search">Google Search</option>
+              <option value="Gmail">Gmail</option>
+              <option value="Google Docs">Google Docs</option>
+              <option value="Google Slides">Google Slides</option>
+              <option value="PowerPoint">PowerPoint</option>
+              <option value="Google Drive">Google Drive</option>
+              <option value="OneDrive">OneDrive</option>
+              <option value="Wikipedia">Wikipedia</option>
+              <option value="YouTube">YouTube</option>
+              <option value="Clever">Clever</option>
+              <option value="Desmos">Desmos</option>
+              <option value="Outlook">Outlook</option>
+              <option value="Google Homepage">Google Homepage</option>
+              <option value="Word">Word</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3>Custom favicon</h3>
+            <p class="smalldesc">Changes the favicon (the small image) of the tab.</p>
+          </div>
+          <div class="right-items">
+            <input type="file" id="faviconchooser" accept="image/*" />
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3>Custom tab name</h3>
+            <p class="smalldesc">Enter your own tab to appear.</p>
+          </div>
+          <div class="right-items">
+            <input
+              type="text"
+              id="titlechooser"
+              placeholder="Choose a name..."
+            />
+            <button id="filetitleconfirm" onclick="settitlecustom()">
+              Confirm
+            </button>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3>About:blank tab</h3>
+            <p class="smalldesc">Opens this site in an 'about:blank' tab</p>
+          </div>
+          <div class="right-items">
+            <button id="blankopener" class="setbutton" onclick="blankpage()">
+              Open in blank
+            </button>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3>Datalink</h3>
+            <p class="smalldesc">Provides a datalink to paste into the URL to access this site.</p>
+          </div>
+          <div class="right-items">
+            <button
+              id="datalinkbutton"
+              class="setbutton"
+              onclick="makefinallink()"
+            >
+              Generate Datalink
+            </button>
+          </div>
+        </div>
+
+        <!--<div class="sections">
+        <label for="anticlosebox">Anticlose (WIP)</label>
+        <input type="checkbox" id="anticlosebox" name="anticlosebox">
+      </div>-->
+
+        <div class="sections">
+          <!--<h2>Panic Site</h2>
+        <select id="panicselector">
+          <option value="https://www.google.com">Google Homepage (default)</option>
+          <option value="https://clever.com/in/bsd405/student/portal">Clever</option>
+          <option value="https://www.khanacademy.org/">Khan Academy</option>
+          <option value="https://www.desmos.com/calculator">Desmos</option>
+        </select>-->
+          <div class="settingdesc">
+            <h3>Panic site</h3>
+            <p class="smalldesc">Set a site to change to when the panic key is pressed</p>
+          </div>
+          <div class="right-items">
+            <input
+              type="text"
+              id="cpanicselector"
+              placeholder="Enter a URL..."
+            />
+            <button id="panicconfirm" onclick="setpanicsite()" class="setbutton">
+              Confirm
+            </button>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3>Panic Key</h3>
+            <p class="smalldesc">Current Key: <kbd id="currentkey">Escape</kbd></p>
+          </div>
+          <div class="right-items">
+            <button id="keysetter" class="setbutton" onclick="listenforkey()">
+              Set Key
+            </button>
+            <script>
+              if (localStorage.getItem("panickey") === null) {
+                localStorage.setAttribute("panickey", "Esc");
+              }
+              document.getElementById("currentkey").innerText = localStorage.getItem('panickey');
+            </script>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3>Cookies/Local Data</h3>
+            <p class="smalldesc">Deletes your local storage from the site</p>
+          </div>
+          <div class="right-items">
+            <button id="cookieclear" onclick="cookieclear()" class="setbutton">
+              delete local data
+            </button>
+          </div>
+        </div>
+
+        <div class="sections">
+          <h2>Colors</h2>
+          <p class="smalldesc">Customize the color of the site</p>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3>Background color</h3>
+          </div>
+          <div class="right-items">
+            <input
+              id="backgroundcolor"
+              placeholder="Enter a hexcode..."
+            />
+            <button
+              id="backgroundcolorset"
+              onclick="backgroundcolorset()"
+            >
+              Set color
+            </button>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3>Secondary color</h3>
+          </div>
+          <div class="right-items">
+            <input
+              id="secondarycolor"
+              placeholder="Enter a hexcode..."
+            />
+            <button
+              id="secondarycolorset"
+              class="setbutton"
+              onclick="secondarycolorset()"
+            >
+              Set color
+            </button>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3>Tertiary color</h3>
+          </div>
+          <div class="right-items">
+            <input
+              id="tertiarycolor"
+              placeholder="Enter a hexcode..."
+            />
+            <button
+              id="tertiarycolorset"
+              class="setbutton"
+              onclick="tertiarycolorset()"
+            >
+            Set color
+          </button>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3>Text color</h3>
+          </div>
+          <div class="right-items">
+            <input
+              id="textcolor"
+              placeholder="Enter a hexcode..."
+            />
+            <button id="textcolorset" class="setbutton" onclick="textcolorset()">
+              Set color
+            </button>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3>History flooder</h3>
+            <p class="smalldesc">Enter "123456789" into the box to activate</p>
+          </div>
+          <div class="right-items">
+            <button class="setbutton" onclick="floodhistory()">Flood</button>
+          </div>
+        </div>
+
+        <div id="datalinkpopup">
+          <button id="exitbutton">x</button>
+          <h3 id="popuptitle">Datalink</h3>
+          <input id="datalinkcontainer" class="colorinput" />
+          <button onclick="copytext()" id="copybutton">Copy</button>
+        </div>
+
+        <!--<div class="sections">
+        <h2>Colors (search page)</h2>
+        </div>
+
+        <div class="sections">
+        <div class="settingdesc">
+          <h3>Text color</h3>
+        </div>
+        <input id="b-textcolor" class="colorinput" placeholder="Enter a hexcode...">
+        <button id="b-textcolorset" class="setbutton" onclick="btextcolorset()">Set color</button>
+        </div>
+
+        <div class="sections">
+        <div class="settingdesc"></div>
+        <h3>Background color</h3>
+        <input id="b-backgroundcolor" class="colorinput" placeholder="Enter a hexcode...">
+        <button id="b-backgroundcolorset" class="setbutton" onclick="bbackgroundcolorset()">Set color</button>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc"></div>
+        <h3>Secondary color</h3>
+        <p>Browser background color #2 (lower half)</p>
+        <input id="b-secondarycolor" class="colorinput" placeholder="Enter a hexcode...">
+        <button id="b-secondarycolorset" class="setbutton" onclick="bsecondarycolorset()">Set color</button>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc"></div>
+        <h3>Tertiary color</h3>
+        <p>Searchbar color</p>
+        <input id="b-tertiarycolor" class="colorinput" placeholder="Enter a hexcode...">
+        <button id="b-tertiarycolorset" class="setbutton" onclick="btertiarycolorset()">Set color</button>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc"></div>
+        <h3>Quartary color</h3>
+        <p>Inactive tab color</p>
+        <input id="b-quartarycolor" class="colorinput" placeholder="Enter a hexcode...">
+        <button id="b-quartarycolorset" class="setbutton" onclick="bquartarycolorset()">Set color</button>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc"></div>
+        <h3>Quinary color</h3>
+        <p>Active tab color</p>
+        <input id="b-quinarycolor" class="colorinput" placeholder="Enter a hexcode...">
+        <button id="b-quinarycolorset" class="setbutton" onclick="bquinarycolorset()">Set color</button>
+        </div>
+
+        <div class="sections"></div>
+        <div class="settingdesc"></div>
+        <h3>Senary color</h3>
+        <p>Inactive tab hover color</p>
+        <input id="b-senarycolor" class="colorinput" placeholder="Enter a hexcode...">
+        <button id="b-senarycolorset" class="setbutton" onclick="bsenarycolorset()">Set color</button>
+        </div>
+      </div>-->
+      </div>
+    </div>
+  </body>
+  <script src="./js/req.js"></script>
+  <script src="./js/settings.js"></script>
+</html>

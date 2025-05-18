@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://kit.fontawesome.com/5be346f7c3.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./css/req.css">
+    <title>KPROXY</title>
+    <link id="ficon"rel="icon" type="image/x-icon" href="">
+  </head>
+  <body>
+    <nav class="navbar">
+        <i class="fa-solid fa-chevron-right menu-icon"></i>
+        <ul class="nav-links">
+            <li><a href="/">
+              <i class="fa-solid fa-house innericon">
+                <p class="innerlabel">Home</p>
+              </i>
+            </a>
+            </li>
+            <li><a href="settings">
+              <i class="fa-solid fa-gear innericon">
+                <p class="innerlabel">Settings</p>
+              </i>
+            </a>
+            </li>
+            <li><a href="apps">
+              <i class="fa-solid fa-table-cells innericon">
+                <p class="innerlabel">Apps</p>
+              </i>
+            </a></li>
+            <li><a href="games">
+              <i class="fa-solid fa-gamepad innericon">
+                <p class="innerlabel">Games</p>
+              </i>
+            </a></li>
+            <li><a href="documentation">
+              <i class="fa-solid fa-file innericon">
+                <p class="innerlabel">Documentation</p>
+              </i>
+            </a></li>
+            <li><a href="changelog">
+              <i class="fa-solid fa-circle-info innericon">
+                <p class="innerlabel">Changelog</p>
+              </i>
+            </a></li>
+        </ul>
+    </nav>
+  </div>
+  <h1 id="webname">KPROXY</h1>
+  <div id="sbar">
+    <input id="searchbar" autocomplete="off" type="text" placeholder="Search something or enter a URL..." onkeydown="searchkey(event)">
+  </div>
+  <h2 id="shortc">Shortcuts</h2>
+  <div id="quicklinks">
+    <div id="quicklinks-inner">
+    <a class="shortcut" href="/search?search=google.com">
+      <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.freepnglogos.com%2Fuploads%2Fgoogle-logo-png%2Fgoogle-logo-png-google-icon-logo-png-transparent-svg-vector-bie-supply-14.png&f=1&nofb=1&ipt=a31b31367a3ef25ae7dcc32926af40288e6277cfa62b984563f745e5b388122a&ipo=images" class="logo">
+      <p>Google</p>
+    </a>
+    </div>
+    <a class="shortcut" onclick="addsite()">
+      <img src="../assets/plus.png" class="logo">
+      <p>Add Website</p>
+    </a>
+  </div>
+  </body>
+  <script src="./js/req.js"></script>
+  <script src="./js/home.js"></script>
+</html>

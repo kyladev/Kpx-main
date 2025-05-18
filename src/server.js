@@ -11,7 +11,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // static paths
-import { publicPath } from "ultraviolet-static";
+const publicPath = "/Users/kylakreal/Kproxy-main/lib";
 import { uvPath } from "@titaniumnetwork-dev/ultraviolet";
 import { epoxyPath } from "@mercuryworkshop/epoxy-transport";
 import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
@@ -41,11 +41,11 @@ fastify.get("/uv/uv.config.js", (req, res) => {
 });
 
 fastify.get("/settings", (req, res) => {
-	return res.sendFile("pages/settings.html", publicPath);
+	return res.sendFile("public/pages/home.html", publicPath);
 });
 
 fastify.get("/", (req, res) => {
-	return res.sendFile("pages/home.html", publicPath);
+	return res.sendFile("public/pages/settings.html", publicPath);
 });
 
 fastify.register(fastifyStatic, {
