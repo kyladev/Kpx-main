@@ -1,12 +1,8 @@
 /* Main container */
 #siteicons {
-    position: fixed;
-    top: 30vh;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-height: 50vh;
+    margin: 2.5vh auto 0 auto; /* Push down from top */
+    max-height: 60vh;        /* Still limit height */
     width: 80vw;
-    margin-top: 9vh;
     box-sizing: border-box;
     background-color: #303030;
     box-shadow: 0 0 8px #ffffff;
@@ -14,8 +10,8 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    z-index: 1000;
 }
+
 
 /* Sticky header */
 .siteicons-header {
