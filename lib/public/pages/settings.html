@@ -6,8 +6,8 @@
       crossorigin="anonymous"
     ></script>
     <title>KPROXY</title>
-    <link rel="stylesheet" href="./css/settings.css" />
-    <link rel="stylesheet" href="./css/req.css" />
+    <link rel="stylesheet" href="public/css/settings.css" />
+    <link rel="stylesheet" href="public/css/req.css" />
     <link id="ficon" rel="icon" type="image/x-icon" href="" />
   </head>
   <body>
@@ -58,7 +58,8 @@
         </li>
       </ul>
     </nav>
-    <h1 id="title">Settings</h1>
+    <h1 id="title">KPROXY</h1>
+    <h3 class="subheading">Settings</h3>
     <div class="center-wrapping">
       <div class="sections-container">
         <div class="sections">
@@ -142,6 +143,16 @@
           </div>
         </div>
 
+        <div class="sections">
+          <div class="settingdesc">
+            <h3>Open in file</h3>
+            <p class="smalldesc">Appears offline with full functionality, simply open the file in your browser.</p>
+          </div>
+          <div class="right-items">
+            <button onclick="">Generate file</button>
+          </div>
+        </div>
+
         <!--<div class="sections">
         <label for="anticlosebox">Anticlose (WIP)</label>
         <input type="checkbox" id="anticlosebox" name="anticlosebox">
@@ -198,6 +209,16 @@
             <button id="cookieclear" onclick="cookieclear()" class="setbutton">
               delete local data
             </button>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3>History flooder</h3>
+            <p class="smalldesc">Enter "123456789" into the box to activate</p>
+          </div>
+          <div class="right-items">
+            <button class="setbutton" onclick="floodhistory()">Flood</button>
           </div>
         </div>
 
@@ -277,16 +298,6 @@
           </div>
         </div>
 
-        <div class="sections">
-          <div class="settingdesc">
-            <h3>History flooder</h3>
-            <p class="smalldesc">Enter "123456789" into the box to activate</p>
-          </div>
-          <div class="right-items">
-            <button class="setbutton" onclick="floodhistory()">Flood</button>
-          </div>
-        </div>
-
         <div id="datalinkpopup">
           <button id="exitbutton">x</button>
           <h3 id="popuptitle">Datalink</h3>
@@ -356,6 +367,6 @@
       </div>
     </div>
   </body>
-  <script src="./js/req.js"></script>
-  <script src="./js/settings.js"></script>
+  <script src="public/js/req.js"></script>
+  <script src="public/js/settings.js"></script>
 </html>

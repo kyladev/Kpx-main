@@ -14,7 +14,7 @@
   margin-right: 22.5%;
   box-sizing: border-box;
   display: inline-block;
-  height: 1500px;
+  height: 1575px;
   width: 55%;
   box-shadow:0 0 8px #ffffff;
 }
@@ -26,6 +26,7 @@
 
 .smalldesc {
   color: #707070;
+  font-size: smaller;
 }
 
 .right-items {
@@ -56,83 +57,72 @@
 }
 
 #cloakselect {
-    padding: 8px;
-    padding-right: 60px;
-    border-radius: 8px;
-    background-color: #202020;
-    border-color: #ffffff;
-    color: #ffffff;
-    border: 0px;
-    font-size: 14px;
-    transition: border-color 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+  border: 1px solid #181818;
+  background-color: #202020;
+  padding: 8px;
+  padding-right: 60px;
+  border-radius: 8px;
+  background-color: #202020;
+  color: #ffffff;
+  font-size: 14px;
+  transition: border-color 0.2s ease-in-out;
 }
 #cloakselect:hover {
-  background-color: #303030;
-  box-shadow: 0 0 8px #ffffff;
-  transition: border-color 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+  border: 1px solid #7d7d7d;
+  background-color: #252525;
+  transition: border-color 0.2s ease-in-out;
 }
-#panicselector {
-    padding: 8px;
-    padding-right: 60px;
-    border-radius: 10px;
-    background-color: #383838;
-    border-color: #ffffff;
-    color: #ffffff;
-    border: 0px;
-    font-size: 14px;
-    transition: border-color 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-#panicselector:hover {
-  background-color: #404040;
-  box-shadow: 0 0 8px #ffffff;
-  transition: border-color 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
-}
+
 button {
     background-color: #202020;
     padding: 8px;
     border-radius: 5px;
     color: #ffffff;
+    border: 1px solid #181818;
     margin: 8px;
-    border: 0px;
     font-size: 14px;
-    transition: border-color 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+    transition: 0.2s ease-in-out;
 }
+
 button:hover {
-  background-color: #303030;
-  box-shadow: 0 0 8px #ffffff;
-  transition: border-color 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+  background-color: #252525;
+  border: 1px solid #7d7d7d;
+  transition: 0.2s ease-in-out;
 }
+
 #faviconchooser {
+  border: 1px solid #181818;
   background-color: #202020;
   padding: 8px;
   border-radius: 5px;
   color: #ffffff;
   margin: 8px;
-  border: 0px;
   font-size: 14px;
 }
+
 input {
   background-color: #202020;
   padding: 8px;
   border-radius: 5px;
   color: #ffffff;
   margin: 8px;
-  border: 0px solid #7d7d7d;
+  border: 1px solid #181818;
   font-size: 14px;
-  transition: border-color 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+  transition: 0.2s ease-in-out
 }
+
 input:hover {
-  background-color: #252525;
-  box-shadow: 0 0 8px #ffffff;
-  transition: border-color 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+  background-color: #222222;
+  transition: 0.2s ease-in-out
 }
+
 input:focus {
   background-color: #252525;
   outline:4px #7d7d7d;
-  border:0px solid #7d7d7d;
-  box-shadow: 0 0 8px white;
-  transition: border-color 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+  border:1px solid #7d7d7d;
+  transition: 0.2s ease-in-out
 }
+
 .botselect {
     padding: 8px;
     padding-right: 60px;
@@ -144,10 +134,12 @@ input:focus {
     font-size: 14px;
     transition: border-color 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
 }
+
 .botselect:hover {
-  box-shadow: 0 0 8px #ffffff;
+  box-shadow: 0 0 2px #ffffff;
   transition: border-color 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
 }
+
 #datalinkpopup {
   position: fixed;
   top: 50%;
@@ -162,12 +154,15 @@ input:focus {
   z-index: 1000;
   visibility: hidden;
 }
+
 #popuptitle {
   text-align: center;
 }
+
 #datalinkcontainer {
   width: 200px !important;
 }
+
 #exitbutton {
   width: 50px;
   height: 50px;
@@ -179,6 +174,7 @@ input:focus {
   transition: 0.1s ease-in-out;
   color: white;
 }
+
 #exitbutton:hover {
   width: 50px;
   height: 50px;
@@ -190,17 +186,19 @@ input:focus {
   border-radius: 50px;
   transition: 0.1s ease-in-out;
 }
+
 #copybutton {
-    background-color: #383838;
-    padding: 10px;
-    border-radius: 5px;
-    color: #ffffff;
-    margin: 10px;
-    border: 0px;
-    font-size: 18px;
-    transition: border-color 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+  background-color: #383838;
+  padding: 10px;
+  border-radius: 5px;
+  color: #ffffff;
+  margin: 10px;
+  border: 0px;
+  font-size: 18px;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
 }
+
 #copybutton:hover {
-  box-shadow: 0 0 8px #ffffff;
+  box-shadow: 0 0 2px #ffffff;
   transition: border-color 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
 }

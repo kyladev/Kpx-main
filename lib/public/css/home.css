@@ -1,10 +1,15 @@
 #webname {
-    text-align: center;
-    padding-top:40px;
-    font-size: 60px;
-    position: relative;
-    color:#ffffff;
-  }
+  text-align: center;
+  padding-top:40px;
+  font-size: 60px;
+  position: relative;
+  color:#ffffff;
+}
+.plus {
+  font-size: 40px;
+  text-align: center;
+  margin: -5px;
+}
 #searchbar {
     text-align: center;
     width: 85vw;

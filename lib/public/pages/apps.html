@@ -2,7 +2,7 @@
 <html>
   <head>
     <script src="https://kit.fontawesome.com/5be346f7c3.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/public/css/home.css">
+    <link rel="stylesheet" href="/public/css/apps.css">
     <link rel="stylesheet" href="/public/css/req.css">
     <title>KPROXY</title>
     <link id="ficon"rel="icon" type="image/x-icon" href="">
@@ -45,26 +45,56 @@
             </a></li>
         </ul>
     </nav>
+    <h1>KPROXY</h1>
+    <h3 class="subheading">Apps & Sites</h3>
+   <div id="siteicons">
+  <div class="siteicons-header">
+    <input placeholder="Search for an app...">
   </div>
-  <h1 id="webname">KPROXY</h1>
-  <div id="sbar">
-    <input id="searchbar" autocomplete="off" type="text" placeholder="Search something or enter a URL..." onkeydown="searchkey(event)">
-  </div>
-  <h2 id="shortc">Shortcuts</h2>
-  <div id="quicklinks">
-    <div id="quicklinks-inner">
-    <a class="shortcut" href="/search?search=google.com">
-      <img src="/public/assets/googlelogo.png" class="logo">
-      <p>Google</p>
-    </a>
+  <div class="siteicons-grid">
+    <div class="siteicon-container">
+      <a href="search?search=https://freedns.afraid.org/">
+        <img src="/public/assets/freedns.png" class="siteicon">
+        <p class="sitename">FreeDNS</p>
+      </a>
     </div>
-    <a class="shortcut" onclick="addsite()">
-      <p class="plus">+</p>
-      <!--<img src="../assets/plus.png" class="logo">-->
-      <p>Add Website</p>
-    </a>
+
+    <div class="siteicon-container">
+      <a href="search?search=https://github.com/">
+        <img src="../assets/github.png" class="siteicon">
+        <p class="sitename">Github</p>
+      </a>
+    </div>
+
+    <div class="siteicon-container">
+      <a href="search?search=https://thehomeworkai.com/">
+        <img src="../assets/hwai.png" class="siteicon">
+        <p class="sitename">The Homework AI</p>
+      </a>
+    </div>
+
+    <div class="siteicon-container">
+      <a href="search?search=https://math-gpt.org/">
+        <img src="../assets/mathai.png" class="siteicon">
+        <p class="sitename">MathGPT</p>
+      </a>
+    </div>
+
+    <div class="siteicon-container">
+      <a href="search?search=https://win11.blueedge.me/">
+        <img src="../assets/windows.jpg" class="siteicon">
+        <p class="sitename">Windows 11 in React</p>
+      </a>
+    </div>
+
+    <div class="siteicon-container">
+      <a href="/bots">
+        <img src="../assets/bot.png" class="siteicon">
+        <p class="sitename">Kahoot and Blooket bots</p>
+      </a>
+    </div>
   </div>
+</div>
   </body>
   <script src="/public/js/req.js"></script>
-  <script src="/public/js/home.js"></script>
 </html>

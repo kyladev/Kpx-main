@@ -1,0 +1,111 @@
+/* Main container */
+#siteicons {
+    position: fixed;
+    top: 30vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-height: 50vh;
+    width: 80vw;
+    margin-top: 9vh;
+    box-sizing: border-box;
+    background-color: #303030;
+    box-shadow: 0 0 8px #ffffff;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+/* Sticky header */
+.siteicons-header {
+    background-color: #404040;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 1px solid #555;
+}
+
+/* Grid area */
+.siteicons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+    gap: 16px;
+    padding: 15px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+/* Each icon container */
+.siteicon-container {
+    background-color: #404040;
+    border: 2px solid #555555;
+    border-radius: 15px;
+    padding: 10px;
+    height: 135px;
+    width: 160px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    margin: 5px;
+}
+
+/* Icon image */
+.siteicon {
+    width: 40%;
+    border-radius: 10px;
+    object-fit: cover;
+    transition: all 0.3s ease-in-out;
+    margin-left: 30%;
+}
+
+/* Hover effect */
+.siteicon-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 4px white;
+}
+
+/* Site name */
+.sitename {
+    margin-top: 10px;
+    color: white;
+    font-size: 14px;
+}
+
+/* Responsive images inside */
+#siteicons a img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+}
+
+.sitename, .sitename:link, .sitename:visited {
+    text-align: center; 
+    color: white;
+    text-decoration: none !important;
+}
+
+input {
+  background-color: #202020;
+  padding: 8px;
+  border-radius: 5px;
+  color: #ffffff;
+  margin: 8px;
+  border: 1px solid #181818;
+  font-size: 14px;
+  width: 400px;
+  transition: 0.2s ease-in-out
+}
+
+input:hover {
+  background-color: #252525;
+  transition: 0.2s ease-in-out
+}
+
+input:focus {
+  background-color: #252525;
+  outline:4px #7d7d7d;
+  border:1px solid #7d7d7d;
+  transition: 0.2s ease-in-out
+}

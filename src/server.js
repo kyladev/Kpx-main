@@ -40,12 +40,16 @@ fastify.get("/uv/uv.config.js", (req, res) => {
 	return res.sendFile("uv/uv.config.js", publicPath);
 });
 
-fastify.get("/settings", (req, res) => {
+fastify.get("/", (req, res) => {
 	return res.sendFile("public/pages/home.html", publicPath);
 });
 
-fastify.get("/", (req, res) => {
+fastify.get("/settings", (req, res) => {
 	return res.sendFile("public/pages/settings.html", publicPath);
+});
+
+fastify.get("/apps", (req, res) => {
+	return res.sendFile("public/pages/apps.html", publicPath);
 });
 
 fastify.register(fastifyStatic, {
