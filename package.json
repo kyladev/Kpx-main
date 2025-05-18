@@ -26,6 +26,7 @@
 		"@mercuryworkshop/epoxy-transport": "^2.1.25",
 		"@titaniumnetwork-dev/ultraviolet": "^3.2.10",
 		"fastify": "^5.0.0",
+		"particles.js": "^2.0.0",
 		"path": "^0.12.7",
 		"ultraviolet-static": "file:Ultraviolet-Static",
 		"wisp-server-node": "^1.1.7",
