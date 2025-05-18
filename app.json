@@ -1,0 +1,7 @@
+{
+	"name": "Kproxy",
+	"description": "A proxy based off of Ultraviolet, made for high user customization.",
+	"repository": "https://github.com/s-krealk/Kproxy",
+	"logo": "https://raw.githubusercontent.com/titaniumnetwork-dev/Ultraviolet-Static/main/public/uv.png",
+	"keywords": ["tomp", "ultraviolet"]
+}
