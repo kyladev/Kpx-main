@@ -5,12 +5,18 @@
       src="https://kit.fontawesome.com/5be346f7c3.js"
       crossorigin="anonymous"
     ></script>
-    <title>KPROXY</title>
+    <title>KPX</title>
     <link rel="stylesheet" href="public/css/settings.css" />
     <link rel="stylesheet" href="public/css/req.css" />
     <link id="ficon" rel="icon" type="image/x-icon" href="" />
   </head>
   <body>
+    <div id="particles-js" style="position: absolute; top: 0%; width: 100%; height: 100%;">
+      <canvas class="particles-js-canvas-el"></canvas>
+    </div>
+    <div id="particles-js" style="position: absolute; top: 100%; width: 100%; height: 100%;">
+      <canvas class="particles-js-canvas-el"></canvas>
+    </div>
     <nav class="navbar">
       <i class="fa-solid fa-chevron-right menu-icon"></i>
       <ul class="nav-links">
@@ -36,6 +42,13 @@
           </a>
         </li>
         <li>
+          <a href="/tools">
+              <i class="fa-solid fa-screwdriver-wrench innericon">
+                <p class="innerlabel">Tools</p>
+              </i>
+            </a>
+          </li>
+        <li>
           <a href="/games">
             <i class="fa-solid fa-gamepad innericon">
               <p class="innerlabel">Games</p>
@@ -58,7 +71,7 @@
         </li>
       </ul>
     </nav>
-    <h1 id="title">KPROXY</h1>
+    <h1 id="title">KPX</h1>
     <h3 class="subheading">Settings</h3>
     <div class="center-wrapping">
       <div class="sections-container">
@@ -369,4 +382,6 @@
   </body>
   <script src="public/js/req.js"></script>
   <script src="public/js/settings.js"></script>
+  <script src=" https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js "></script>
+  <script src="/public/js/particles-js.js"></script>
 </html>

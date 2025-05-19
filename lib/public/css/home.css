@@ -4,6 +4,7 @@
   font-size: 60px;
   position: relative;
   color:#ffffff;
+  
 }
 .plus {
   font-size: 40px;
@@ -23,6 +24,7 @@
     box-shadow: 0 0 4px #303030;
     transition: border-color 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
     transition: 0.3s ease-in-out;
+    z-index: 1;
 }
 #searchbar:hover {
   border:1px solid white;
@@ -43,14 +45,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1;
   }
 #shortc {
-    text-align: center;
-    padding-top: 20px;
-    font-family: Arial;
-    color: #ffffff;
-    align-items: center;
-  }
+  position: relative; /* or absolute/fixed/sticky */
+  z-index: 100;
+  text-align: center;
+  padding-top: 20px;
+  font-family: Arial;
+  color: #ffffff;
+  align-items: center;
+}
 .logo {
     width:40px;
   }
@@ -76,18 +81,20 @@
   transition: 0.3s ease-in-out;
 }
 #quicklinks {
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    align-self: center;
-    display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  align-self: center;
+  display: flex;
+  position: relative; /* or absolute/fixed/sticky */
+  z-index: 100;
   }
 #ducklogo {
-    width: 40px;
-  }
+  width: 40px;
+}
 #plus {
-    width: 40px;
-  }
+  width: 40px;
+}
 #user {
-    color: #ffffff;
-  }
+  color: #ffffff;
+}

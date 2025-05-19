@@ -4,12 +4,16 @@
     <script src="https://kit.fontawesome.com/5be346f7c3.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/public/css/apps.css">
     <link rel="stylesheet" href="/public/css/req.css">
-    <script src="/public/js/req.js"></script>
-    <script src="/public/js/cloak.js"></script>
-    <title>KPROXY</title>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("gameiframe").src = params.get("game");
+        })
+    </script>
+    <title>KPX</title>
     <link id="ficon"rel="icon" type="image/x-icon" href="">
   </head>
-  <body>
+  <body style="background-color: black;">
     <nav class="navbar">
         <i class="fa-solid fa-chevron-right menu-icon"></i>
         <ul class="nav-links">
@@ -52,55 +56,18 @@
             </a></li>
         </ul>
     </nav>
-    <h1>KPX</h1>
-    <h3 class="subheading">Games</h3>
-   <div id="siteicons">
-  <div class="siteicons-header">
-    <input placeholder="Search for a game...">
-  </div>
-  <div class="siteicons-grid">
-    <div class="siteicon-container">
-      <a href="/games/play?game=/public/games/celeste/celeste.html">
-        <img src="/public/games/celeste/celeste.png" class="siteicon">
-        <p class="sitename">Celeste (PICO-8)</p>
-      </a>
-    </div>
-
-    <div class="siteicon-container">
-      <a href="/games/play?game=/public/games/2048/index.html">
-        <img src="/public/games/2048/2048.png" class="siteicon">
-        <p class="sitename">2048</p>
-      </a>
-    </div>
-
-    <div class="siteicon-container">
-      <a href="search?search=https://thehomeworkai.com/">
-        <img src="/public/assets/hwai.png" class="siteicon">
-        <p class="sitename">The Homework AI</p>
-      </a>
-    </div>
-
-    <div class="siteicon-container">
-      <a href="search?search=https://math-gpt.org/">
-        <img src="/public/assets/mathai.png" class="siteicon">
-        <p class="sitename">MathGPT</p>
-      </a>
-    </div>
-
-    <div class="siteicon-container">
-      <a href="search?search=https://win11.blueedge.me/">
-        <img src="/public/assets/windows.jpg" class="siteicon">
-        <p class="sitename">Windows 11 in React</p>
-      </a>
-    </div>
-
-    <div class="siteicon-container">
-      <a href="/bots">
-        <img src="/public/assets/bot.png" class="siteicon">
-        <p class="sitename">Bot spammers</p>
-      </a>
-    </div>
-  </div>
-</div>
+    <iframe id="gameiframe" src=""></iframe>
   </body>
+  <script src="/public/js/req.js"></script>
+  <style>
+    body {
+        width: 100%;
+        height: 100%;
+    }
+    #gameiframe {
+        width: 100vw;
+        height: 100vh;
+        border: none;
+    }
+  </style>
 </html>

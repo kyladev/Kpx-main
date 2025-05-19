@@ -4,10 +4,16 @@
     <script src="https://kit.fontawesome.com/5be346f7c3.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/public/css/home.css">
     <link rel="stylesheet" href="/public/css/req.css">
-    <title>KPROXY</title>
+    <script src="/public/js/req.js"></script>
+    <script src="/public/js/home.js"></script>
+    <title>KPX</title>
     <link id="ficon"rel="icon" type="image/x-icon" href="">
   </head>
   <body>
+  <div id="particles-js" style="position: absolute; top: 0%; width: 100%; height: 100%;">
+      <canvas class="particles-js-canvas-el"></canvas>
+  </div>
+  <div id="container">
     <nav class="navbar">
         <i class="fa-solid fa-chevron-right menu-icon"></i>
         <ul class="nav-links">
@@ -28,6 +34,11 @@
                 <p class="innerlabel">Apps</p>
               </i>
             </a></li>
+            <li><a href="/tools">
+              <i class="fa-solid fa-screwdriver-wrench innericon">
+                <p class="innerlabel">Tools</p>
+              </i>
+            </a></li>
             <li><a href="/games">
               <i class="fa-solid fa-gamepad innericon">
                 <p class="innerlabel">Games</p>
@@ -45,8 +56,8 @@
             </a></li>
         </ul>
     </nav>
-  </div>
-  <h1 id="webname">KPROXY</h1>
+  <div id="overlay">
+  <h1 id="webname">KPX</h1>
   <div id="sbar">
     <input id="searchbar" autocomplete="off" type="text" placeholder="Search something or enter a URL..." onkeydown="searchkey(event)">
   </div>
@@ -64,7 +75,8 @@
       <p>Add Website</p>
     </a>
   </div>
+  </div>
   </body>
-  <script src="/public/js/req.js"></script>
-  <script src="/public/js/home.js"></script>
+  <script src=" https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js "></script>
+  <script src="/public/js/particles-js.js"></script>
 </html>

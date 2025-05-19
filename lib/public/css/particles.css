@@ -1,0 +1,22 @@
+canvas {
+    position: absolute;
+    top: 100px;
+    width: 100%; 
+    height: 100%; 
+    z-index: -10; 
+    pointer-events: none;
+    background-position: 50% 50%;
+}
+#particles-js {
+    z-index: -1; /* Set to a low value so other elements with higher z-index will appear above */
+    position: absolute; /* Or relative, depending on your layout */
+    width: 100%;
+    height: 110vh;
+    background-color: #000000;
+    background-image: url("");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    pointer-events: none; /* Optional: allows clicks to pass through */
+    top: 0px;
+}

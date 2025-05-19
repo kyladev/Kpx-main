@@ -52,6 +52,18 @@ fastify.get("/apps", (req, res) => {
 	return res.sendFile("public/pages/apps.html", publicPath);
 });
 
+fastify.get("/tools", (req, res) => {
+	return res.sendFile("public/pages/tools.html", publicPath);
+});
+
+fastify.get("/games", (req, res) => {
+	return res.sendFile("public/pages/games.html", publicPath);
+});
+
+fastify.get("/games/play", (req, res) => {
+	return res.sendFile("public/pages/gameview.html", publicPath);
+});
+
 fastify.register(fastifyStatic, {
 	root: uvPath,
 	prefix: "/uv/",

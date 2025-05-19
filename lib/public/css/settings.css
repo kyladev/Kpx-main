@@ -16,6 +16,8 @@
   display: inline-block;
   width: 55%;
   box-shadow:0 0 8px #ffffff;
+  z-index: 10;
+  position: relative;
 }
 
 .settingdesc {
