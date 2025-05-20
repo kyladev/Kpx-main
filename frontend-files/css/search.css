@@ -1,0 +1,180 @@
+.iframeWindow {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  top: 6em; /* top UI height */
+  height: 90%;
+  border: none;
+  background-color: #141414;
+  z-index: 1;
+}
+#searchbox {
+  background-color: #1d1d1d;
+  display: flex;
+  align-items: center;        
+  justify-content: center;   
+  padding: 0.5em 1em;
+  gap: 1em;
+  width: 100%;
+  box-sizing: border-box;
+  padding-bottom: 1.2em;
+}
+
+#buttons-left,
+#buttons-right {
+  display: flex;
+  gap: 0.75em;
+}
+
+#buttons-left {
+    margin-right: 10%;
+}
+#buttons-right {
+    margin-left: 10%;
+}
+
+#urlInput {
+  flex: 1;
+  max-width: 900px;
+  width: 700px;
+  min-width: 200px;
+  padding-left: 0.5em;
+  height: 1.5em;
+  border: 0;
+  outline: 0;
+  color: white;
+  background-color: #161616;
+  font-size: 1.2em;
+  border-radius: 5px;
+}
+
+#searchButton {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 0;
+    outline: 0;
+    color: #141414;
+    background-color: white;
+    font-size: 0px;
+}
+#browsertabs {
+  display: flex;
+  justify-content: left;
+  padding: 0.5em 1em;
+  gap: 1em;
+  width: 100%;
+  box-sizing: border-box;
+}
+#addtab {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center horizontally */
+  height: 30px;
+  width: 30px;
+  border: none;
+  background-color: #383838;
+  color: white;
+  font-size: 18px; /* Optional: adjust for better visual balance */
+  border-radius: 5px; /* Optional: move here so it applies always */
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+#addtab:hover {
+  background-color: #303030;
+}
+.tabactive, .tabs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;             
+    font-size: small;
+    background-color: #303030;
+    padding: 4px 12px;
+    border-radius: 5px;
+    width: 160px;
+    height: 20px;
+    margin: -6px;
+    padding: 6px;
+}
+.tabs:hover {
+    background-color: #363636;
+}
+.tabactive {
+    background-color: #6d6d6d;
+}
+.closebutton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+.closebutton:hover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: black;
+    transition: 0.3s ease-in-out;
+}
+.tab-container {
+  display: flex;
+  align-items: center;  /* Aligns #browsertabs and #addtab vertically */
+  gap: 1em;              /* Optional: spacing between tabs and + button */
+  padding: 0.15em;
+  width: 100%;
+  box-sizing: border-box;
+}
+.switch {
+    margin-left: 87.5%;
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+input:checked + .slider {
+    background-color: #2196F3;
+}
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+.slider.round {
+    border-radius: 34px;
+}
+.slider.round:before {
+    border-radius: 50%;
+}
