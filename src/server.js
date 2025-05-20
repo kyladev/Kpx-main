@@ -11,8 +11,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // note: only use path to project root during design/testing, the search function doesn't work on it.
-//const publicPath = "/Users/kylakreal/Kproxy-main/";
-const publicPath = "/Users/kylakreal/Kproxy-main/Ultraviolet-Static/public";
+const publicPath = "/Users/kylakreal/Kproxy-main/";
+//const publicPath = "/Users/kylakreal/Kproxy-main/Ultraviolet-Static/public";
 import { uvPath } from "@titaniumnetwork-dev/ultraviolet";
 import { epoxyPath } from "@mercuryworkshop/epoxy-transport";
 import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
@@ -53,9 +53,27 @@ fastify.get("/", (req, res) => {
 	return res.sendFile("frontend-files/pages/home.html", publicPath);
 });
 
+
+
 fastify.get("/settings", (req, res) => {
 	return res.sendFile("frontend-files/pages/settings.html", publicPath);
 });
+
+//settings subpages
+fastify.get("/settings/ui", (req, res) => {
+	return res.sendFile("frontend-files/pages/settings-pages/settings-ui.html", publicPath);
+});
+fastify.get("/settings/cloaking", (req, res) => {
+	return res.sendFile("frontend-files/pages/settings-pages/settings-cloaking.html", publicPath);
+});
+fastify.get("/settings/color", (req, res) => {
+	return res.sendFile("frontend-files/pages/settings-pages/settings-color.html", publicPath);
+});
+fastify.get("/settings/particles", (req, res) => {
+	return res.sendFile("frontend-files/pages/settings-pages/settings-particles.html", publicPath);
+});
+
+
 
 fastify.get("/apps", (req, res) => {
 	return res.sendFile("frontend-files/pages/apps.html", publicPath);
