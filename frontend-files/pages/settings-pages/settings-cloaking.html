@@ -111,7 +111,9 @@
             <p class="smalldesc">Appears offline with full functionality, simply open the file in your browser.</p>
           </div>
           <div class="right-items">
-            <button onclick="">Generate file</button>
+            <a href="/frontend-files/pages/settings-pages/iframe-download.html" download="kpx">
+              <button onclick="">Generate file</button>
+            </a>
           </div>
         </div>
 
@@ -147,7 +149,7 @@
         <div class="sections">
           <div class="settingdesc">
             <h3>Panic Key</h3>
-            <p class="smalldesc">Current Key: <kbd id="currentkey">Escape</kbd></p>
+            <p class="smalldesc">Current Key: <kbd id="currentkey">`</kbd> (Note: reload the page for changes to take effect)</p>
           </div>
           <div class="right-items">
             <button id="keysetter" class="setbutton" onclick="listenforkey()">
@@ -173,8 +175,7 @@
         </div>
 
         <div id="datalinkpopup">
-          <button id="exitbutton">x</button>
-          <h3 id="popuptitle">Datalink</h3>
+          <button id="exitbutton">X</button>
           <input id="datalinkcontainer" class="colorinput" />
           <button onclick="copytext()" id="copybutton">Copy</button>
         </div>
@@ -188,6 +189,7 @@
   <!--general scripts-->
   <script src="/frontend-files/js/req.js"></script>
   <script src="/frontend-files/js/settings.js"></script>
+  <script src="/frontend-files/js/panic.js"></script>
   <!--particle scripts-->
   <script src=" https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js "></script>
   <script src="/frontend-files/js/particles-js.js"></script>

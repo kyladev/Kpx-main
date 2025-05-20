@@ -20,6 +20,28 @@
   position: relative;
 }
 
+#buttons-container {
+  padding: 10px;
+  background-color: #303030;
+  border: #ffffff 1px solid;
+  text-align: center;
+  border-radius: 6px;
+  margin-left: 22.5%;
+  margin-right: 22.5%;
+  box-sizing: border-box;
+  display: inline-block;
+  width: 55%;
+  box-shadow:0 0 8px #ffffff;
+  z-index: 10;
+  position: relative;
+}
+
+.settings-button {
+  width: 100px;
+  height: 60px;
+  font-size: larger;
+}
+
 .settingdesc {
   text-align: left;
   margin-left: 6px;
@@ -149,7 +171,7 @@ input:focus {
   padding: 90px;
   border: 50px;
   border-color: black;
-  background-color: #7d7d7d;
+  background-color: #505050;
   border-radius: 8px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   z-index: 1000;
@@ -170,8 +192,8 @@ input:focus {
   font-size: 25px;
   padding: 5px;
   border: none;
-  background-color: #7d7d7d;
-  margin: -10px;
+  background-color: #707070;
+  margin: 10px;
   transition: 0.1s ease-in-out;
   color: white;
 }
@@ -182,8 +204,7 @@ input:focus {
   font-size: 25px;
   padding: 5px;
   border: none;
-  background-color: #6d6d6d;
-  margin: -10px;
+  background-color: #909090;
   border-radius: 50px;
   transition: 0.1s ease-in-out;
 }
