@@ -2,8 +2,8 @@
 <html>
   <head>
     <script src="https://kit.fontawesome.com/5be346f7c3.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/public/css/apps.css">
-    <link rel="stylesheet" href="/public/css/req.css">
+    <link rel="stylesheet" href="/frontend-files/css/apps.css">
+    <link rel="stylesheet" href="/frontend-files/css/req.css">
     <script>
         const params = new URLSearchParams(window.location.search);
         document.addEventListener("DOMContentLoaded", function() {
@@ -14,51 +14,15 @@
     <link id="ficon"rel="icon" type="image/x-icon" href="">
   </head>
   <body style="background-color: black;">
-    <nav class="navbar">
-        <i class="fa-solid fa-chevron-right menu-icon"></i>
-        <ul class="nav-links">
-            <li><a href="/">
-              <i class="fa-solid fa-house innericon">
-                <p class="innerlabel">Home</p>
-              </i>
-            </a>
-            </li>
-            <li><a href="/settings">
-              <i class="fa-solid fa-gear innericon">
-                <p class="innerlabel">Settings</p>
-              </i>
-            </a>
-            </li>
-            <li><a href="/apps">
-              <i class="fa-solid fa-table-cells innericon">
-                <p class="innerlabel">Apps</p>
-              </i>
-            </a></li>
-            <li><a href="/tools">
-              <i class="fa-solid fa-screwdriver-wrench innericon">
-                <p class="innerlabel">Tools</p>
-              </i>
-            </a></li>
-            <li><a href="/games">
-              <i class="fa-solid fa-gamepad innericon">
-                <p class="innerlabel">Games</p>
-              </i>
-            </a></li>
-            <li><a href="/documentation">
-              <i class="fa-solid fa-file innericon">
-                <p class="innerlabel">Documentation</p>
-              </i>
-            </a></li>
-            <li><a href="/changelog">
-              <i class="fa-solid fa-circle-info innericon">
-                <p class="innerlabel">Changelog</p>
-              </i>
-            </a></li>
-        </ul>
-    </nav>
+    <div id="nav-container">
+      <!--navbar generated here-->
+    </div>
     <iframe id="gameiframe" src=""></iframe>
   </body>
-  <script src="/public/js/req.js"></script>
+  <!--pagegen scripts-->
+  <script src="/frontend-files/pagegen-js/navbar-1-gen.js"></script>
+  <!--general scriptss-->
+  <script src="/frontend-files/js/req.js"></script>
   <style>
     body {
         width: 100%;

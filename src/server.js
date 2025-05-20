@@ -10,8 +10,8 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// static paths
-//const publicPath = "/Users/kylakreal/Kproxy-main/lib";
+// note: only use path to project root during design/testing, the search function doesn't work on it.
+//const publicPath = "/Users/kylakreal/Kproxy-main/";
 const publicPath = "/Users/kylakreal/Kproxy-main/Ultraviolet-Static/public";
 import { uvPath } from "@titaniumnetwork-dev/ultraviolet";
 import { epoxyPath } from "@mercuryworkshop/epoxy-transport";
