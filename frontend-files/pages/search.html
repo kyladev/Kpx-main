@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
     />
-    <title>Ultraviolet | Sophisticated Web Proxy</title>
+    <title>Ultraviolet</title>
     <meta
       name="description"
       content="Ultraviolet is a highly sophisticated proxy used for evading internet censorship or accessing websites in a controlled sandbox using the power of service-workers. Unblock sites today!"
@@ -22,14 +22,14 @@
     />
     <meta name="googlebot" content="index, follow, snippet" />
     <link rel="shortcut icon" content="favicon.ico" />
-    <link rel="stylesheet" href="/public/index.css" />
-    <script src="/public/baremux/index.js" defer></script>
-    <script src="/public/epoxy/index.js" defer></script>
-    <script src="/public/uv/uv.bundle.js" defer></script>
-    <script src="/public/uv/uv.config.js" defer></script>
-    <script src="/public/register-sw.js" defer></script>
-    <script src="/public/search.js" defer></script>
-    <script src="/public/index.js" defer></script>
+    <link rel="stylesheet" href="/index.css" />
+    <script src="/baremux/index.js" defer></script>
+    <script src="/epoxy/index.js" defer></script>
+    <script src="/uv/uv.bundle.js" defer></script>
+    <script src="/uv/uv.config.js" defer></script>
+    <script src="/register-sw.js" defer></script>
+    <script src="/search.js" defer></script>
+    <script src="/index.js" defer></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -69,15 +69,20 @@
       title="Ultraviolet Logo"
       class="flex-center logo-wrapper header-center"
     >
-      <h1>Ultraviolet</h1>
+      <img class="logo" src="uv.png" alt="Ultraviolet" />
+      <h1>Ultraviolet | TN</h1>
     </div>
     <div class="flex-center desc left-margin">
+      <p>
+        Ultraviolet is highly sophisticated proxy used for evading internet
+        censorship.
+      </p>
     </div>
 
     <form id="uv-form" class="flex-center">
       <input
         id="uv-search-engine"
-        value="https://www.duckduckgo.com/search?q=%s"
+        value="https://www.google.com/search?q=%s"
         type="hidden"
       />
       <input id="uv-address" type="text" placeholder="Search the web freely" />
@@ -86,6 +91,32 @@
       <p id="uv-error"></p>
       <pre id="uv-error-code"></pre>
     </div>
+    <footer>
+      <div>
+        <a
+          title="The TitaniumNetwork GitHub organization"
+          href="https://github.com/titaniumnetwork-dev"
+          >TitaniumNetwork</a
+        >
+        <a title="The TitaniumNetwork Discord" href="https://discord.gg/unblock"
+          >Discord</a
+        >
+        <a
+          title="The TompHTTP GitHub organization"
+          href="https://github.com/tomphttp"
+          >TompHTTP</a
+        >
+        <a
+          title="The official deployment repository for Ultraviolet"
+          href="https://github.com/titaniumnetwork-dev/Ultraviolet-App"
+          >GitHub</a
+        >
+        <a title="License information" href="credits.html">Credits</a>
+      </div>
+      <div>
+        <span>Ultraviolet &copy; TN 2023</span>
+      </div>
+    </footer>
     <iframe style="display: none;" id="uv-frame"></iframe>
   </body>
 </html>

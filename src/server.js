@@ -42,35 +42,35 @@ fastify.get("/uv/uv.config.js", (req, res) => {
 });
 
 fastify.get("/search", (req, res) => {
-	return res.sendFile("public/pages/search.html", publicPath);
+	return res.sendFile("frontend-files/pages/search.html", publicPath);
 });
 
 fastify.get("/searchtemp", (req, res) => {
-	return res.sendFile("/index.html", publicPath);
+	return res.sendFile("index.html", publicPath);
 });
 
 fastify.get("/", (req, res) => {
-	return res.sendFile("public/pages/home.html", publicPath);
+	return res.sendFile("frontend-files/pages/home.html", publicPath);
 });
 
 fastify.get("/settings", (req, res) => {
-	return res.sendFile("public/pages/settings.html", publicPath);
+	return res.sendFile("frontend-files/pages/settings.html", publicPath);
 });
 
 fastify.get("/apps", (req, res) => {
-	return res.sendFile("public/pages/apps.html", publicPath);
+	return res.sendFile("frontend-files/pages/apps.html", publicPath);
 });
 
 fastify.get("/tools", (req, res) => {
-	return res.sendFile("public/pages/tools.html", publicPath);
+	return res.sendFile("frontend-files/pages/tools.html", publicPath);
 });
 
 fastify.get("/games", (req, res) => {
-	return res.sendFile("public/pages/games.html", publicPath);
+	return res.sendFile("frontend-files/pages/games.html", publicPath);
 });
 
 fastify.get("/games/play", (req, res) => {
-	return res.sendFile("public/pages/gameview.html", publicPath);
+	return res.sendFile("frontend-files/pages/gameview.html", publicPath);
 });
 
 fastify.register(fastifyStatic, {
