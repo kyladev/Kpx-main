@@ -5,72 +5,21 @@
       src="https://kit.fontawesome.com/5be346f7c3.js"
       crossorigin="anonymous"
     ></script>
-    <title>KPX</title>
     <link rel="stylesheet" href="public/css/settings.css" />
     <link rel="stylesheet" href="public/css/req.css" />
+    <link rel="stylesheet" href="/public/css/particles.css">
+    <script src="/public/js/cloak.js"></script>
+    <title>KPX</title>
     <link id="ficon" rel="icon" type="image/x-icon" href="" />
   </head>
-  <body>
-    <div id="particles-js" style="position: absolute; top: 0%; width: 100%; height: 100%;">
+  <body style="overflow-x: hidden; overflow-y: scroll !important;">
+    <div id="particles-js" style="z-index: -10; position: fixed; top: 0%; width: 100%; height: 100%;">
       <canvas class="particles-js-canvas-el"></canvas>
     </div>
-    <div id="particles-js" style="position: absolute; top: 100%; width: 100%; height: 100%;">
-      <canvas class="particles-js-canvas-el"></canvas>
+    <div id="content" style="position: relative;">
+    <div id="nav-container">
+      <!--navbar generated here-->
     </div>
-    <nav class="navbar">
-      <i class="fa-solid fa-chevron-right menu-icon"></i>
-      <ul class="nav-links">
-        <li>
-          <a href="/">
-            <i class="fa-solid fa-house innericon">
-              <p class="innerlabel">Home</p>
-            </i>
-          </a>
-        </li>
-        <li>
-          <a href="/settings">
-            <i class="fa-solid fa-gear innericon">
-              <p class="innerlabel">Settings</p>
-            </i>
-          </a>
-        </li>
-        <li>
-          <a href="/apps">
-            <i class="fa-solid fa-table-cells innericon">
-              <p class="innerlabel">Apps</p>
-            </i>
-          </a>
-        </li>
-        <li>
-          <a href="/tools">
-              <i class="fa-solid fa-screwdriver-wrench innericon">
-                <p class="innerlabel">Tools</p>
-              </i>
-            </a>
-          </li>
-        <li>
-          <a href="/games">
-            <i class="fa-solid fa-gamepad innericon">
-              <p class="innerlabel">Games</p>
-            </i>
-          </a>
-        </li>
-        <li>
-          <a href="/documentation">
-            <i class="fa-solid fa-file innericon">
-              <p class="innerlabel">Documentation</p>
-            </i>
-          </a>
-        </li>
-        <li>
-          <a href="/changelog">
-            <i class="fa-solid fa-circle-info innericon">
-              <p class="innerlabel">Changelog</p>
-            </i>
-          </a>
-        </li>
-      </ul>
-    </nav>
     <h1 id="title">KPX</h1>
     <h3 class="subheading">Settings</h3>
     <div class="center-wrapping">
@@ -318,70 +267,16 @@
           <button onclick="copytext()" id="copybutton">Copy</button>
         </div>
 
-        <!--<div class="sections">
-        <h2>Colors (search page)</h2>
-        </div>
-
-        <div class="sections">
-        <div class="settingdesc">
-          <h3>Text color</h3>
-        </div>
-        <input id="b-textcolor" class="colorinput" placeholder="Enter a hexcode...">
-        <button id="b-textcolorset" class="setbutton" onclick="btextcolorset()">Set color</button>
-        </div>
-
-        <div class="sections">
-        <div class="settingdesc"></div>
-        <h3>Background color</h3>
-        <input id="b-backgroundcolor" class="colorinput" placeholder="Enter a hexcode...">
-        <button id="b-backgroundcolorset" class="setbutton" onclick="bbackgroundcolorset()">Set color</button>
-        </div>
-
-        <div class="sections">
-          <div class="settingdesc"></div>
-        <h3>Secondary color</h3>
-        <p>Browser background color #2 (lower half)</p>
-        <input id="b-secondarycolor" class="colorinput" placeholder="Enter a hexcode...">
-        <button id="b-secondarycolorset" class="setbutton" onclick="bsecondarycolorset()">Set color</button>
-        </div>
-
-        <div class="sections">
-          <div class="settingdesc"></div>
-        <h3>Tertiary color</h3>
-        <p>Searchbar color</p>
-        <input id="b-tertiarycolor" class="colorinput" placeholder="Enter a hexcode...">
-        <button id="b-tertiarycolorset" class="setbutton" onclick="btertiarycolorset()">Set color</button>
-        </div>
-
-        <div class="sections">
-          <div class="settingdesc"></div>
-        <h3>Quartary color</h3>
-        <p>Inactive tab color</p>
-        <input id="b-quartarycolor" class="colorinput" placeholder="Enter a hexcode...">
-        <button id="b-quartarycolorset" class="setbutton" onclick="bquartarycolorset()">Set color</button>
-        </div>
-
-        <div class="sections">
-          <div class="settingdesc"></div>
-        <h3>Quinary color</h3>
-        <p>Active tab color</p>
-        <input id="b-quinarycolor" class="colorinput" placeholder="Enter a hexcode...">
-        <button id="b-quinarycolorset" class="setbutton" onclick="bquinarycolorset()">Set color</button>
-        </div>
-
-        <div class="sections"></div>
-        <div class="settingdesc"></div>
-        <h3>Senary color</h3>
-        <p>Inactive tab hover color</p>
-        <input id="b-senarycolor" class="colorinput" placeholder="Enter a hexcode...">
-        <button id="b-senarycolorset" class="setbutton" onclick="bsenarycolorset()">Set color</button>
-        </div>
-      </div>-->
       </div>
     </div>
+    </div>
   </body>
+  <!--pagegen scripts-->
+  <script src="/public/pagegen-js/navbar-1-gen.js"></script>
+  <!--general scripts-->
   <script src="public/js/req.js"></script>
   <script src="public/js/settings.js"></script>
+  <!--particle scripts-->
   <script src=" https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js "></script>
   <script src="/public/js/particles-js.js"></script>
 </html>
