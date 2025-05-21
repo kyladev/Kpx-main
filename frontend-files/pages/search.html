@@ -29,7 +29,7 @@
     <iframe style="display: none;" id="uv-frame"></iframe>
     <div class="tab-container">
             <div id="browsertabs"></div>
-            <button id="addtab" onclick="addtab()">+</button>
+            <button id="addtab" onclick="addtab(false)">+</button>
         </div>
         <div id="searchbox">
             <div id="buttons-left">
@@ -66,5 +66,9 @@
         <div id="iframe-container">
             <iframe id="iframeWindow" class="iframeWindow" allowfullscreen></iframe>
         </div>
+        <script src="/frontend-files/js/search-tabs.js"></script>
+        <script>
+            addtab(true);
+        </script>
   </body>
 </html>
