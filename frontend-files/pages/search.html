@@ -17,6 +17,9 @@
     <script src="/baremux/index.js"></script>
     <link rel="stylesheet" href="/frontend-files/css/search.css">
     <link rel="stylesheet" href="/frontend-files/css/req.css">
+    <script src="/frontend-files/js/cloak.js"></script>
+    <script src="/frontend-files/js/search-handler.js"></script>
+    <script src="/frontend-files/js/search-load.js"></script>
   </head>
   <body>
     <div class="desc left-margin">
@@ -46,17 +49,22 @@
                 </a>
             </div>
         </div>
-        <!--
-            <label class="switch">
-                <input id="blockercheck" type="checkbox" onchange="checkboxstate()">
-                <span class="slider round"></span>
-                <p id="desctext">ADBLOCK</p>
-            </label>
-        -->
-        <button id="searchButton" style='display: none;'>Search Text</button>
+        
+        <!--<label class="switch" style="display: none;">
+            <input id="blockercheck" type="checkbox" onchange="checkboxstate()">
+            <span class="slider round"></span>
+            <p id="desctext">ADBLOCK</p>
+        </label>-->
+
+        <select id="switcher">
+            <option value="">--Please Choose an Option--</option>
+            <option value="epoxy">Epoxy</option>
+            <option value="bare">Bare</option>
+        </select>
+        
+        <button id="searchButton" style='display: none;'></button>
         <div id="iframe-container">
             <iframe id="iframeWindow" class="iframeWindow" allowfullscreen></iframe>
         </div>
-        <script src="/frontend-files/js/search-handler.js"></script>
   </body>
 </html>

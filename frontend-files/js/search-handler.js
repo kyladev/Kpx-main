@@ -1,3 +1,4 @@
+document.addEventListener("DOMContentLoaded", function() {
 const connection = new BareMux.BareMuxConnection("/baremux/worker.js")
 const wispUrl = (location.protocol === "https:" ? "wss" : "ws") + "://" + location.host + "/wisp/";
 const bareUrl = (location.protocol === "https:" ? "https" : "http") + "://" + location.host + "/bare/"
@@ -40,3 +41,4 @@ document.getElementById("switcher").onselect = async function (event) {
             break;
     }
 }
+});
