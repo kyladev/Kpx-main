@@ -79,8 +79,16 @@ fastify.get("/apps", (req, res) => {
 	return res.sendFile("frontend-files/pages/apps.html", publicPath);
 });
 
+fastify.get("/apps/view", (req, res) => {
+	return res.sendFile("frontend-files/pages/appview.html", publicPath);
+});
+
 fastify.get("/tools", (req, res) => {
 	return res.sendFile("frontend-files/pages/tools.html", publicPath);
+});
+
+fastify.get("/tools/view", (req, res) => {
+	return res.sendFile("frontend-files/pages/appview.html", publicPath);
 });
 
 fastify.get("/games", (req, res) => {

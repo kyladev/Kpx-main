@@ -46,7 +46,7 @@ function searchkey(event) {
 }
 function search() {
     let searchvalue = document.getElementById("searchbar").value;
-    window.location.href = "/search?search=" + searchvalue;
+    window.location.href = "/search?q=" + searchvalue;
 }
 
 
