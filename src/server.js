@@ -6,6 +6,7 @@ import Fastify from "fastify";
 import fastifyStatic from "@fastify/static";
 import path from "path";
 import { fileURLToPath } from 'url';
+import settings_router from "./settings-router.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -53,27 +54,7 @@ fastify.get("/", (req, res) => {
 	return res.sendFile("frontend-files/pages/home.html", publicPath);
 });
 
-
-
-fastify.get("/settings", (req, res) => {
-	return res.sendFile("frontend-files/pages/settings.html", publicPath);
-});
-
-//settings subpages
-fastify.get("/settings/ui", (req, res) => {
-	return res.sendFile("frontend-files/pages/settings-pages/settings-ui.html", publicPath);
-});
-fastify.get("/settings/cloaking", (req, res) => {
-	return res.sendFile("frontend-files/pages/settings-pages/settings-cloaking.html", publicPath);
-});
-fastify.get("/settings/color", (req, res) => {
-	return res.sendFile("frontend-files/pages/settings-pages/settings-color.html", publicPath);
-});
-fastify.get("/settings/particles", (req, res) => {
-	return res.sendFile("frontend-files/pages/settings-pages/settings-particles.html", publicPath);
-});
-
-
+fastify.register(settings_router, { prefix: '/settings' });
 
 fastify.get("/apps", (req, res) => {
 	return res.sendFile("frontend-files/pages/apps.html", publicPath);
@@ -97,6 +78,14 @@ fastify.get("/games", (req, res) => {
 
 fastify.get("/games/play", (req, res) => {
 	return res.sendFile("frontend-files/pages/gameview.html", publicPath);
+});
+
+fastify.get("/resources", (req, res) => {
+	return res.sendFile("frontend-files/pages/resources.html", publicPath);
+});
+
+fastify.get("/bots", (req, res) => {
+	return res.sendFile("frontend-files/pages/inprogress.html", publicPath);
 });
 
 fastify.register(fastifyStatic, {

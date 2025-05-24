@@ -123,10 +123,3 @@ const canvas = document.getElementsByClassName('particles-js-canvas-el')[0];
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
-
-  // Initial resize
-  //resizeCanvas();
-
-  // Resize on window resize
-  //window.addEventListener('resize', resizeCanvas);
-  //window.addEventListener('scroll', resizeCanvas);

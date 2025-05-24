@@ -25,6 +25,345 @@
     <div class="center-wrapping">
       <div class="sections-container">
 
+        <div class="sections">
+          <div class="settingdesc">
+            <h3>Reload Particles</h3>
+          </div>
+          <div class="right-items">
+            <button onclick="reload_current(); setparticleoptions();">
+              Reload
+            </button>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3>Particle amount</h3>
+            <p class="smalldesc" id="particle-amount-text">Current: 120</p>
+          </div>
+          <div class="right-items">
+            <input
+              id="particle-amount-input"
+              placeholder="Enter a number..."
+              type="number"
+            />
+            <button
+              id="particle-amount-set"
+              onclick="particleamountset(false)"
+            >
+              Set number
+            </button>
+          </div>
+        </div>
+
+         <div class="sections">
+          <div class="settingdesc">
+            <h3>Particle color</h3>
+            <p class="smalldesc" id="color-text">Current: #ffffff</p>
+          </div>
+          <div class="right-items">
+            <input
+              id="particle-color-input"
+              placeholder="Enter a hex code..."
+            />
+            <button
+              id="particle-color-set"
+              onclick="particlecolorset(false)"
+            >
+              Set color
+            </button>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3>Particle speed</h3>
+            <p class="smalldesc" id="speed-text">Current: 1.5</p>
+          </div>
+          <div class="right-items">
+            <input
+              id="particle-speed-input"
+              placeholder="Enter a number..."
+              type="number"
+            />
+            <button
+              id="particle-speed-set"
+              onclick="particlespeedset(false)"
+            >
+              Set speed
+            </button>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3>Particle direction</h3>
+            <p class="smalldesc" id="direction-text">Current: bottom</p>
+          </div>
+          <div class="right-items">
+            <select id="particle-direction-select">
+              <option value="bottom">Bottom</option>
+              <option value="top">Top</option>
+              <option value="right">Right</option>
+              <option value="left">Left</option>
+              <option value="top-right">Top-right</option>
+              <option value="top-left">Top-left</option>
+              <option value="bottom-right">Bottom-right</option>
+              <option value="bottom-left">Bottom-left</option>
+            </select>
+            <button
+              id="particle-direction-set"
+              onclick="particledirectionset(false)"
+            >
+              Set option
+            </button>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3>Particle movement</h3>
+            <p class="smalldesc" id="movement-text">Current: random</p>
+          </div>
+          <div class="right-items">
+            <select id="particle-movement-select">
+              <option value="random">Random</option>
+              <option value="straight">Straight</option>
+            </select>
+            <button
+              id="particle-movement-set"
+              onclick="particlemovementset(false)"
+            >
+              Set option
+            </button>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3>Particle bounce</h3>
+            <p class="smalldesc" id="bounce-text">Current: false</p>
+          </div>
+          <div class="right-items">
+            <select id="particle-bounce-select">
+              <option value="false">No bounce</option>
+              <option value="true">Bounce</option>
+            </select>
+            <button
+              id="particle-bounce-set"
+              onclick="particlebounceset(false)"
+            >
+              Set option
+            </button>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h2>Particle shape</h2>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3 class="smalldesc">Particle shape</h3>
+            <p class="smalldesc" id="shape-text">For polygon and star, side count can be set; Current: circle</p>
+          </div>
+          <div class="right-items">
+            <select id="particle-shape-select">
+              <option value="circle">Circle</option>
+              <option value="edge">Edge</option>
+              <option value="triangle">Triangle</option>
+              <option value="polygon">Polygon</option>
+              <option value="star">Star</option>
+            </select>
+            <button
+              id="particle-shape-set"
+              onclick="particleshapeset(false)"
+            >
+              Set shape
+            </button>
+          </div>
+        </div>
+        
+        <div class="sections">
+          <div class="settingdesc">
+            <h3 class="smalldesc">Polygon side amount</h3>
+            <p class="smalldesc" id="sidecount-text">Current: 3</p>
+          </div>
+          <div class="right-items">
+            <input
+            id="particle-sidecount-input"
+            placeholder="Enter a number..."
+            type="number"
+            />
+            <button
+              id="particle-sidecount-set"
+              onclick="particlesidecountset(false)"
+            >
+              Set option
+            </button>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h2>Size</h2>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3 class="smalldesc">Particle size</h3>
+            <p class="smalldesc" id="size-text">Current: 3</p>
+          </div>
+          <div class="right-items">
+            <input
+              id="particle-size-input"
+              placeholder="Enter a number..."
+              type="number"
+            />
+            <button
+              id="particle-size-set"
+              onclick="particlesizeset(false)"
+            >
+              Set size
+            </button>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3 class="smalldesc">Randomness</h3>
+            <p class="smalldesc" id="random-text">Current: true</p>
+          </div>
+          <div class="right-items">
+            <select id="particle-size-random-select">
+              <option value="true">Random</option>
+              <option value="false">Not random</option>
+            </select>
+            <button
+              id="particle-size-random-set"
+              onclick="particlesizerandomset(false)"
+            >
+              Set option
+            </button>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h2>Linked particles</h2>
+          </div>
+        </div>
+        <div class="sections">
+          <div class="settingdesc">
+            <h3 class="smalldesc">Link particles</h3>
+            <p class="smalldesc" id="link-text">Current: false</p>
+          </div>
+          <div class="right-items">
+            <select id="particle-link-select">
+              <option value="false">Unlinked</option>
+              <option value="true">Linked</option>
+            </select>
+            <button
+              id="particle-link-set"
+              onclick="particlelinkedset(false)"
+            >
+              Set option
+            </button>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3 class="smalldesc">Link distance</h3>
+            <p class="smalldesc" id="linkd-text">Current: 150</p>
+          </div>
+          <div class="right-items">
+            <input 
+              id="particle-link-distance-input"
+              placeholder="Enter a number..."
+              type="number"
+            />
+            <button
+              id="particle-link-distance-set"
+              onclick="particlelinkeddistset(false)"
+            >
+              Set distance
+            </button>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3 class="smalldesc">Link color</h3>
+            <p class="smalldesc" id="linkc-text">Current: #ffffff</p>
+          </div>
+          <div class="right-items">
+            <input
+            id="particle-link-color-input"
+            placeholder="Enter a hex code..."
+            />
+            <button
+              id="particle-link-color-set"
+              onclick="particlelinkedcolorset(false)"
+            >
+              Set color
+            </button>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h2>Opacity</h2>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3 class="smalldesc">Particle opacity</h3>
+            <p class="smalldesc" id="opac-text">Current: 0.4419296542689612</p>
+          </div>
+          <div class="right-items">
+            <input
+              id="particle-opacity-input"
+              placeholder="Enter a number..."
+              type="number"
+            />
+            <button
+              id="particle-opacity-set"
+              onclick="particleopacityset(false)"
+            >
+              Set opacity
+            </button>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3 class="smalldesc">Particle randomness</h3>
+            <p class="smalldesc" id="randomp-text"> Current: 0.1, false</p>
+          </div>
+          <div class="right-items">
+            <select id="particle-opacity-random-select">
+              <option value="false">Not random</option>
+              <option value="true">Random</option>
+            </select>
+            <input
+              id="particle-opacity-min-input"
+              placeholder="Set minimum opacity..."
+              type="number"
+            />
+            <button
+              id="particle-opacity-random-set"
+              onclick="particleopacityrandomset(false)"
+            >
+              Set option
+            </button>
+          </div>
+        </div>
+
       </div>
     </div>
     </div>
@@ -34,7 +373,13 @@
   <!--general scripts-->
   <script src="/frontend-files/js/req.js"></script>
   <script src="/frontend-files/js/settings.js"></script>
+  <script src="/frontend-files/js/particles/load-options-particles.js"></script>
   <!--particle scripts-->
   <script src=" https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js "></script>
   <script src="/frontend-files/js/particles-js.js"></script>
+  <script src="/frontend-files/js/settings-particles.js"></script>
+  <script>
+    reload_current();
+    add_listeners();
+  </script>
 </html>
