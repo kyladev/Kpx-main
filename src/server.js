@@ -8,13 +8,20 @@ import path from "path";
 import { fileURLToPath } from 'url';
 import settings_router from "./settings-router.js";
 import resources_router from "./resources-router.js";
+import * as fs from 'node:fs';
+
+import fastifyCookie from '@fastify/cookie';
+import fastifyFormbody from '@fastify/formbody';
+
+import { authMiddleware, publicPath } from './run-settings.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// note: only use path to project root during design/testing, the search function doesn't work on it.
-const publicPath = "/Users/kylakreal/Kproxy-main/";
-//const publicPath = "/Users/kylakreal/Kproxy-main/Ultraviolet-Static/public";
+const users = {
+	admin: "password"
+};
+
 import { uvPath } from "@titaniumnetwork-dev/ultraviolet";
 import { epoxyPath } from "@mercuryworkshop/epoxy-transport";
 import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
@@ -39,52 +46,124 @@ fastify.register(fastifyStatic, {
 	decorateReply: true,
 });
 
+await fastify.register(fastifyCookie);
+await fastify.register(fastifyFormbody);
+
 fastify.get("/uv/uv.config.js", (req, res) => {
 	return res.sendFile("/uv/uv.config.js", publicPath);
 });
 
-fastify.get("/search", (req, res) => {
-	return res.sendFile("frontend-files/pages/search.html", publicPath);
+fastify.get("/search", {
+  preHandler: authMiddleware(), // or false for test mode
+  handler: (req, res) => {
+    return res.sendFile("frontend-files/pages/search.html", publicPath);
+  }
 });
 
-fastify.get("/searchtemp", (req, res) => {
-	return res.sendFile("index.html", publicPath);
-});
-
-fastify.get("/", (req, res) => {
-	return res.sendFile("frontend-files/pages/home.html", publicPath);
+fastify.get("/", {
+  preHandler: authMiddleware(), // or false for test mode
+  handler: (req, res) => {
+    return res.sendFile("frontend-files/pages/home.html", publicPath);
+  }
 });
 
 fastify.register(settings_router, { prefix: '/settings' });
 
 fastify.register(resources_router, { prefix: '/resources' });
 
-fastify.get("/apps", (req, res) => {
-	return res.sendFile("frontend-files/pages/apps.html", publicPath);
+fastify.get("/apps", {
+  preHandler: authMiddleware(), // or false for test mode
+  handler: (req, res) => {
+    return res.sendFile("frontend-files/pages/apps.html", publicPath);
+  }
 });
 
-fastify.get("/apps/view", (req, res) => {
-	return res.sendFile("frontend-files/pages/appview.html", publicPath);
+fastify.get("/apps/view", {
+  preHandler: authMiddleware(), // or false for test mode
+  handler: (req, res) => {
+    return res.sendFile("frontend-files/pages/appview.html", publicPath);
+  }
 });
 
-fastify.get("/tools", (req, res) => {
-	return res.sendFile("frontend-files/pages/tools.html", publicPath);
+fastify.get("/tools", {
+  preHandler: authMiddleware(), // or false for test mode
+  handler: (req, res) => {
+    return res.sendFile("frontend-files/pages/tools.html", publicPath);
+  }
 });
 
-fastify.get("/tools/view", (req, res) => {
-	return res.sendFile("frontend-files/pages/appview.html", publicPath);
+fastify.get("/tools/view", {
+  preHandler: authMiddleware(), // or false for test mode
+  handler: (req, res) => {
+    return res.sendFile("frontend-files/pages/appview.html", publicPath);
+  }
 });
 
-fastify.get("/games", (req, res) => {
-	return res.sendFile("frontend-files/pages/games.html", publicPath);
+fastify.get("/games", {
+  preHandler: authMiddleware(), // or false for test mode
+  handler: (req, res) => {
+    return res.sendFile("frontend-files/pages/games.html", publicPath);
+  }
 });
 
-fastify.get("/games/play", (req, res) => {
-	return res.sendFile("frontend-files/pages/gameview.html", publicPath);
+fastify.get("/games/play", {
+  preHandler: authMiddleware(), // or false for test mode
+  handler: (req, res) => {
+    return res.sendFile("frontend-files/pages/gameview.html", publicPath);
+  }
 });
 
-fastify.get("/bots", (req, res) => {
-	return res.sendFile("frontend-files/pages/inprogress.html", publicPath);
+fastify.get("/bots", {
+  preHandler: authMiddleware(), // or false for test mode
+  handler: (req, res) => {
+    return res.sendFile("frontend-files/pages/inprogress.html", publicPath);
+  }
+});
+
+fastify.get("/info", {
+  preHandler: authMiddleware(), // or false for test mode
+  handler: (req, res) => {
+    return res.sendFile("frontend-files/pages/info.html", publicPath);
+  }
+});
+
+fastify.get("/info/changelog", {
+  preHandler: authMiddleware(), // or false for test mode
+  handler: (req, res) => {
+    return res.sendFile("frontend-files/pages/changelog.html", publicPath);
+  }
+});
+
+fastify.get("/error", (req, res) => {
+	return res.sendFile("frontend-files/pages/403.html", publicPath);
+});
+
+// POST /error route
+fastify.post('/error', async (request, reply) => {
+  const { user, pass } = request.body;
+
+  if (users[user] && users[user] === pass) {
+    console.log("User logged in:", user);
+
+    reply.setCookie('Session', 'Valid', {
+      maxAge: 3600, // 1 hour
+      httpOnly: false,
+      path: '/'
+    });
+
+    fs.appendFile("logs.txt", user + " has logged in:" + new Date + "\n", ()=> {
+        console.log("sign in logged, " + user + ": " + new Date);
+    });
+
+    reply.type('text/html').send(`
+      <script>
+        window.location.href = "/";
+      </script>
+    `);
+  } else {
+    // Optional: Add feedback to the error page
+    reply.redirect('/error');
+  }
 });
 
 fastify.register(fastifyStatic, {

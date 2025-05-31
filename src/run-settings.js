@@ -1,0 +1,35 @@
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+
+//turn to false to not require logging in
+const require_pass = true;
+
+//for testing (proxy doesn't work):
+export const publicPath = "/Users/kylakreal/Kproxy-main/";
+
+//for release (must be in ultraviolet static path):
+//export const publicPath = "/Users/kylakreal/Kproxy-main/Ultraviolet-Static/public/";
+
+const logFilePath = path.join(path.resolve('./src'), 'logs.txt'); // Absolute path
+
+export function authMiddleware() {
+  return async function (request, reply) {
+    if (require_pass === false) {
+      fs.appendFile(logFilePath, "kick off bypassed (testing mode)\n", () => {
+        console.log("kick off bypassed (testing mode)");
+      });
+      return;
+    }
+
+    const cookieHeader = request.headers.cookie || '';
+    if (cookieHeader.includes('Session=Valid')) {
+      return;
+    } else {
+      const logMsg = "user been kicked out: " + new Date() + "\n";
+      fs.appendFile(logFilePath, logMsg, () => {
+        console.log("kick off logged: " + new Date());
+      });
+      reply.redirect('/error');
+    }
+  };
+}
