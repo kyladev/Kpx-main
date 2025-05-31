@@ -8,7 +8,7 @@
     <script>
         const params = new URLSearchParams(window.location.search);
         document.addEventListener("DOMContentLoaded", function() {
-            document.getElementById("gameiframe").src = params.get("game");
+            document.getElementById("gameiframe").src = "/frontend-files/games/" + params.get("game");
         })
     </script>
     <title>KPX</title>

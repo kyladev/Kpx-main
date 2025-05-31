@@ -7,6 +7,7 @@ import fastifyStatic from "@fastify/static";
 import path from "path";
 import { fileURLToPath } from 'url';
 import settings_router from "./settings-router.js";
+import resources_router from "./resources-router.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -56,6 +57,8 @@ fastify.get("/", (req, res) => {
 
 fastify.register(settings_router, { prefix: '/settings' });
 
+fastify.register(resources_router, { prefix: '/resources' });
+
 fastify.get("/apps", (req, res) => {
 	return res.sendFile("frontend-files/pages/apps.html", publicPath);
 });
@@ -78,10 +81,6 @@ fastify.get("/games", (req, res) => {
 
 fastify.get("/games/play", (req, res) => {
 	return res.sendFile("frontend-files/pages/gameview.html", publicPath);
-});
-
-fastify.get("/resources", (req, res) => {
-	return res.sendFile("frontend-files/pages/resources.html", publicPath);
 });
 
 fastify.get("/bots", (req, res) => {
