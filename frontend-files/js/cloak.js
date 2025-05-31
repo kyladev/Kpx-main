@@ -1,5 +1,5 @@
 function applycloak() {
-    if (localStorage.getItem('panicsite') === null) {
+    if (!localStorage.getItem('panicsite')) {
         localStorage.setItem('panicsite', "https://www.google.com");
     }
     if (localStorage.getItem('cloak')) {
@@ -9,8 +9,9 @@ function applycloak() {
         return;
     }
     else {
-        document.title = "KPROXY";
-        document.getElementById("ficon").setAttribute("href", "");
+        document.title = "Google";
+        document.getElementById("ficon").setAttribute("href", "https://www.gstatic.com/images/branding/searchlogo/ico/favicon.ico");
         return;
     }
 }
+document.addEventListener("DOMContentLoaded", applycloak);
