@@ -1,8 +1,8 @@
-document.onkeydown = function(evt) {
-    evt = evt || window.event;
-    if (evt.key == 27) {
-      window.location.replace(localStorage.getItem('panicsite'));
-    }
+document.onkeydown = function (evt) {
+  evt = evt || window.event;
+  if (evt.key == 27) {
+    window.location.replace(localStorage.getItem('panicsite'));
+  }
 };
 function addlinkstoui(userurl, userimage, usercustomname) {
   const location = document.getElementById("quicklinks-inner");
@@ -41,12 +41,12 @@ function addsite() {
 }
 function searchkey(event) {
   if (event.key == "Enter") {
-      search();
-    }
+    search();
+  }
 }
 function search() {
-    let searchvalue = document.getElementById("searchbar").value;
-    window.location.href = "/search?q=" + searchvalue;
+  let searchvalue = document.getElementById("searchbar").value;
+  window.location.href = "/search?q=" + searchvalue;
 }
 
 

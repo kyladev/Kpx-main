@@ -1,6 +1,7 @@
 @media (max-width: 480px) {
   .sections {
-    width: 100%; /* One per row on mobile */
+    width: 100%;
+    /* One per row on mobile */
   }
 }
 
@@ -15,7 +16,7 @@
   box-sizing: border-box;
   display: inline-block;
   width: 55%;
-  box-shadow:0 0 8px #ffffff;
+  box-shadow: 0 0 8px #ffffff;
   z-index: 10;
   position: relative;
 }
@@ -31,7 +32,7 @@
   box-sizing: border-box;
   display: inline-block;
   width: 55%;
-  box-shadow:0 0 8px #ffffff;
+  box-shadow: 0 0 8px #ffffff;
   z-index: 10;
   position: relative;
 }
@@ -54,14 +55,16 @@
 
 .right-items {
   display: flex;
-  gap: 10px; /* space between right-aligned items */
+  gap: 10px;
+  /* space between right-aligned items */
   align-items: center;
 }
 
 .sections {
   display: flex;
   justify-content: space-between;
-  align-items: center; /* Ensures vertical alignment */
+  align-items: center;
+  /* Ensures vertical alignment */
   border-bottom: #333333 1px solid;
   border-top: #333333 1px solid;
   padding-top: 10px;
@@ -90,6 +93,7 @@ select {
   font-size: 14px;
   transition: border-color 0.2s ease-in-out;
 }
+
 select:hover {
   border: 1px solid #7d7d7d;
   background-color: #252525;
@@ -97,14 +101,14 @@ select:hover {
 }
 
 button {
-    background-color: #202020;
-    padding: 8px;
-    border-radius: 5px;
-    color: #ffffff;
-    border: 1px solid #181818;
-    margin: 8px;
-    font-size: 14px;
-    transition: 0.2s ease-in-out;
+  background-color: #202020;
+  padding: 8px;
+  border-radius: 5px;
+  color: #ffffff;
+  border: 1px solid #181818;
+  margin: 8px;
+  font-size: 14px;
+  transition: 0.2s ease-in-out;
 }
 
 button:hover {
@@ -141,21 +145,21 @@ input:hover {
 
 input:focus {
   background-color: #252525;
-  outline:4px #7d7d7d;
-  border:1px solid #7d7d7d;
+  outline: 4px #7d7d7d;
+  border: 1px solid #7d7d7d;
   transition: 0.2s ease-in-out
 }
 
 .botselect {
-    padding: 8px;
-    padding-right: 60px;
-    border-radius: 10px;
-    background-color: #383838;
-    border-color: #ffffff;
-    color: #ffffff;
-    border: 0px;
-    font-size: 14px;
-    transition: border-color 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+  padding: 8px;
+  padding-right: 60px;
+  border-radius: 10px;
+  background-color: #383838;
+  border-color: #ffffff;
+  color: #ffffff;
+  border: 0px;
+  font-size: 14px;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .botselect:hover {

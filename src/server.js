@@ -8,23 +8,15 @@ import path from "path";
 import { fileURLToPath } from 'url';
 import settings_router from "./settings-router.js";
 import resources_router from "./resources-router.js";
-import * as fs from 'node:fs';
-
 import fastifyCookie from '@fastify/cookie';
 import fastifyFormbody from '@fastify/formbody';
-
-import { authMiddleware, publicPath } from './run-settings.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const users = {
-	admin: "password"
-};
-
+import { authMiddleware, publicPath, require_pass } from './run-settings.js';
 import { uvPath } from "@titaniumnetwork-dev/ultraviolet";
 import { epoxyPath } from "@mercuryworkshop/epoxy-transport";
 import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
+//import user passwords and usernames
+import { users } from "./credentials.js";
+
 
 const fastify = Fastify({
 	serverFactory: (handler) => {
@@ -135,7 +127,12 @@ fastify.get("/info/changelog", {
 });
 
 fastify.get("/error", (req, res) => {
-	return res.sendFile("frontend-files/pages/403.html", publicPath);
+	if (require_pass === false) {
+		res.redirect('/');
+	}
+	else {
+		return res.sendFile("frontend-files/pages/403.html", publicPath);
+	}
 });
 
 // POST /error route

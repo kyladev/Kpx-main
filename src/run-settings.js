@@ -2,7 +2,7 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 
 //turn to false to not require logging in
-const require_pass = true;
+export const require_pass = false;
 
 //for testing (proxy doesn't work):
 export const publicPath = "/Users/kylakreal/Kproxy-main/";
@@ -15,9 +15,7 @@ const logFilePath = path.join(path.resolve('./src'), 'logs.txt'); // Absolute pa
 export function authMiddleware() {
   return async function (request, reply) {
     if (require_pass === false) {
-      fs.appendFile(logFilePath, "kick off bypassed (testing mode)\n", () => {
-        console.log("kick off bypassed (testing mode)");
-      });
+      console.log("kick off bypassed (testing mode)");
       return;
     }
 

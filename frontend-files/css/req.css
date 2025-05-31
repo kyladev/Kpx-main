@@ -9,40 +9,47 @@ body {
     height: 100%;
     width: 100%;
 }
+
 h1 {
     text-align: center;
     font-size: 40px;
     position: relative;
     z-index: 10;
 }
+
 .subheading {
-    text-align: center; 
+    text-align: center;
     margin-bottom: 20px;
     color: #404040;
     z-index: 10;
     position: relative;
 }
+
 .fa-solid {
-  color:white;
-  margin: 4px;
-  font-size: 16px;
-  transition: 0.15s ease-in-out;
-  z-index: 1;
+    color: white;
+    margin: 4px;
+    font-size: 16px;
+    transition: 0.15s ease-in-out;
+    z-index: 1;
 }
+
 .fa-solid:hover {
-  color:#252525;
-  margin: 4px;
-  font-size: 16px;
-  transition: 0.15s ease-in-out;
-  z-index: 1100;
-  z-index: 1;
+    color: #252525;
+    margin: 4px;
+    font-size: 16px;
+    transition: 0.15s ease-in-out;
+    z-index: 1100;
+    z-index: 1;
 }
+
 a:link {
-  color: white; /* Unvisited link color */
+    color: white;
+    /* Unvisited link color */
 }
 
 a:visited {
-  color: white; /* Visited link color */
+    color: white;
+    /* Visited link color */
 }
 
 .navbar {
@@ -72,18 +79,19 @@ a:visited {
     font-size: 24px;
     z-index: 1100;
     transition: transform 0.3s ease;
-    pointer-events: none; /* Prevents accidental blocking of clicks */
+    pointer-events: none;
+    /* Prevents accidental blocking of clicks */
 }
 
 .innericon {
-    display: block; 
+    display: block;
     text-align: center;
 }
 
 .innerlabel {
-    margin: 2px; 
-    font-size: small; 
-    font-family: Verdana; 
+    margin: 2px;
+    font-size: small;
+    font-family: Verdana;
     text-align: center;
 }
 
@@ -98,7 +106,8 @@ a:visited {
     list-style: none;
     display: flex;
     flex-direction: row;
-    margin-left: -45px; /* leave space for icon */
+    margin-left: -45px;
+    /* leave space for icon */
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;

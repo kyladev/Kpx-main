@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <script
-      src="https://kit.fontawesome.com/5be346f7c3.js"
-      crossorigin="anonymous"
-    ></script>
-    <link rel="stylesheet" href="/frontend-files/css/settings.css" />
-    <link rel="stylesheet" href="/frontend-files/css/req.css" />
-    <link rel="stylesheet" href="/frontend-files/css/particles.css">
-    <script src="/frontend-files/js/cloak.js"></script>
-    <title>KPX</title>
-    <link id="ficon" rel="icon" type="image/x-icon" href="" />
-  </head>
-  <body style="overflow-x: hidden; overflow-y: scroll !important;">
-    <div id="particles-js" style="z-index: -10; position: fixed; top: 0%; width: 100%; height: 100%;">
-      <canvas class="particles-js-canvas-el"></canvas>
-    </div>
-    <div id="content" style="position: relative;">
+
+<head>
+  <script src="https://kit.fontawesome.com/5be346f7c3.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/frontend-files/css/settings.css" />
+  <link rel="stylesheet" href="/frontend-files/css/req.css" />
+  <link rel="stylesheet" href="/frontend-files/css/particles.css">
+  <script src="/frontend-files/js/cloak.js"></script>
+  <title>KPX</title>
+  <link id="ficon" rel="icon" type="image/x-icon" href="" />
+</head>
+
+<body style="overflow-x: hidden; overflow-y: scroll !important;">
+  <div id="particles-js" style="z-index: -10; position: fixed; top: 0%; width: 100%; height: 100%;">
+    <canvas class="particles-js-canvas-el"></canvas>
+  </div>
+  <div id="content" style="position: relative;">
     <div id="nav-container">
       <!--navbar generated here-->
     </div>
@@ -66,11 +65,7 @@
             <p class="smalldesc">Enter your own tab to appear.</p>
           </div>
           <div class="right-items">
-            <input
-              type="text"
-              id="titlechooser"
-              placeholder="Choose a name..."
-            />
+            <input type="text" id="titlechooser" placeholder="Choose a name..." />
             <button id="filetitleconfirm" onclick="settitlecustom()">
               Confirm
             </button>
@@ -95,11 +90,7 @@
             <p class="smalldesc">Provides a datalink to paste into the URL to access this site.</p>
           </div>
           <div class="right-items">
-            <button
-              id="datalinkbutton"
-              class="setbutton"
-              onclick="makefinallink()"
-            >
+            <button id="datalinkbutton" class="setbutton" onclick="makefinallink()">
               Generate Datalink
             </button>
           </div>
@@ -135,11 +126,7 @@
             <p class="smalldesc">Set a site to change to when the panic key is pressed</p>
           </div>
           <div class="right-items">
-            <input
-              type="text"
-              id="cpanicselector"
-              placeholder="Enter a URL..."
-            />
+            <input type="text" id="cpanicselector" placeholder="Enter a URL..." />
             <button id="panicconfirm" onclick="setpanicsite()" class="setbutton">
               Confirm
             </button>
@@ -149,7 +136,8 @@
         <div class="sections">
           <div class="settingdesc">
             <h3>Panic Key</h3>
-            <p class="smalldesc">Current Key: <kbd id="currentkey">`</kbd> (Note: reload the page for changes to take effect)</p>
+            <p class="smalldesc">Current Key: <kbd id="currentkey">`</kbd> (Note: reload the page for changes to take
+              effect)</p>
           </div>
           <div class="right-items">
             <button id="keysetter" class="setbutton" onclick="listenforkey()">
@@ -182,16 +170,17 @@
 
       </div>
     </div>
-    </div>
-  </body>
-  <!--pagegen scripts-->
-  <script src="/frontend-files/pagegen-js/navbar-1-gen.js"></script>
-  <!--general scripts-->
-  <script src="/frontend-files/js/req.js"></script>
-  <script src="/frontend-files/js/settings.js"></script>
-  <script src="/frontend-files/js/panic.js"></script>
-  <!--particle scripts-->
-  <script src=" https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js "></script>
-  <script src="/frontend-files/js/particles/particles-js.js"></script>
-  <script src="/frontend-files/js/particles/settings-particles.js"></script>
+  </div>
+</body>
+<!--pagegen scripts-->
+<script src="/frontend-files/pagegen-js/navbar-1-gen.js"></script>
+<!--general scripts-->
+<script src="/frontend-files/js/req.js"></script>
+<script src="/frontend-files/js/settings.js"></script>
+<script src="/frontend-files/js/panic.js"></script>
+<!--particle scripts-->
+<script src=" https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js "></script>
+<script src="/frontend-files/js/particles/particles-js.js"></script>
+<script src="/frontend-files/js/particles/settings-particles.js"></script>
+
 </html>

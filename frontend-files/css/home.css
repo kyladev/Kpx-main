@@ -1,54 +1,61 @@
 #webname {
   text-align: center;
-  padding-top:40px;
+  padding-top: 40px;
   font-size: 60px;
   position: relative;
-  color:#ffffff;
-  
+  color: #ffffff;
+
 }
+
 .plus {
   font-size: 40px;
   text-align: center;
   margin: -5px;
 }
+
 #searchbar {
-    text-align: center;
-    width: 85vw;
-    height: 35px;
-    max-width: 800px;
-    border:1px solid white;
-    border-radius:10px;
-    background-color:#202020;
-    color:#ffffff;
-    font-size: 16px;
-    box-shadow: 0 0 4px #303030;
-    transition: border-color 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
-    transition: 0.3s ease-in-out;
-    z-index: 1;
+  text-align: center;
+  width: 85vw;
+  height: 35px;
+  max-width: 800px;
+  border: 1px solid white;
+  border-radius: 10px;
+  background-color: #202020;
+  color: #ffffff;
+  font-size: 16px;
+  box-shadow: 0 0 4px #303030;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+  z-index: 1;
 }
+
 #searchbar:hover {
-  border:1px solid white;
+  border: 1px solid white;
   box-shadow: 0 0 5px white;
   transition: border-color 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
 }
+
 #searchbar:focus {
   background-color: #303030;
-    outline:4px white;
-    border:1px solid white;
-    box-shadow: 0 0 7px white;
-    transition: border-color 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
-    transition: 0.3s ease-in-out;
-  }
+  outline: 4px white;
+  border: 1px solid white;
+  box-shadow: 0 0 7px white;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+
 #sbar {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-  }
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
 #shortc {
-  position: relative; /* or absolute/fixed/sticky */
+  position: relative;
+  /* or absolute/fixed/sticky */
   z-index: 100;
   text-align: center;
   padding-top: 20px;
@@ -56,45 +63,53 @@
   color: #ffffff;
   align-items: center;
 }
+
 .logo {
-    width:40px;
-  }
+  width: 40px;
+}
+
 .shortcut {
-    display: block;
-    margin-left: 5px;
-    margin-right: 5px;
-    color: #ffffff;
-    text-align: center;
-    background: #303030;
-    border: #404040 2px solid;
-    padding: 3px;
-    width: 90px;
-    height: 110px;
-    border-radius: 10px;
-    align-content: center;
-    align-items: center;
-    font-size: 12px;
-    transition: 0.3s ease-in-out;
-  }
+  display: block;
+  margin-left: 5px;
+  margin-right: 5px;
+  color: #ffffff;
+  text-align: center;
+  background: #303030;
+  border: #404040 2px solid;
+  padding: 3px;
+  width: 90px;
+  height: 110px;
+  border-radius: 10px;
+  align-content: center;
+  align-items: center;
+  font-size: 12px;
+  transition: 0.3s ease-in-out;
+}
+
 .shortcut:hover {
   background-color: #505050;
   transition: 0.3s ease-in-out;
 }
+
 #quicklinks {
   align-items: center;
   align-content: center;
   justify-content: center;
   align-self: center;
   display: flex;
-  position: relative; /* or absolute/fixed/sticky */
+  position: relative;
+  /* or absolute/fixed/sticky */
   z-index: 100;
-  }
+}
+
 #ducklogo {
   width: 40px;
 }
+
 #plus {
   width: 40px;
 }
+
 #user {
   color: #ffffff;
 }

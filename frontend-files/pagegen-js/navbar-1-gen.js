@@ -1,5 +1,12 @@
-document.addEventListener("DOMContentLoaded", addnav);
-
+document.addEventListener("DOMContentLoaded", function () {
+    if (!localStorage.getItem("show-app-nav") || localStorage.getItem("show-app-nav") === "true") {
+        addnav();
+    }
+    if (localStorage.getItem("show-app-nav") === "false") {
+        console.log("navbar generation skipped");
+        return;
+    }
+});
 
 function addnav() {
     //get navbar div
@@ -7,7 +14,7 @@ function addnav() {
 
     //define nav container
     let navcontainer = document.createElement("nav");
-    
+
     //create menu icon and navlinks div
     let menuicon = document.createElement("i");
     let navlinks = document.createElement("ul");

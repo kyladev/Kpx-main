@@ -8,7 +8,7 @@ if (!key) {
     key = "!";
 }
 
-document.addEventListener("keypress", function(evt) {
+document.addEventListener("keypress", function (evt) {
     if (evt.key === key) {
         window.location.href = site;
     }

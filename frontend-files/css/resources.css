@@ -9,10 +9,11 @@
   box-sizing: border-box;
   display: inline-block;
   width: 55%;
-  box-shadow:0 0 8px #ffffff;
+  box-shadow: 0 0 8px #ffffff;
   z-index: 10;
   position: relative;
 }
+
 .sections {
   border-bottom: #333333 1px solid;
   border-top: #333333 1px solid;
@@ -20,6 +21,7 @@
   padding-bottom: 10px;
   transition: 0.1s ease-in-out;
 }
+
 .sections:hover {
   background-color: #323232;
   transition: 0.1s ease-in-out;

@@ -1,7 +1,9 @@
 /* Main container */
 #siteicons {
-    margin: 2.5vh auto 0 auto; /* Push down from top */
-    max-height: 60vh;        /* Still limit height */
+    margin: 2.5vh auto 0 auto;
+    /* Push down from top */
+    max-height: 60vh;
+    /* Still limit height */
     width: 80vw;
     box-sizing: border-box;
     background-color: #303030;
@@ -76,32 +78,34 @@
     border-radius: 10px;
 }
 
-.sitename, .sitename:link, .sitename:visited {
-    text-align: center; 
+.sitename,
+.sitename:link,
+.sitename:visited {
+    text-align: center;
     color: white;
     text-decoration: none !important;
 }
 
 input {
-  background-color: #202020;
-  padding: 8px;
-  border-radius: 5px;
-  color: #ffffff;
-  margin: 8px;
-  border: 1px solid #181818;
-  font-size: 14px;
-  width: 400px;
-  transition: 0.2s ease-in-out
+    background-color: #202020;
+    padding: 8px;
+    border-radius: 5px;
+    color: #ffffff;
+    margin: 8px;
+    border: 1px solid #181818;
+    font-size: 14px;
+    width: 400px;
+    transition: 0.2s ease-in-out
 }
 
 input:hover {
-  background-color: #252525;
-  transition: 0.2s ease-in-out
+    background-color: #252525;
+    transition: 0.2s ease-in-out
 }
 
 input:focus {
-  background-color: #252525;
-  outline:4px #7d7d7d;
-  border:1px solid #7d7d7d;
-  transition: 0.2s ease-in-out
+    background-color: #252525;
+    outline: 4px #7d7d7d;
+    border: 1px solid #7d7d7d;
+    transition: 0.2s ease-in-out
 }

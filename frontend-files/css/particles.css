@@ -1,10 +1,11 @@
 canvas {
     top: 100px;
     width: 100%;
-    z-index: -10; 
+    z-index: -10;
     pointer-events: none;
     background-position: 50% 50%;
 }
+
 #particles-js {
     z-index: -1;
     height: 100%;

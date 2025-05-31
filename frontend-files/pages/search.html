@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <title>KPX</title>
     <meta name="googlebot" content="index, follow, snippet" />
@@ -20,55 +21,58 @@
     <script src="/frontend-files/js/cloak.js"></script>
     <script src="/frontend-files/js/search-handler.js"></script>
     <script src="/frontend-files/js/search-load.js"></script>
-  </head>
-  <body>
+</head>
+
+<body>
     <div class="desc left-margin">
-      <p id="uv-error"></p>
-      <pre id="uv-error-code"></pre>
+        <p id="uv-error"></p>
+        <pre id="uv-error-code"></pre>
     </div>
     <iframe style="display: none;" id="uv-frame"></iframe>
     <div class="tab-container">
-            <div id="browsertabs"></div>
-            <button id="addtab" onclick="addtab(false)">+</button>
+        <div id="browsertabs"></div>
+        <button id="addtab" onclick="addtab(false)">+</button>
+    </div>
+    <div id="searchbox">
+        <div id="buttons-left">
+            <i class="fa-solid fa-table-list"></i>
+
+            <i class="fa-solid fa-arrow-left" id="backhistory"></i>
+            <i class="fa-solid fa-arrow-right" id="forwardhistory"></i>
+            <i class="fa-solid fa-arrow-rotate-right"
+                onclick="document.getElementById('iframeWindow').contentDocument.location.reload()"></i>
         </div>
-        <div id="searchbox">
-            <div id="buttons-left">
-                <i class="fa-solid fa-table-list"></i>
-                
-                <i class="fa-solid fa-arrow-left" id="backhistory"></i>
-                <i class="fa-solid fa-arrow-right" id="forwardhistory"></i>
-                <i class="fa-solid fa-arrow-rotate-right" onclick="document.getElementById('iframeWindow').contentDocument.location.reload()"></i>
-            </div>
-            <input type="text" id="urlInput" placeholder="Enter a URL or Search something...">
-            <div id="buttons-right">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-gear"></i>
-                <i class="fa-solid fa-code"></i>
-                <a href="/home">
-                    <i class="fa-solid fa-house"></i>
-                </a>
-            </div>
+        <input type="text" id="urlInput" placeholder="Enter a URL or Search something...">
+        <div id="buttons-right">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-gear"></i>
+            <i class="fa-solid fa-code"></i>
+            <a href="/home">
+                <i class="fa-solid fa-house"></i>
+            </a>
         </div>
-        
-        <!--<label class="switch" style="display: none;">
+    </div>
+
+    <!--<label class="switch" style="display: none;">
             <input id="blockercheck" type="checkbox" onchange="checkboxstate()">
             <span class="slider round"></span>
             <p id="desctext">ADBLOCK</p>
         </label>-->
 
-        <select id="switcher" style="display: none;">
-            <option value="">--Please Choose an Option--</option>
-            <option value="epoxy">Epoxy</option>
-            <option value="bare">Bare</option>
-        </select>
-        
-        <button id="searchButton" style='display: none;'></button>
-        <div id="iframe-container">
-            <iframe id="iframeWindow" class="iframeWindow" allowfullscreen></iframe>
-        </div>
-        <script src="/frontend-files/js/search-tabs.js"></script>
-        <script>
-            addtab(true);
-        </script>
-  </body>
+    <select id="switcher" style="display: none;">
+        <option value="">--Please Choose an Option--</option>
+        <option value="epoxy">Epoxy</option>
+        <option value="bare">Bare</option>
+    </select>
+
+    <button id="searchButton" style='display: none;'></button>
+    <div id="iframe-container">
+        <iframe id="iframeWindow" class="iframeWindow" allowfullscreen></iframe>
+    </div>
+    <script src="/frontend-files/js/search-tabs.js"></script>
+    <script>
+        addtab(true);
+    </script>
+</body>
+
 </html>
