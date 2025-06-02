@@ -1,17 +1,18 @@
 let tabcount = 0;
+
 function addtab(first) {
     let tab = document.createElement("div");
     let close = document.createElement("div");
     let span = document.createElement("span");
     const params = new URLSearchParams(window.location.search);
+
     if (first === true) {
         tab.classList.add("tabactive");
-    }
-    else {
+    } else {
         tab.classList.add("tabs");
     }
-    close.classList.add("closebutton");
 
+    close.classList.add("closebutton");
     span.classList.add("tabtitle");
 
     span.innerText = "New Tab";
@@ -25,24 +26,24 @@ function addtab(first) {
         changetab(el.currentTarget);
     };
 
+    // Initialize tab history
+    tab.history = [];
+
     if (first === true) {
-        tab.dataset.url = params.get("q");
-        if (tab.dataset.url === '') {
+        const initialUrl = params.get("q") || "";
+        tab.dataset.url = initialUrl;
+        if (initialUrl !== "") {
+            tab.history.push(initialUrl);
+        } else {
             document.getElementById("iframeWindow").src = "/frontend-files/pages/emptytab.html";
-            document.getElementById("iframeWindow").contentDocument.window.reload();
+            document.getElementById("iframeWindow").contentDocument.window?.reload?.();
         }
-    }
-    else {
-        tab.dataset.url = ``;
+    } else {
+        tab.dataset.url = "";
     }
 
     tab.appendChild(span);
     tab.appendChild(close);
-
-    if (tabcount > 0) {
-
-    }
-
 
     const container = document.getElementById("browsertabs");
     if (container) {
@@ -51,11 +52,10 @@ function addtab(first) {
         console.error("Element with ID 'browsertabs' not found.");
     }
 
-    changetab(tab)
+    changetab(tab);
     tabcount++;
-
-
 }
+
 function closetab(button) {
     const tab = button.parentElement;
     const container = document.getElementById("browsertabs");
@@ -77,16 +77,10 @@ function closetab(button) {
     if (isActive) {
         // Get remaining tabs
         const remainingTabs = Array.from(container.children);
-
-        // Get tab to the left (index - 1)
         const newIndex = index - 1 >= 0 ? index - 1 : 0;
         const nextTab = remainingTabs[newIndex];
 
-        if (nextTab.classList = "tabactive") {
-
-        }
-
-        else if (nextTab) {
+        if (nextTab) {
             changetab(nextTab);
         }
     }
@@ -110,12 +104,70 @@ function changetab(currentTarget) {
         document.getElementById("iframeWindow").src = "/frontend-files/pages/emptytab.html";
         searchbar.value = "";
         return;
-    }
-    else {
+    } else {
         searchbar.value = url;
+    }
+
+    // Add URL to history if it's different from the last
+    if (!currentTarget.history) currentTarget.history = [];
+    const history = currentTarget.history;
+    if (history.length === 0 || history[history.length - 1] !== url) {
+        history.push(url);
     }
 
     document.getElementById("iframeWindow").src = url;
 
     document.getElementById("searchButton").click();
+}
+
+
+document.getElementById("searchButton").addEventListener("click", function () {
+    const activeTab = document.querySelector(".tabactive");
+    const searchbar = document.getElementById("urlInput");
+    const newUrl = searchbar.value.trim();
+
+    if (!activeTab) return;
+
+    // Only update if the URL is non-empty
+    if (newUrl) {
+        // Update the tab's dataset
+        activeTab.dataset.url = newUrl;
+
+        // Ensure history array exists
+        if (!activeTab.history) activeTab.history = [];
+
+        // Avoid duplicate entries
+        const last = activeTab.history[activeTab.history.length - 1];
+        if (last !== newUrl) {
+            activeTab.history.push(newUrl);
+        }
+
+        // Load URL in iframe
+        document.getElementById("iframeWindow").src = newUrl;
+    } else {
+        // If empty, reset to blank tab
+        activeTab.dataset.url = "";
+        if (!activeTab.history) activeTab.history = [];
+        activeTab.history.push("");
+
+        document.getElementById("iframeWindow").src = "/frontend-files/pages/emptytab.html";
+    }
+});
+
+function traverse_history(tab, direction) {
+    if (direction === "forward") {
+
+    }
+    else if (direction === "back") {
+        const history_count = tab.history.length;
+        if (history_count < 2) {
+            console.log("no previous history, back button ignored.")
+            return;
+        }
+        tab.dataset.url = tab.history[history_count - 2];
+        document.getElementById("searchButton").click();
+    }
+    else {
+        console.log("error with tab history");
+    }
 }
