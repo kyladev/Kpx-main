@@ -4,8 +4,10 @@ function create_section(topdesc, lowdesc, desctext1, desctext2, desc2id, locatio
     if (topdesc === true) {
         const desc = document.createElement("h2");
         desc.innerText = desctext1;
+        descdiv.classList.add("settingdesc");
         descdiv.appendChild(desc);
         sectiondiv.appendChild(descdiv);
+        document.getElementsByClassName(locationclass)[classindex].appendChild(sectiondiv);
         return;
     }
     const itemsdiv = document.createElement("div");

@@ -16,6 +16,7 @@ import { epoxyPath } from "@mercuryworkshop/epoxy-transport";
 import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
 //import user passwords and usernames
 import { users } from "./credentials.js";
+import * as fs from 'node:fs';
 
 
 const fastify = Fastify({
