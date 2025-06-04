@@ -26,110 +26,6 @@
 
         <div class="sections">
           <div class="settingdesc">
-            <h3>Reload Particles</h3>
-          </div>
-          <div class="right-items">
-            <button onclick="reload_current(); setparticleoptions();">
-              Reload
-            </button>
-          </div>
-        </div>
-
-        <div class="sections">
-          <div class="settingdesc">
-            <h3>Particle amount</h3>
-            <p class="smalldesc" id="particle-amount-text">Current: 120</p>
-          </div>
-          <div class="right-items">
-            <input id="particle-amount-input" placeholder="Enter a number..." type="number" />
-            <button id="particle-amount-set" onclick="particleamountset(false)">
-              Set number
-            </button>
-          </div>
-        </div>
-
-        <div class="sections">
-          <div class="settingdesc">
-            <h3>Particle color</h3>
-            <p class="smalldesc" id="color-text">Current: #ffffff</p>
-          </div>
-          <div class="right-items">
-            <input id="particle-color-input" placeholder="Enter a hex code..." />
-            <button id="particle-color-set" onclick="particlecolorset(false)">
-              Set color
-            </button>
-          </div>
-        </div>
-
-        <div class="sections">
-          <div class="settingdesc">
-            <h3>Particle speed</h3>
-            <p class="smalldesc" id="speed-text">Current: 1.5</p>
-          </div>
-          <div class="right-items">
-            <input id="particle-speed-input" placeholder="Enter a number..." type="number" />
-            <button id="particle-speed-set" onclick="particlespeedset(false)">
-              Set speed
-            </button>
-          </div>
-        </div>
-
-        <div class="sections">
-          <div class="settingdesc">
-            <h3>Particle direction</h3>
-            <p class="smalldesc" id="direction-text">Current: bottom</p>
-          </div>
-          <div class="right-items">
-            <select id="particle-direction-select">
-              <option value="bottom">Bottom</option>
-              <option value="top">Top</option>
-              <option value="right">Right</option>
-              <option value="left">Left</option>
-              <option value="top-right">Top-right</option>
-              <option value="top-left">Top-left</option>
-              <option value="bottom-right">Bottom-right</option>
-              <option value="bottom-left">Bottom-left</option>
-            </select>
-            <button id="particle-direction-set" onclick="particledirectionset(false)">
-              Set option
-            </button>
-          </div>
-        </div>
-
-        <div class="sections">
-          <div class="settingdesc">
-            <h3>Particle movement</h3>
-            <p class="smalldesc" id="movement-text">Current: random</p>
-          </div>
-          <div class="right-items">
-            <select id="particle-movement-select">
-              <option value="random">Random</option>
-              <option value="straight">Straight</option>
-            </select>
-            <button id="particle-movement-set" onclick="particlemovementset(false)">
-              Set option
-            </button>
-          </div>
-        </div>
-
-        <div class="sections">
-          <div class="settingdesc">
-            <h3>Particle bounce</h3>
-            <p class="smalldesc" id="bounce-text">Current: false</p>
-          </div>
-          <div class="right-items">
-            <select id="particle-bounce-select">
-              <option value="false">No bounce</option>
-              <option value="true">Bounce</option>
-            </select>
-            <button id="particle-bounce-set" onclick="particlebounceset(false)">
-              Set option
-            </button>
-          </div>
-        </div>
-
-        <div class="sections">
-          <div class="settingdesc">
             <h2>Particle shape</h2>
           </div>
         </div>
@@ -290,6 +186,8 @@
 </body>
 <!--pagegen scripts-->
 <script src="/frontend-files/pagegen-js/navbar-1-gen.js"></script>
+<script src="/frontend-files/pagegen-js/settings-sections.js"></script>
+<script src="/frontend-files/pagegen-js/settings-particles-gen.js"></script>
 <!--general scripts-->
 <script src="/frontend-files/js/req.js"></script>
 <script src="/frontend-files/js/settings.js"></script>
