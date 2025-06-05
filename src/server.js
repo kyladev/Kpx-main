@@ -210,7 +210,7 @@ let port = parseInt(process.env.PORT || "");
 
 if (isNaN(port)) port = 8080;
 
-PORT = 8080;
+const PORT = 8080;
 
 fastify.listen({
 	port: PORT,
