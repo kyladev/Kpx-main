@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const params = new URLSearchParams(window.location.search);
-    const url_input = document.getElementById("urlInput");
+    const url_input = document.getElementById("uv-address");
     url_input.value = params.get("q");
     document.getElementById("searchButton").click();
     console.log("clicked button");

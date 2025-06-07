@@ -35,8 +35,8 @@ function addtab(first) {
         if (initialUrl !== "") {
             tab.history.push(initialUrl);
         } else {
-            document.getElementById("iframeWindow").src = "/frontend-files/pages/emptytab.html";
-            document.getElementById("iframeWindow").contentDocument.window?.reload?.();
+            document.getElementById("uv-frame").src = "/frontend-files/pages/emptytab.html";
+            document.getElementById("uv-frame").contentDocument.window?.reload?.();
         }
     } else {
         tab.dataset.url = "";
@@ -98,10 +98,10 @@ function changetab(currentTarget) {
     currentTarget.classList.add("tabactive");
 
     const url = currentTarget.dataset.url;
-    const searchbar = document.getElementById("urlInput");
+    const searchbar = document.getElementById("uv-address");
 
     if (!url) {
-        document.getElementById("iframeWindow").src = "/frontend-files/pages/emptytab.html";
+        document.getElementById("uv-frame").src = "/frontend-files/pages/emptytab.html";
         searchbar.value = "";
         return;
     } else {
@@ -115,7 +115,7 @@ function changetab(currentTarget) {
         history.push(url);
     }
 
-    document.getElementById("iframeWindow").src = url;
+    document.getElementById("uv-frame").src = url;
 
     document.getElementById("searchButton").click();
 }
@@ -123,7 +123,7 @@ function changetab(currentTarget) {
 
 document.getElementById("searchButton").addEventListener("click", function () {
     const activeTab = document.querySelector(".tabactive");
-    const searchbar = document.getElementById("urlInput");
+    const searchbar = document.getElementById("uv-address");
     const newUrl = searchbar.value.trim();
 
     if (!activeTab) return;
@@ -143,14 +143,14 @@ document.getElementById("searchButton").addEventListener("click", function () {
         }
 
         // Load URL in iframe
-        document.getElementById("iframeWindow").src = newUrl;
+        document.getElementById("uv-frame").src = newUrl;
     } else {
         // If empty, reset to blank tab
         activeTab.dataset.url = "";
         if (!activeTab.history) activeTab.history = [];
         activeTab.history.push("");
 
-        document.getElementById("iframeWindow").src = "/frontend-files/pages/emptytab.html";
+        document.getElementById("uv-frame").src = "/frontend-files/pages/emptytab.html";
     }
 });
 
