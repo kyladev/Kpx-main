@@ -26,21 +26,17 @@
     </div>
     <h2 id="shortc">Shortcuts</h2>
     <div id="quicklinks">
-      <div id="quicklinks-inner">
-        <a class="shortcut" href="/search?q=google.com">
-          <img src="/frontend-files/assets/googlelogo.png" class="logo">
-          <p>Google</p>
-        </a>
-      </div>
-      <a class="shortcut" onclick="addsite()">
-        <p class="plus">+</p>
-        <p>Add Website</p>
-      </a>
+      <!--shortcuts generated here-->
     </div>
   </div>
 </body>
 <!--page generation scripts-->
 <script src="/frontend-files/pagegen-js/navbar-1-gen.js"></script>
+<script src="/frontend-files/pagegen-js/lib/home-shortcuts.js"></script>
+<script>
+  add_shortcut("/search?q=google.com", "/frontend-files/assets/googlelogo.png", "Google");
+  add_shortcut_add_button();
+</script>
 <!--general scripts-->
 <script src="/frontend-files/js/req.js"></script>
 <script src="/frontend-files/js/home.js"></script>

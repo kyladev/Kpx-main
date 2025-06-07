@@ -37,7 +37,7 @@ function addsite() {
   let savedlinks = JSON.parse(localStorage.getItem('customurls')) || [];
   savedlinks.push(newlink);
   localStorage.setItem('customurls', JSON.stringify(savedlinks));
-  addlinkstoui(customurl, customimage, customname);
+  add_shortcut(customurl, customimage, customname);
 }
 function searchkey(event) {
   if (event.key == "Enter") {
