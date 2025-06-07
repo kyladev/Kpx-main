@@ -2,7 +2,7 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 
 //turn to false to not require logging in
-export const require_pass = true;
+export const require_pass = false;
 
 //for testing (proxy doesn't work):
 //export const publicPath = process.cwd();

@@ -1,6 +1,6 @@
 # Kpx
 
-start with: npm start
+start with: npm start or node src/server.js
 
 To run and update ultraviolet, install new version, and copy frontend-files into the public folder of Ultraviolet-Static
 
