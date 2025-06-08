@@ -115,11 +115,10 @@ function changetab(currentTarget) {
         history.push(url);
     }
 
-    document.getElementById("uv-frame").src = url;
+    document.getElementById("uv-address").value = url;
 
     document.getElementById("searchButton").click();
 }
-
 
 document.getElementById("searchButton").addEventListener("click", function () {
     const activeTab = document.querySelector(".tabactive");
@@ -143,7 +142,7 @@ document.getElementById("searchButton").addEventListener("click", function () {
         }
 
         // Load URL in iframe
-        document.getElementById("uv-frame").src = newUrl;
+        //document.getElementById("uv-frame").src = __uv$config.prefix + __uv$config.encodeUrl(newUrl);
     } else {
         // If empty, reset to blank tab
         activeTab.dataset.url = "";
