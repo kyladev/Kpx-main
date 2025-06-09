@@ -1,13 +1,3 @@
-document.addEventListener("DOMContentLoaded", function () {
-    if (!localStorage.getItem("show-app-nav") || localStorage.getItem("show-app-nav") === "true") {
-        addnav();
-    }
-    if (localStorage.getItem("show-app-nav") === "false") {
-        console.log("navbar generation skipped");
-        return;
-    }
-});
-
 function addnav() {
     //get navbar div
     const navloc = document.getElementById("nav-container");

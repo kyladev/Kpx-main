@@ -10,6 +10,6 @@ export const users = {
     "Best_player": "brandonispoop", //Milo note: paid
     "Sathvik123": "$Sathvik19", //Sathvik note: paid
     "dillydoo": "currydagoat", //Dillon note: paid
-    "Kaden": "Kaden0510$", // Kaden paid until 6/7
-    "Braxtonlikesmilk": "Toyman2341" //Eddie paid until 6/7
+    //"Kaden": "Kaden0510$", // Kaden paid until 6/7
+    //"Braxtonlikesmilk": "Toyman2341" //Eddie paid until 6/7
 };

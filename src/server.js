@@ -49,7 +49,7 @@ fastify.get("/uv/uv.config.js", (req, res) => {
 fastify.get("/search", {
   preHandler: authMiddleware(), // or false for test mode
   handler: (req, res) => {
-    return res.sendFile("frontend-files/searchv2.html", publicPath);
+    return res.sendFile("frontend-files/search.html", publicPath);
   }
 });
 

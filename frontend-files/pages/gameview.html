@@ -5,10 +5,20 @@
   <script src="https://kit.fontawesome.com/5be346f7c3.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/frontend-files/css/apps.css">
   <link rel="stylesheet" href="/frontend-files/css/req.css">
+  <script src="/frontend-files/pagegen-js/navbar-1-gen.js"></script>
+  <script src="/frontend-files/js/req.js"></script>
   <script>
     const params = new URLSearchParams(window.location.search);
     document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("gameiframe").src = "/frontend-files/games/" + params.get("game");
+
+      if (!localStorage.getItem("show-game-nav") || localStorage.getItem("show-game-nav") === "true") {
+        addnav();
+      }
+      if (localStorage.getItem("show-game-nav") === "false") {
+        console.log("navbar generation skipped");
+        return;
+      }
     })
   </script>
   <title>KPX</title>
@@ -22,10 +32,6 @@
   </div>
   <iframe id="gameiframe" src=""></iframe>
 </body>
-<!--pagegen scripts-->
-<script src="/frontend-files/pagegen-js/navbar-1-gen.js"></script>
-<!--general scriptss-->
-<script src="/frontend-files/js/req.js"></script>
 <style>
   body {
     width: 100%;
