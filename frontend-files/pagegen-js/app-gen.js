@@ -5,3 +5,4 @@ create_section("apps/view?q=https://chatgpt.com/", "/frontend-files/assets/chatg
 create_section("apps/view?q=https://www.twitch.tv/", "/frontend-files/assets/twitch-logo.png", "Twitch");
 create_section("apps/view?q=https://discord.com/", "/frontend-files/assets/discord-logo.png", "Discord");
 create_section("apps/view?q=https://open.spotify.com/", "/frontend-files/assets/spotify.png", "Spotify");
+create_section("apps/view?q=https://plex.tv/", "/frontend-files/assets/plex.jpg", "Plex");

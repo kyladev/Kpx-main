@@ -17,6 +17,10 @@ h1 {
     z-index: 10;
 }
 
+input {
+    background-color: #202020;
+}
+
 .subheading {
     text-align: center;
     margin-bottom: 20px;

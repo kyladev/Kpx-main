@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <title>KPX</title>
-    <link rel="shortcut icon" content="favicon.ico" id="ficon"/>
+    <link rel="shortcut icon" content="favicon.ico" id="ficon" />
     <script src="https://kit.fontawesome.com/5be346f7c3.js" crossorigin="anonymous"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -29,28 +30,23 @@
     <link rel="stylesheet" href="/frontend-files/css/search.css">
     <link rel="stylesheet" href="/frontend-files/css/req.css">
     <script src="/frontend-files/js/cloak.js"></script>
-    <script src="/frontend-files/pagegen-js/navbar-1-gen.js"></script>
-    <script src="/frontend-files/js/req.js"></script>
-  </head>
+    <script src="/frontend-files/js/panic.js"></script>
+</head>
 
-  <body>
+<body>
     <div id="outer-nav">
         <div id="nav-container">
             <!--navbar generated here-->
         </div>
     </div>
     <form id="uv-form" class="flex-center" style="display: none;">
-        <input
-            id="uv-search-engine"
-            value="https://duckduckgo.com/%s"
-            type="hidden"
-        />
+        <input id="uv-search-engine" value="https://duckduckgo.com/%s" type="hidden" />
         <!--user search value is in 'uv-address'-->
         <input id="uv-address" type="text" placeholder="Search the web freely" />
     </form>
     <div class="desc left-margin">
-      <p id="uv-error"></p>
-      <pre id="uv-error-code"></pre>
+        <p id="uv-error"></p>
+        <pre id="uv-error-code"></pre>
     </div>
     <button id="searchButton" style='display: none;'></button>
     <select id="switcher" style="display: none;">
@@ -58,6 +54,18 @@
         <option value="epoxy">Epoxy</option>
         <option value="bare">Bare</option>
     </select>
-    <iframe style="display: block; width: 100%; height: 100%; position: absolute; border: 0; top: 0;" id="uv-frame"></iframe>
-  </body>
+    <iframe style="display: block; width: 100%; height: 100%; position: absolute; border: 0; top: 0;"
+        id="uv-frame"></iframe>
+    <script src="/frontend-files/pagegen-js/navbar-1-gen.js"></script>
+    <script>
+        if (!localStorage.getItem("show-app-nav") || localStorage.getItem("show-app-nav") === "false") {
+            return;
+        }
+        else {
+            addnav();
+        }
+    </script>
+    <script src="/frontend-files/js/req.js"></script>
+</body>
+
 </html>
