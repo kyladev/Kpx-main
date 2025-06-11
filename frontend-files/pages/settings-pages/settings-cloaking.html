@@ -24,31 +24,6 @@
     <h3 class="subheading">Settings - Cloaking</h3>
     <div class="center-wrapping">
       <div class="sections-container">
-        <div class="sections">
-          <div class="settingdesc">
-            <h3>Tab Cloak</h3>
-            <p class="smalldesc">Changes the appearence of the tab.</p>
-          </div>
-          <div class="right-items">
-            <select id="cloakselect" onchange="settitle()">
-              <option selected="true" disabled value="">Select a Cloak</option>
-              <option value="Google Search">Google Search (calculator)</option>
-              <option value="Gmail">Gmail</option>
-              <option value="Google Docs">Google Docs</option>
-              <option value="Google Slides">Google Slides</option>
-              <option value="PowerPoint">PowerPoint</option>
-              <option value="Google Drive">Google Drive</option>
-              <option value="OneDrive">OneDrive</option>
-              <option value="Wikipedia">Wikipedia</option>
-              <option value="YouTube">YouTube</option>
-              <option value="Clever">Clever</option>
-              <option value="Desmos">Desmos</option>
-              <option value="Outlook">Outlook</option>
-              <option value="Google Homepage">Google Homepage</option>
-              <option value="Word">Word</option>
-            </select>
-          </div>
-        </div>
 
         <div class="sections">
           <div class="settingdesc">
@@ -175,11 +150,34 @@
 </body>
 <!--pagegen scripts-->
 <script src="/frontend-files/pagegen-js/navbar-1-gen.js"></script>
+<script src="/frontend-files/pagegen-js/lib/settings-sections.js"></script>
 <script>
   addnav();
 </script>
+<script>
+  create_section(false, false, "Tab Cloak", "Changes the appearance of your tab", "", "sections-container", 0, "cloak-section-items");
+  add_select_body(document.getElementById("cloak-section-items"), "cloakselect", "cloakset");
+  add_select_option(document.getElementById("cloakselect"), "Google Search", "Google Search (calculator)");
+  add_select_option(document.getElementById("cloakselect"), "Gmail", "Gmail");
+  add_select_option(document.getElementById("cloakselect"), "Google Docs", "Google Docs");
+  add_select_option(document.getElementById("cloakselect"), "Google Slides", "Google Slides");
+  add_select_option(document.getElementById("cloakselect"), "PowerPoint", "PowerPoint");
+  add_select_option(document.getElementById("cloakselect"), "Google Drive", "Google Drive");
+  add_select_option(document.getElementById("cloakselect"), "OneDrive", "OneDrive");
+  add_select_option(document.getElementById("cloakselect"), "Wikipedia", "Wikipedia");
+  add_select_option(document.getElementById("cloakselect"), "YouTube", "YouTube");
+  add_select_option(document.getElementById("cloakselect"), "Clever", "Clever");
+  add_select_option(document.getElementById("cloakselect"), "Desmos", "Desmos");
+  add_select_option(document.getElementById("cloakselect"), "Outlook", "Outlook");
+  add_select_option(document.getElementById("cloakselect"), "Google Homepage", "Google Homepage");
+  add_select_option(document.getElementById("cloakselect"), "Word", "Word");
+  document.getElementById("cloakset").addEventListener("click", function () {
+    settitle();
+  });
+</script>
 <!--general scripts-->
 <script src="/frontend-files/js/req.js"></script>
+<script src="/frontend-files/js/settings-cloak.js"></script>
 <!--particle scripts-->
 <script src=" https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js "></script>
 <script src="/frontend-files/js/particles/particles-js.js"></script>

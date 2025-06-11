@@ -11,5 +11,5 @@ export const users = {
     "Sathvik123": "$Sathvik19", //Sathvik note: paid
     "dillydoo": "currydagoat", //Dillon note: paid
     //"Kaden": "Kaden0510$", // Kaden paid until 6/7
-    //"Braxtonlikesmilk": "Toyman2341" //Eddie paid until 6/7
+    "Braxtonlikesmilk": "Toyman2341" //Eddie paid until 6/14
 };
