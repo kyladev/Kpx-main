@@ -231,28 +231,26 @@ fastify.post('/error', async (request, reply) => {
 //server utility paths
 
 fastify.get('/admin/logs', {
-  preHandler: authMiddlewareAdmin,
+  preHandler: authMiddlewareAdmin(),
   handler: async (request, reply) => {
-    const logPath = path.join(__dirname, './logs.txt');
-    const data = await fs.promises.readFile(logPath, 'utf8');
+    try {
+      const logPath = path.join(__dirname, 'logs.txt');
+      const data = await fs.promises.readFile(logPath, 'utf8');
 
-    fs.readFile(logPath, 'utf8', (err, data) => {
-        if (err) {
-            console.error("Error reading log file:", err);
-            return res.status(500).send("Error reading log file");
-        }
-
-        console.log("sending log files");
-
-        reply.type('text/html').send(`
-            <!DOCTYPE html>
-            <html>
+      reply
+        .type('text/html')
+        .send(`
+          <!DOCTYPE html>
+          <html>
             <body>
-                <pre>${data}</pre>
+              <pre>${data}</pre>
             </body>
-            </html>
+          </html>
         `);
-    });
+    } catch (err) {
+      request.log.error(err);
+      reply.code(500).send('Error reading log file');
+    }
   }
 });
 
