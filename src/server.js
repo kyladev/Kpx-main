@@ -10,14 +10,18 @@ import settings_router from "./settings-router.js";
 import resources_router from "./resources-router.js";
 import fastifyCookie from '@fastify/cookie';
 import fastifyFormbody from '@fastify/formbody';
-import { authMiddleware, publicPath, require_pass } from './run-settings.js';
+import { authMiddleware, authMiddlewareAdmin, publicPath, require_pass } from './run-settings.js';
 import { uvPath } from "@titaniumnetwork-dev/ultraviolet";
 import { epoxyPath } from "@mercuryworkshop/epoxy-transport";
 import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
 //import user passwords and usernames
-import { users } from "./credentials.js";
+import { users, admins } from "./credentials.js";
 import * as fs from 'node:fs';
+import crypto from 'node:crypto';
 
+export const userSessions = new Map(); // { username: sessionId }
+
+const __dirname = join(fileURLToPath(import.meta.url), "..");
 
 const fastify = Fastify({
 	serverFactory: (handler) => {
@@ -39,8 +43,59 @@ fastify.register(fastifyStatic, {
 	decorateReply: true,
 });
 
-await fastify.register(fastifyCookie);
 await fastify.register(fastifyFormbody);
+await fastify.register(fastifyCookie, {
+  secret: `5iudXgHUUMQhjUoUova9bGRF3GyupJCVnxAFcZE28aEmcpUUUYT81EiyFDZKJf7uGr2OHjSuAhk07YOEdEWC36g0M9S309U4kKWt0iBEELDq4tghh6riKWaEBENqSMKHDx9CxjqmEqBelQdfcjF03tHsRmdofdtSc3QqRze8ZaGJYelzsKnS11MxAQ9rx1udk3BEY6vqdWhQhXeluo1qQX8fNsvlNgN9
+WANl5dPrn8bOD0thJMbP9F1DOjWQpvZU`,
+});
+
+fastify.addHook('preHandler', async (request, reply) => {
+  const rawUser = request.cookies.User;
+  const rawSession = request.cookies.Session;
+
+  if (!rawUser || !rawSession) {
+    console.log('Missing cookies, skipping validation');
+    return;
+  }
+
+  const { value: username, valid: userValid } = request.unsignCookie(rawUser);
+  const { value: sessionId, valid: sessionValid } = request.unsignCookie(rawSession);
+
+  if (!userValid || !sessionValid) {
+    console.log('Invalid signed cookie(s)');
+    reply.clearCookie('Session');
+    reply.clearCookie('User');
+    return reply.redirect('/error');
+  }
+
+  console.log('User:', username);
+  console.log('Session from cookie:', sessionId);
+
+  const validSession = userSessions.get(username);
+  console.log('Expected session:', validSession);
+
+  if (validSession !== sessionId) {
+    console.log(`Invalid session for user ${username}. Forcing logout.`);
+    reply.clearCookie('Session');
+    reply.clearCookie('User');
+    return reply.redirect('/error');
+  }
+});
+
+fastify.setErrorHandler((error, request, reply) => {
+  if (error.message === 'UserNotAuthorized') {
+    reply
+      .code(403)
+      .type('text/html')
+      .send("<h1>403 Forbidden</h1><p>You don't have permission to access this resource.</p>");
+  } else {
+    // fallback for unhandled errors
+    reply
+      .code(500)
+      .type('text/html')
+      .send('<h1>500 Server Error</h1><p>No verified cookie, a cookie was not read correctly, or there is a missing cookie.</p>');
+  }
+});
 
 fastify.get("/uv/uv.config.js", (req, res) => {
 	return res.sendFile("/uv/uv.config.js", publicPath);
@@ -141,16 +196,26 @@ fastify.post('/error', async (request, reply) => {
   const { user, pass } = request.body;
 
   if (users[user] && users[user] === pass) {
-    console.log("User logged in:", user);
+    const sessionId = crypto.randomUUID();
+    userSessions.set(user, sessionId);
+    console.log("Cookie session:", sessionId);
 
-    reply.setCookie('Session', 'Valid', {
-      maxAge: 3600, // 1 hour
-      httpOnly: false,
-      path: '/'
-    });
+    reply
+      .setCookie('Session', sessionId, {
+        signed: true,
+        maxAge: 3600, // 1 hour
+        httpOnly: true,
+        path: '/'
+      })
+      .setCookie('User', user, {
+        signed: true,
+        maxAge: 3600,
+        httpOnly: true,
+        path: '/'
+      });
 
-    fs.appendFile("logs.txt", user + " has logged in:" + new Date + "\n", ()=> {
-        console.log("sign in logged, " + user + ": " + new Date);
+    fs.appendFile("logs.txt", `${user} has logged in: ${new Date()}\n`, () => {
+      console.log("sign in logged:", user, new Date());
     });
 
     reply.type('text/html').send(`
@@ -159,10 +224,88 @@ fastify.post('/error', async (request, reply) => {
       </script>
     `);
   } else {
-    // Optional: Add feedback to the error page
     reply.redirect('/error');
   }
 });
+
+//server utility paths
+
+fastify.get('/admin/logs', {
+  preHandler: authMiddlewareAdmin,
+  handler: async (request, reply) => {
+    const logPath = path.join(__dirname, './logs.txt');
+    const data = await fs.promises.readFile(logPath, 'utf8');
+
+    fs.readFile(logPath, 'utf8', (err, data) => {
+        if (err) {
+            console.error("Error reading log file:", err);
+            return res.status(500).send("Error reading log file");
+        }
+
+        console.log("sending log files");
+
+        reply.type('text/html').send(`
+            <!DOCTYPE html>
+            <html>
+            <body>
+                <pre>${data}</pre>
+            </body>
+            </html>
+        `);
+    });
+  }
+});
+
+fastify.get("/admin", {
+  preHandler: authMiddlewareAdmin(),
+  handler: (req, res) => {
+    return res.sendFile("frontend-files/pages/utility/adminhub.html", publicPath);
+  }
+});
+
+fastify.get("/admin/login", {
+  preHandler: authMiddlewareAdmin(),
+  handler: (req, res) => {
+    return res.sendFile("frontend-files/pages/utility/adminlogin.html", publicPath);
+  }
+});
+
+fastify.post('/admin/login', async (request, reply) => {
+  const { user, pass } = request.body;
+
+  if (admins[user] && admins[user] === pass) {
+    const sessionId = crypto.randomUUID();
+    userSessions.set(user, sessionId);
+    console.log("Admin cookie session:", sessionId);
+
+    reply
+      .setCookie('Session', sessionId, {
+        signed: true,
+        maxAge: 360, // 1 hour
+        httpOnly: true,
+        path: '/admin'
+      })
+      .setCookie('User', user, {
+        signed: true,
+        maxAge: 360,
+        httpOnly: true,
+        path: '/admin'
+      });
+
+    fs.appendFile("logs.txt", `${user} has logged in on admin page: ${new Date()}\n`, () => {
+      console.log("sign in on admin page, logged:", user, new Date());
+    });
+
+    reply.type('text/html').send(`
+      <script>
+        window.location.href = "/admin";
+      </script>
+    `);
+  } else {
+    reply.redirect('/admin/login');
+  }
+});
+
 
 fastify.register(fastifyStatic, {
 	root: uvPath,
