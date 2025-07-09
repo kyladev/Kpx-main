@@ -57,8 +57,8 @@ fastify.register(fastifyStatic, {
 
 await fastify.register(fastifyFormbody);
 await fastify.register(fastifyCookie, {
-  secret: `5iudXgHUUMQhjUoUova9bGRF3GyupJCVnxAFcZE28aEmcpUUUYT81EiyFDZKJf7uGr2OHjSuAhk07YOEdEWC36g0M9S309U4kKWt0iBEELDq4tghh6riKWaEBENqSMKHDx9CxjqmEqBelQdfcjF03tHsRmdofdtSc3QqRze8ZaGJYelzsKnS11MxAQ9rx1udk3BEY6vqdWhQhXeluo1qQX8fNsvlNgN9
-WANl5dPrn8bOD0thJMbP9F1DOjWQpvZU`,
+  secret: `alziWLAgC5Sy5EtSh9JaaJa46KVKCK7UesL8n9hBQUZazwJoq5g5iVygjb1QC80yQvxQkntmFh0j3i5U8p8ZEZG57UUvI0DiXbMoGL7li36eaVbvFLHMHs6j75kJU94buiGZZN4PCJRZCI7te4Dfn0vA0ZOp1eN6B5RBcP90IpVCRQ0oxmIOBmsZA8KFRlmqctgPpPp19iQObJLxJqPPaki44LoGnaVm210ZXfFvmKuUMgiGUlVugYbZD85vFV1F
+  3JVD61m61oiL1nNrOsPqce3bcdUZKNcsp5sAo6ZeJb0CM6Ljdc48o2oewuwjma3OUr2VrBhHHrK2B3qG9i3PUhNzzYV8kzHPe96JFnUWOjnL3ssLEbBkdb1DAKEv5eXhSJORSA7fD6Lq9qYVQnh5bAv6RGvNjs8R3fIbiWlJdoxdhGp6JhgkTuLAP2BxDzZ61epZbWsUGTSbiHCKcpqoweHdzdwCmLLrIgAhZuknnu6H6NUjy7FGGZvoG7KthRGx`
 });
 
 fastify.addHook('preHandler', async (request, reply) => {
@@ -363,5 +363,5 @@ const PORT = process.env.PORT || 443;
 
 fastify.listen({
 	port: PORT,
-	host: "0.0.0.0",
+	host: "0.0.0.0"
 });
