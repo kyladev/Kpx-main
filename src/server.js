@@ -1,4 +1,4 @@
-import { createServer } from "node:http";
+import { createServer } from "node:https";
 import { join } from "node:path";
 import { hostname } from "node:os";
 import wisp from "wisp-server-node";
@@ -18,24 +18,36 @@ import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
 import { users, admins } from "./credentials.js";
 import * as fs from 'node:fs';
 import crypto from 'node:crypto';
+import tls from 'tls';
+import constants from 'node:constants';
 
 export const userSessions = new Map(); // { username: sessionId }
 
 const __dirname = join(fileURLToPath(import.meta.url), "..");
 
+const httpsOptions = {
+  key: fs.readFileSync('/etc/letsencrypt/live/testinghostdomain.zapto.org/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/testinghostdomain.zapto.org/fullchain.pem'),
+  minVersion: 'TLSv1.2', // Don't allow TLSv1.1 or older
+  ciphers: tls.DEFAULT_CIPHERS,
+  honorCipherOrder: true,
+  secureOptions: constants.SSL_OP_NO_SSLv2 | constants.SSL_OP_NO_SSLv3, // Disable SSLv2/v3
+};
+
 const fastify = Fastify({
-	serverFactory: (handler) => {
-		return createServer()
-			.on("request", (req, res) => {
-				res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
-				res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
-				handler(req, res);
-			})
-			.on("upgrade", (req, socket, head) => {
-				if (req.url.endsWith("/wisp/")) wisp.routeRequest(req, socket, head);
-				else socket.end();
-			});
-	},
+  https: httpsOptions,
+  serverFactory: (handler) => {
+    return createServer(httpsOptions)
+      .on("request", (req, res) => {
+        res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+        res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
+        handler(req, res);
+      })
+      .on("upgrade", (req, socket, head) => {
+        if (req.url.endsWith("/wisp/")) wisp.routeRequest(req, socket, head);
+        else socket.end();
+      });
+  },
 });
 
 fastify.register(fastifyStatic, {
@@ -347,7 +359,7 @@ function shutdown() {
 	process.exit(0);
 }
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 443;
 
 fastify.listen({
 	port: PORT,
