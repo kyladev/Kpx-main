@@ -354,7 +354,7 @@ process.on("SIGINT", shutdown);
 process.on("SIGTERM", shutdown);
 
 function shutdown() {
-	console.log("SIGTERM signal received: closing HTTP server");
+	console.log("SIGTERM signal received: closing HTTP/HTTPS server");
 	fastify.close();
 	process.exit(0);
 }
