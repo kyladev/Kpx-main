@@ -14,17 +14,20 @@ import { authMiddleware, authMiddlewareAdmin, publicPath, require_pass } from '.
 import { uvPath } from "@titaniumnetwork-dev/ultraviolet";
 import { epoxyPath } from "@mercuryworkshop/epoxy-transport";
 import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
-//import user passwords and usernames
-import { users, admins } from "./credentials.js";
+import { readFile, appendFile } from 'fs/promises';
 import * as fs from 'node:fs';
 import crypto from 'node:crypto';
 import tls from 'tls';
 import constants from 'node:constants';
 
+//import user passwords and usernames as path to JSON file
+const usersFilePath = path.join(process.cwd(), 'src/userdata.json');
+
 export const userSessions = new Map(); // { username: sessionId }
 
 const __dirname = join(fileURLToPath(import.meta.url), "..");
 
+//replace paths with whatever the paths are to the ssl certificates
 const httpsOptions = {
   key: fs.readFileSync('/etc/letsencrypt/live/testinghostdomain.zapto.org/privkey.pem'),
   cert: fs.readFileSync('/etc/letsencrypt/live/testinghostdomain.zapto.org/fullchain.pem'),
@@ -95,14 +98,15 @@ fastify.addHook('preHandler', async (request, reply) => {
 });
 
 fastify.setErrorHandler((error, request, reply) => {
+  // fallback for unhandled errors
   if (error.message === 'UserNotAuthorized') {
     reply
       .code(403)
       .type('text/html')
       .send("<h1>403 Forbidden</h1><p>You don't have permission to access this resource.</p>");
   } else {
-    // fallback for unhandled errors
     reply
+      //shows for any user going to a page that needs a cookie without one
       .code(500)
       .type('text/html')
       .send('<h1>500 Server Error</h1><p>No verified cookie, a cookie was not read correctly, or there is a missing cookie.</p>');
@@ -113,84 +117,91 @@ fastify.get("/uv/uv.config.js", (req, res) => {
 	return res.sendFile("/uv/uv.config.js", publicPath);
 });
 
-fastify.get("/search", {
-  preHandler: authMiddleware(), // or false for test mode
+fastify.get("/s", {
+  preHandler: authMiddleware(),
   handler: (req, res) => {
-    return res.sendFile("frontend-files/pages/search.html", publicPath);
+    return res.sendFile("files/pages/search.html", publicPath);
   }
 });
 
 fastify.get("/", {
-  preHandler: authMiddleware(), // or false for test mode
+  preHandler: authMiddleware(),
   handler: (req, res) => {
-    return res.sendFile("frontend-files/pages/home.html", publicPath);
+    return res.sendFile("files/pages/home.html", publicPath);
   }
 });
 
-fastify.register(settings_router, { prefix: '/settings' });
+fastify.register(settings_router, { prefix: '/st' });
 
-fastify.register(resources_router, { prefix: '/resources' });
+fastify.register(resources_router, { prefix: '/r' });
 
-fastify.get("/apps", {
-  preHandler: authMiddleware(), // or false for test mode
+fastify.get("/a", {
+  preHandler: authMiddleware(),
   handler: (req, res) => {
-    return res.sendFile("frontend-files/pages/apps.html", publicPath);
+    return res.sendFile("files/pages/apps.html", publicPath);
   }
 });
 
-fastify.get("/apps/view", {
-  preHandler: authMiddleware(), // or false for test mode
+fastify.get("/a/v", {
+  preHandler: authMiddleware(),
   handler: (req, res) => {
-    return res.sendFile("frontend-files/pages/appview.html", publicPath);
+    return res.sendFile("files/pages/appview.html", publicPath);
   }
 });
 
-fastify.get("/tools", {
-  preHandler: authMiddleware(), // or false for test mode
+fastify.get("/t", {
+  preHandler: authMiddleware(),
   handler: (req, res) => {
-    return res.sendFile("frontend-files/pages/tools.html", publicPath);
+    return res.sendFile("files/pages/tools.html", publicPath);
   }
 });
 
-fastify.get("/tools/view", {
-  preHandler: authMiddleware(), // or false for test mode
+fastify.get("/t/v", {
+  preHandler: authMiddleware(),
   handler: (req, res) => {
-    return res.sendFile("frontend-files/pages/appview.html", publicPath);
+    return res.sendFile("files/pages/appview.html", publicPath);
   }
 });
 
-fastify.get("/games", {
-  preHandler: authMiddleware(), // or false for test mode
+fastify.get("/g", {
+  preHandler: authMiddleware(),
   handler: (req, res) => {
-    return res.sendFile("frontend-files/pages/games.html", publicPath);
+    return res.sendFile("files/pages/games.html", publicPath);
   }
 });
 
-fastify.get("/games/play", {
-  preHandler: authMiddleware(), // or false for test mode
+fastify.get("/g/p", {
+  preHandler: authMiddleware(),
   handler: (req, res) => {
-    return res.sendFile("frontend-files/pages/gameview.html", publicPath);
+    return res.sendFile("files/pages/gameview.html", publicPath);
   }
 });
 
-fastify.get("/bots", {
-  preHandler: authMiddleware(), // or false for test mode
+fastify.get("/b", {
+  preHandler: authMiddleware(),
   handler: (req, res) => {
-    return res.sendFile("frontend-files/pages/inprogress.html", publicPath);
+    return res.sendFile("files/pages/inprogress.html", publicPath);
   }
 });
 
-fastify.get("/info", {
-  preHandler: authMiddleware(), // or false for test mode
+fastify.get("/i", {
+  preHandler: authMiddleware(),
   handler: (req, res) => {
-    return res.sendFile("frontend-files/pages/info.html", publicPath);
+    return res.sendFile("files/pages/info.html", publicPath);
   }
 });
 
-fastify.get("/info/changelog", {
-  preHandler: authMiddleware(), // or false for test mode
+fastify.get("/i/c", {
+  preHandler: authMiddleware(),
   handler: (req, res) => {
-    return res.sendFile("frontend-files/pages/changelog.html", publicPath);
+    return res.sendFile("files/pages/changelog.html", publicPath);
+  }
+});
+
+fastify.get("/sc", {
+  preHandler: authMiddleware(),
+  handler: (req, res) => {
+    return res.sendFile("files/pages/security.html", publicPath);
   }
 });
 
@@ -199,7 +210,7 @@ fastify.get("/error", (req, res) => {
 		res.redirect('/');
 	}
 	else {
-		return res.sendFile("frontend-files/pages/403.html", publicPath);
+		return res.sendFile("files/pages/403.html", publicPath);
 	}
 });
 
@@ -207,36 +218,45 @@ fastify.get("/error", (req, res) => {
 fastify.post('/error', async (request, reply) => {
   const { user, pass } = request.body;
 
-  if (users[user] && users[user] === pass) {
-    const sessionId = crypto.randomUUID();
-    userSessions.set(user, sessionId);
-    console.log("Cookie session:", sessionId);
+  try {
+    const data = await readFile(usersFilePath, 'utf-8');
+    const json = JSON.parse(data);
+    const storedUser = json.Users?.[user];
 
-    reply
-      .setCookie('Session', sessionId, {
-        signed: true,
-        maxAge: 3600, // 1 hour
-        httpOnly: true,
-        path: '/'
-      })
-      .setCookie('User', user, {
-        signed: true,
-        maxAge: 3600,
-        httpOnly: true,
-        path: '/'
-      });
+    if (storedUser && storedUser.password === pass) {
+      const sessionId = crypto.randomUUID();
+      userSessions.set(user, sessionId);
 
-    fs.appendFile("logs.txt", `${user} has logged in: ${new Date()}\n`, () => {
+      console.log("Cookie session:", sessionId);
+
+      reply
+        .setCookie('Session', sessionId, {
+          signed: true,
+          maxAge: 3600,
+          httpOnly: true,
+          path: '/'
+        })
+        .setCookie('User', user, {
+          signed: true,
+          maxAge: 3600,
+          httpOnly: true,
+          path: '/'
+        });
+
+      await appendFile("logs.txt", `${user} has logged in: ${new Date()}\n`);
       console.log("sign in logged:", user, new Date());
-    });
 
-    reply.type('text/html').send(`
-      <script>
-        window.location.href = "/";
-      </script>
-    `);
-  } else {
-    reply.redirect('/error');
+      reply.type('text/html').send(`
+        <script>
+          window.location.href = "/";
+        </script>
+      `);
+    } else {
+      reply.redirect('/error');
+    }
+  } catch (err) {
+    console.error("Login error:", err);
+    reply.status(500).send("Internal Server Error");
   }
 });
 
@@ -269,69 +289,76 @@ fastify.get('/admin/logs', {
 fastify.get("/admin", {
   preHandler: authMiddlewareAdmin(),
   handler: (req, res) => {
-    return res.sendFile("frontend-files/pages/utility/adminhub.html", publicPath);
+    return res.sendFile("files/pages/utility/adminhub.html", publicPath);
   }
 });
 
 fastify.get("/admin/login", {
   preHandler: authMiddlewareAdmin(),
   handler: (req, res) => {
-    return res.sendFile("frontend-files/pages/utility/adminlogin.html", publicPath);
+    return res.sendFile("files/pages/utility/adminlogin.html", publicPath);
   }
 });
 
 fastify.post('/admin/login', async (request, reply) => {
   const { user, pass } = request.body;
 
-  if (admins[user] && admins[user] === pass) {
-    const sessionId = crypto.randomUUID();
-    userSessions.set(user, sessionId);
-    console.log("Admin cookie session:", sessionId);
+  try {
+    const data = await readFile(usersFilePath, 'utf-8');
+    const json = JSON.parse(data);
+    const storedAdmin = json.Admins?.[user];
 
-    reply
-      .setCookie('Session', sessionId, {
-        signed: true,
-        maxAge: 360, // 1 hour
-        httpOnly: true,
-        path: '/admin'
-      })
-      .setCookie('User', user, {
-        signed: true,
-        maxAge: 360,
-        httpOnly: true,
-        path: '/admin'
-      });
+    if (storedAdmin && storedAdmin.password === pass) {
+      const sessionId = crypto.randomUUID();
+      console.log("Admin cookie session:", sessionId);
 
-    fs.appendFile("logs.txt", `${user} has logged in on admin page: ${new Date()}\n`, () => {
-      console.log("sign in on admin page, logged:", user, new Date());
-    });
+      reply
+        .setCookie('Session', sessionId, {
+          signed: true,
+          maxAge: 3600, // 1 hour
+          httpOnly: true,
+          path: '/admin'
+        })
+        .setCookie('User', user, {
+          signed: true,
+          maxAge: 3600,
+          httpOnly: true,
+          path: '/admin'
+        });
 
-    reply.type('text/html').send(`
-      <script>
-        window.location.href = "/admin";
-      </script>
-    `);
-  } else {
-    reply.redirect('/admin/login');
+      await appendFile("logs.txt", `${user} has logged in on admin page: ${new Date()}\n`);
+      console.log("Sign in on admin page logged:", user, new Date());
+
+      reply.type('text/html').send(`
+        <script>
+          window.location.href = "/admin";
+        </script>
+      `);
+    } else {
+      reply.redirect('/admin/login');
+    }
+  } catch (err) {
+    console.error("Admin login error:", err);
+    reply.status(500).send("Internal Server Error");
   }
 });
 
 
 fastify.register(fastifyStatic, {
 	root: uvPath,
-	prefix: "/uv/",
+	prefix: "/core/",
 	decorateReply: false,
 });
 
 fastify.register(fastifyStatic, {
 	root: epoxyPath,
-	prefix: "/epoxy/",
+	prefix: "/core/epoxy/",
 	decorateReply: false,
 });
 
 fastify.register(fastifyStatic, {
 	root: baremuxPath,
-	prefix: "/baremux/",
+	prefix: "/core/baremux/",
 	decorateReply: false,
 });
 
@@ -359,6 +386,7 @@ function shutdown() {
 	process.exit(0);
 }
 
+//listening on default https port (http: 80, https: 443)
 const PORT = process.env.PORT || 443;
 
 fastify.listen({

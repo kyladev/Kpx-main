@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>KPX</title>
+    <link rel="shortcut icon" content="favicon.ico" id="ficon" />
+    <script src="https://kit.fontawesome.com/5be346f7c3.js" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (!localStorage.getItem("show-app-nav") || localStorage.getItem("show-app-nav") === "true") {
+                addnav();
+            }
+            if (localStorage.getItem("show-app-nav") === "false") {
+                console.log("navbar generation skipped");
+                return;
+            }
+        });
+    </script>
+    <link rel="stylesheet" href="/files/css/index.css" />
+    <script src="../../baremux/index.js" defer></script>
+    <script src="../../epoxy/index.js" defer></script>
+    <script src="../../uv/uv.bundle.js" defer></script>
+    <script src="../../uv/uv.config.js" defer></script>
+    <script src="../../register-sw.js" defer></script>
+    <script src="../../search.js" defer></script>
+    <script src="../../index.js" defer></script>
+    <script src="/files/js/search-form.js"></script>
+    <script src="/files/js/search-load.js"></script>
+    <link rel="stylesheet" href="/files/css/search.css">
+    <link rel="stylesheet" href="/files/css/req.css">
+    <script src="/files/js/cloak.js"></script>
+    <script src="/files/js/panic.js"></script>
+</head>
+
+<body>
+    <div id="outer-nav">
+        <div id="nav-container">
+            <!--navbar generated here-->
+        </div>
+    </div>
+    <form id="uv-form" class="flex-center" style="display: none;">
+        <input id="uv-search-engine" value="https://duckduckgo.com/%s" type="hidden" />
+        <!--user search value is in 'uv-address'-->
+        <input id="uv-address" type="text" placeholder="Search the web freely" />
+    </form>
+    <div class="desc left-margin">
+        <p id="uv-error"></p>
+        <pre id="uv-error-code"></pre>
+    </div>
+    <button id="searchButton" style='display: none;'></button>
+    <select id="switcher" style="display: none;">
+        <option value="">--Please Choose an Option--</option>
+        <option value="epoxy">Epoxy</option>
+        <option value="bare">Bare</option>
+    </select>
+    <iframe style="display: block; width: 100%; height: 100%; position: absolute; border: 0; top: 0;"
+        id="uv-frame"></iframe>
+    <script src="/files/pagegen-js/navbar-1-gen.js"></script>
+    <script>
+        if (!localStorage.getItem("show-app-nav") || localStorage.getItem("show-app-nav") === "false") {
+            return;
+        }
+        else {
+            addnav();
+        }
+    </script>
+    <script src="/files/js/req.js"></script>
+</body>
+
+</html>

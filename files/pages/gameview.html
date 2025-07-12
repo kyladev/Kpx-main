@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://kit.fontawesome.com/5be346f7c3.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/files/css/apps.css">
+  <link rel="stylesheet" href="/files/css/req.css">
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("gameiframe").src = "/files/games/" + params.get("game");
+
+      if (!localStorage.getItem("show-game-nav") || localStorage.getItem("show-game-nav") === "true") {
+        addnav();
+      }
+      if (localStorage.getItem("show-game-nav") === "false") {
+        console.log("navbar generation skipped");
+        return;
+      }
+    })
+  </script>
+  <title>KPX</title>
+  <link id="ficon" rel="icon" type="image/x-icon" href="">
+  <script src="/files/js/cloak.js"></script>
+  <script src="/files/js/panic.js"></script>
+</head>
+
+<body style="background-color: black;">
+  <div id="nav-container">
+    <!--navbar generated here-->
+  </div>
+  <iframe id="gameiframe" src=""></iframe>
+</body>
+<script src="/files/pagegen-js/navbar-1-gen.js"></script>
+<script>
+  if (!localStorage.getItem("show-game-nav") || localStorage.getItem("show-game-nav") === "false") {
+    return;
+  }
+  else {
+    addnav();
+  }
+</script>
+<script src="/files/js/req.js"></script>
+<style>
+  body {
+    width: 100%;
+    height: 100%;
+  }
+
+  #gameiframe {
+    width: 100vw;
+    height: 100vh;
+    border: none;
+  }
+</style>
+
+</html>

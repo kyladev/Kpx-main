@@ -1,0 +1,16 @@
+{
+    "Users": {
+        "admin": {
+            "password": "hwack5983",
+            "lastlogin": null,
+            "subscriptionStartDate": null,
+            "subscriptionEndDate": null
+        }
+    },
+    "Admins": {
+        "admin" : {
+            "password": "hwack",
+            "lastlogin": null
+        }
+    }
+}

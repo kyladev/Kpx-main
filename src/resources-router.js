@@ -8,25 +8,25 @@ export default async function resources_router(fastify, options) {
     fastify.get("/", {
         preHandler: authMiddleware(), // or false for test mode
         handler: (req, res) => {
-            return res.sendFile("frontend-files/pages/resources.html", publicPath);
+            return res.sendFile("files/pages/resources.html", publicPath);
         }
     });
-    fastify.get("/guides", {
+    fastify.get("/g", {
         preHandler: authMiddleware(), // or false for test mode
         handler: (req, res) => {
-            return res.sendFile("frontend-files/pages/resource-pages/guides.html", publicPath);
+            return res.sendFile("files/pages/resource-pages/guides.html", publicPath);
         }
     });
-    fastify.get("/links", {
+    fastify.get("/l", {
         preHandler: authMiddleware(), // or false for test mode
         handler: (req, res) => {
-            return res.sendFile("frontend-files/pages/resource-pages/links.html", publicPath);
+            return res.sendFile("files/pages/resource-pages/links.html", publicPath);
         }
     });
-    fastify.get("/sites", {
+    fastify.get("/s", {
         preHandler: authMiddleware(), // or false for test mode
         handler: (req, res) => {
-            return res.sendFile("frontend-files/pages/resource-pages/sites.html", publicPath);
+            return res.sendFile("files/pages/resource-pages/sites.html", publicPath);
         }
     });
 }

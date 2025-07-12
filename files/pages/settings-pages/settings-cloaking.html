@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://kit.fontawesome.com/5be346f7c3.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/files/css/settings.css" />
+  <link rel="stylesheet" href="/files/css/req.css" />
+  <link rel="stylesheet" href="/files/css/particles.css">
+  <title>KPX</title>
+  <link id="ficon" rel="icon" type="image/x-icon" href="" />
+  <script src="/files/js/panic.js"></script>
+  <script src="/files/js/cloak.js"></script>
+</head>
+
+<body style="overflow-x: hidden; overflow-y: scroll !important;">
+  <div id="particles-js" style="z-index: -10; position: fixed; top: 0%; width: 100%; height: 100%;">
+    <canvas class="particles-js-canvas-el"></canvas>
+  </div>
+  <div id="content" style="position: relative;">
+    <div id="nav-container">
+      <!--navbar generated here-->
+    </div>
+    <h1 id="title">KPX</h1>
+    <h3 class="subheading">Settings - Cloaking</h3>
+    <div class="center-wrapping">
+      <div class="sections-container">
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3>Clear cookies & local storage</h3>
+          </div>
+          <div class="right-items">
+            <button onclick="clear_cookies()">Clear</button>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3>Custom favicon</h3>
+            <p class="smalldesc">Changes the favicon (the small image) of the tab.</p>
+          </div>
+          <div class="right-items">
+            <input type="file" id="faviconchooser" accept="image/*" />
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3>Custom tab name</h3>
+            <p class="smalldesc">Enter your own tab to appear.</p>
+          </div>
+          <div class="right-items">
+            <input type="text" id="titlechooser" placeholder="Choose a name..." />
+            <button id="filetitleconfirm" onclick="settitlecustom()">
+              Confirm
+            </button>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3>About:blank tab</h3>
+            <p class="smalldesc">Opens this site in an 'about:blank' tab</p>
+          </div>
+          <div class="right-items">
+            <button id="blankopener" class="setbutton" onclick="blankpage()">
+              Open in blank
+            </button>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3>Datalink</h3>
+            <p class="smalldesc">Provides a datalink to paste into the URL to access this site.</p>
+          </div>
+          <div class="right-items">
+            <button id="datalinkbutton" class="setbutton" onclick="makefinallink()">
+              Generate Datalink
+            </button>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3>Open in file</h3>
+            <p class="smalldesc">Appears offline with full functionality, simply open the file in your browser.</p>
+          </div>
+          <div class="right-items">
+            <a href="/files/pages/settings-pages/iframe-download.html" download="kpx">
+              <button onclick="">Generate file</button>
+            </a>
+          </div>
+        </div>
+
+        <!--<div class="sections">
+        <label for="anticlosebox">Anticlose (WIP)</label>
+        <input type="checkbox" id="anticlosebox" name="anticlosebox">
+      </div>-->
+
+        <div class="sections">
+          <!--<h2>Panic Site</h2>
+        <select id="panicselector">
+          <option value="https://www.google.com">Google Homepage (default)</option>
+          <option value="https://clever.com/in/bsd405/student/portal">Clever</option>
+          <option value="https://www.khanacademy.org/">Khan Academy</option>
+          <option value="https://www.desmos.com/calculator">Desmos</option>
+        </select>-->
+          <div class="settingdesc">
+            <h3>Panic site</h3>
+            <p class="smalldesc">Set a site to change to when the panic key is pressed</p>
+          </div>
+          <div class="right-items">
+            <input type="text" id="cpanicselector" placeholder="Enter a URL..." />
+            <button id="panicconfirm" onclick="setpanicsite()" class="setbutton">
+              Confirm
+            </button>
+          </div>
+        </div>
+
+        <div class="sections">
+          <div class="settingdesc">
+            <h3>Panic Key</h3>
+            <p class="smalldesc">Current Key: <kbd id="currentkey">`</kbd> (Note: reload the page for changes to take
+              effect)</p>
+          </div>
+          <div class="right-items">
+            <button id="keysetter" class="setbutton" onclick="listenforkey()">
+              Set Key
+            </button>
+            <script>
+              if (localStorage.getItem("panickey") === null) {
+                localStorage.setAttribute("panickey", "Esc");
+              }
+              document.getElementById("currentkey").innerText = localStorage.getItem('panickey');
+            </script>
+          </div>
+        </div>
+
+        <!--<div class="sections">
+          <div class="settingdesc">
+            <h3>History flooder</h3>
+            <p class="smalldesc">Enter "123456789" into the box to activate</p>
+          </div>
+          <div class="right-items">
+            <button class="setbutton" onclick="floodhistory()">Flood</button>
+          </div>
+        </div>-->
+
+        <div id="datalinkpopup">
+          <button id="exitbutton">X</button>
+          <input id="datalinkcontainer" class="colorinput" />
+          <button onclick="copytext()" id="copybutton">Copy</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+<!--pagegen scripts-->
+<script src="/files/pagegen-js/navbar-1-gen.js"></script>
+<script src="/files/pagegen-js/lib/settings-sections.js"></script>
+<script>
+  addnav();
+</script>
+<script>
+  create_section(false, false, "Tab Cloak", "Changes the appearance of your tab", "", "sections-container", 0, "cloak-section-items");
+  add_select_body(document.getElementById("cloak-section-items"), "cloakselect", "cloakset");
+  add_select_option(document.getElementById("cloakselect"), "Google Search", "Google Search (calculator)");
+  add_select_option(document.getElementById("cloakselect"), "Gmail", "Gmail");
+  add_select_option(document.getElementById("cloakselect"), "Google Docs", "Google Docs");
+  add_select_option(document.getElementById("cloakselect"), "Google Slides", "Google Slides");
+  add_select_option(document.getElementById("cloakselect"), "PowerPoint", "PowerPoint");
+  add_select_option(document.getElementById("cloakselect"), "Google Drive", "Google Drive");
+  add_select_option(document.getElementById("cloakselect"), "OneDrive", "OneDrive");
+  add_select_option(document.getElementById("cloakselect"), "Wikipedia", "Wikipedia");
+  add_select_option(document.getElementById("cloakselect"), "YouTube", "YouTube");
+  add_select_option(document.getElementById("cloakselect"), "Clever", "Clever");
+  add_select_option(document.getElementById("cloakselect"), "Desmos", "Desmos");
+  add_select_option(document.getElementById("cloakselect"), "Outlook", "Outlook");
+  add_select_option(document.getElementById("cloakselect"), "Google Homepage", "Google Homepage");
+  add_select_option(document.getElementById("cloakselect"), "Word", "Word");
+  document.getElementById("cloakset").addEventListener("click", function () {
+    settitle();
+  });
+</script>
+<!--general scripts-->
+<script src="/files/js/req.js"></script>
+<script src="/files/js/settings-cloak.js"></script>
+<!--particle scripts-->
+<script src=" https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js "></script>
+<script src="/files/js/particles/particles-js.js"></script>
+<script src="/files/js/particles/settings-particles.js"></script>
+
+</html>

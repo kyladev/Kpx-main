@@ -8,31 +8,31 @@ export default async function settings_router(fastify, options) {
     fastify.get("/", {
         preHandler: authMiddleware(), // or false for test mode
         handler: (req, res) => {
-            return res.sendFile("frontend-files/pages/settings.html", publicPath);
+            return res.sendFile("files/pages/settings.html", publicPath);
         }
     });
-    fastify.get("/ui", {
+    fastify.get("/u", {
         preHandler: authMiddleware(), // or false for test mode
         handler: (req, res) => {
-            return res.sendFile("frontend-files/pages/settings-pages/settings-ui.html", publicPath);
+            return res.sendFile("files/pages/settings-pages/settings-ui.html", publicPath);
         }
     });
-    fastify.get("/cloaking", {
+    fastify.get("/cl", {
         preHandler: authMiddleware(), // or false for test mode
         handler: (req, res) => {
-            return res.sendFile("frontend-files/pages/settings-pages/settings-cloaking.html", publicPath);
+            return res.sendFile("files/pages/settings-pages/settings-cloaking.html", publicPath);
         }
     });
-    fastify.get("/color", {
+    fastify.get("/c", {
         preHandler: authMiddleware(), // or false for test mode
         handler: (req, res) => {
-            return res.sendFile("frontend-files/pages/settings-pages/settings-color.html", publicPath);
+            return res.sendFile("files/pages/settings-pages/settings-color.html", publicPath);
         }
     });
-    fastify.get("/particles", {
+    fastify.get("/p", {
         preHandler: authMiddleware(), // or false for test mode
         handler: (req, res) => {
-            return res.sendFile("frontend-files/pages/settings-pages/settings-particles.html", publicPath);
+            return res.sendFile("files/pages/settings-pages/settings-particles.html", publicPath);
         }
     });
 }
