@@ -3,8 +3,7 @@ async function manual_submit() {
 	try {
 		await registerSW();
 	} catch (err) {
-		error.textContent = "Failed to register service worker.";
-		errorCode.textContent = err.toString();
+		err.textContent = "Failed to register service worker.";
 		throw err;
 	}
 

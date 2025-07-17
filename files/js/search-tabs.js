@@ -35,7 +35,7 @@ function addtab(first) {
         if (initialUrl !== "") {
             tab.history.push(initialUrl);
         } else {
-            document.getElementById("uv-frame").src = "/frontend-files/pages/emptytab.html";
+            document.getElementById("uv-frame").src = "/files/pages/emptytab.html";
             document.getElementById("uv-frame").contentDocument.window?.reload?.();
         }
     } else {
@@ -101,7 +101,7 @@ function changetab(currentTarget) {
     const searchbar = document.getElementById("uv-address");
 
     if (!url) {
-        document.getElementById("uv-frame").src = "/frontend-files/pages/emptytab.html";
+        document.getElementById("uv-frame").src = "/files/pages/emptytab.html";
         searchbar.value = "";
         return;
     } else {
@@ -149,7 +149,7 @@ document.getElementById("searchButton").addEventListener("click", function () {
         if (!activeTab.history) activeTab.history = [];
         activeTab.history.push("");
 
-        document.getElementById("uv-frame").src = "/frontend-files/pages/emptytab.html";
+        document.getElementById("uv-frame").src = "/files/pages/emptytab.html";
     }
 });
 
