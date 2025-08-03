@@ -3,7 +3,7 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 
 //turn to false to not require logging in
-export const require_pass = false;
+export const require_pass = true;
 
 //root of everything publicly accessible
 export const publicPath = process.cwd();
@@ -20,7 +20,10 @@ export function authMiddleware() {
       return;
     }
 
-    // Verify signed cookies
+    if(!request.cookies.Session||!request.cookies.User) {
+      return reply.redirect('/login');
+    }
+
     const signedSession = request.unsignCookie(request.cookies.Session);
     const signedUser = request.unsignCookie(request.cookies.User);
 
@@ -28,7 +31,7 @@ export function authMiddleware() {
       console.log("Tampered or missing cookies.");
       reply.clearCookie('Session');
       reply.clearCookie('User');
-      return reply.redirect('/error');
+      return reply.redirect('/login');
     }
 
     const sessionId = signedSession.value;
@@ -47,7 +50,7 @@ export function authMiddleware() {
 
     reply.clearCookie('Session');
     reply.clearCookie('User');
-    reply.redirect('/error');
+    reply.redirect('/login');
   };
 }
 

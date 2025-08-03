@@ -91,17 +91,23 @@ export default async function register_paths(fastify, userSessions) {
         }
     });
 
-    fastify.get("/error", (req, res) => {
+    fastify.get("/login", (req, res) => {
         if (require_pass === false) {
             res.redirect('/');
         }
         else {
-            return res.sendFile("main/files/pages/403.html", publicPath);
+            return res.sendFile("main/files/frontend/login.html", publicPath);
         }
     });
 
-    // POST /error route
-    fastify.post('/error', async (request, reply) => {
+    fastify.get("/register", {
+        handler: (req, res) => {
+            return res.sendFile("main/files/frontend/register.html", publicPath);
+        }
+    });
+
+    // POST /login route
+    fastify.post('/login', async (request, reply) => {
         const { user, pass } = request.body;
 
         try {
@@ -138,7 +144,7 @@ export default async function register_paths(fastify, userSessions) {
         </script>
       `);
             } else {
-                reply.redirect('/error');
+                reply.redirect('/login');
             }
         } catch (err) {
             console.error("Login error:", err);
