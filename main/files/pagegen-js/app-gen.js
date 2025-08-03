@@ -1,0 +1,15 @@
+create_section("apps/view?q=https://github.com/", "/main/files/assets/githublogo.png", "Github");
+create_section("apps/view?q=https://win11.blueedge.me/", "/main/files/assets/windows.jpg", "Windows 11 in React");
+create_section("apps/view?q=https://xp.quenq.com/", "/main/files/assets/windowsxp.png", "Windows XP");
+create_section("apps/view?q=https://chatgpt.com/", "/main/files/assets/chatgpt-logo.jpg", "ChatGPT");
+create_section("apps/view?q=https://www.twitch.tv/", "/main/files/assets/twitch-logo.png", "Twitch");
+create_section("apps/view?q=https://discord.com/", "/main/files/assets/discord-logo.png", "Discord");
+create_section("apps/view?q=https://open.spotify.com/", "/main/files/assets/spotify.png", "Spotify");
+create_section("apps/view?q=https://plex.tv/", "/main/files/assets/plex.jpg", "Plex");
+create_section("tools/view?q=https://freedns.afraid.org/", "/main/files/assets/freedns.png", "FreeDNS");
+create_section("tools/view?q=https://extprint3r.github.io/printer.html", "/main/files/assets/extprint3r.png", "Extprint3r");
+create_section("tools/view?q=https://thehomeworkai.com/", "/main/files/assets/hwai.png", "The Homework AI");
+create_section("tools/view?q=https://math-gpt.org/", "/main/files/assets/mathai.png", "MathGPT");
+create_section("tools/view?q=https://quillbot.com/", "/main/files/assets/quillbot.png", "Quillbot");
+create_section("tools/view?q=https://vscode.dev/", "/main/files/assets/vscode.png", "VS Code");
+create_section("/bots", "/main/files/assets/bot.png", "Bot Spammers (WIP)");

@@ -5,7 +5,7 @@ import * as path from 'node:path';
 //turn to false to not require logging in
 export const require_pass = false;
 
-//for testing (proxy doesn't work):
+//root of everything publicly accessible
 export const publicPath = process.cwd();
 
 //for release (must be in ultraviolet static path):
