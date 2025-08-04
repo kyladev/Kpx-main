@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Create Account - Knetwork</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/main/files/frontend/favicon.ico">
     <style>
         body {
             margin: 0;
@@ -37,7 +37,7 @@
         input[type="text"],
         input[type="email"],
         input[type="password"] {
-            width: 100%;
+            width: 93.5%;
             padding: 12px;
             margin-bottom: 20px;
             border: 1px solid #ccc;
@@ -78,24 +78,39 @@
 
 <body>
     <div class="register-container">
-        <h1>Create Your Account</h1>
+        <h1 id="headingText">Create Your Account</h1>
         <form id="registerForm">
             <input type="text" name="username" placeholder="Username" required>
             <input type="email" name="email" placeholder="Email address" required>
-            <input type="password" name="password" placeholder="Password" required>
+            <input type="password" name="password" id="password" placeholder="Password" required>
+            <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required>
             <button type="submit">Register</button>
         </form>
         <div class="message" id="confirmationMessage" style="display: none;">
             Your registration request has been sent for human review.<br>
             You will be contacted at your email address if approved.
         </div>
+        <div class="message" id="errorMessage" style="color: red; display: none;">
+            Passwords do not match. Please try again.
+        </div>
     </div>
 
     <script>
         document.getElementById('registerForm').addEventListener('submit', function (e) {
             e.preventDefault();
+
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                document.getElementById('errorMessage').style.display = 'block';
+                return;
+            }
+
+            document.getElementById('errorMessage').style.display = 'none';
             this.style.display = 'none';
             document.getElementById('confirmationMessage').style.display = 'block';
+            document.getElementById("headingText").innerText = "Account Creation Pending";
         });
     </script>
 </body>

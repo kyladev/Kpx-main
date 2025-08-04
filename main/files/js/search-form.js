@@ -15,5 +15,9 @@ async function manual_submit() {
 	if (await connection.getTransport() !== "/epoxy/index.mjs") {
 		await connection.setTransport("/epoxy/index.mjs", [{ wisp: wispUrl }]);
 	}
+	if (url === "") {
+		return;
+	}
+
 	frame.src = __uv$config.prefix + __uv$config.encodeUrl(url);
 }

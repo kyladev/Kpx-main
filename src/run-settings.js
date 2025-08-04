@@ -20,7 +20,7 @@ export function authMiddleware() {
       return;
     }
 
-    if(!request.cookies.Session||!request.cookies.User) {
+    if (!request.cookies.Session || !request.cookies.User) {
       return reply.redirect('/login');
     }
 
@@ -94,4 +94,39 @@ export function authMiddlewareAdmin() {
     reply.clearCookie('User');
     reply.redirect('/admin/login');
   };
+}
+
+export async function isUserLoggedIn(request) {
+  if (require_pass === false) {
+    console.log("kick off bypassed (testing mode)");
+    return true;
+  }
+
+  if (!request.cookies.Session || !request.cookies.User) {
+    return false;
+  }
+
+  const signedSession = request.unsignCookie(request.cookies.Session);
+  const signedUser = request.unsignCookie(request.cookies.User);
+
+  if (!signedSession?.valid || !signedUser?.valid) {
+    console.log("Tampered or missing cookies.");
+    return false;
+  }
+
+  const sessionId = signedSession.value;
+  const username = signedUser.value;
+
+  // Verify single session per user
+  if (userSessions.get(username) === sessionId) {
+    return true;
+  }
+
+  // Invalid session or kicked due to multiple logins
+  const logMsg = `User ${username} kicked out at ${new Date()}\n`;
+  fs.appendFile(logFilePath, logMsg, () => {
+    console.log("Kick out logged:", new Date());
+  });
+
+  return false;
 }

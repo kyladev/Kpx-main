@@ -1,4 +1,4 @@
-import { authMiddleware, authMiddlewareAdmin, publicPath, require_pass } from './run-settings.js';
+import { authMiddleware, authMiddlewareAdmin, publicPath, require_pass, isUserLoggedIn } from './run-settings.js';
 import { readFile, appendFile } from 'fs/promises';
 import crypto from 'node:crypto';
 import path from "path";
@@ -14,11 +14,14 @@ export default async function register_paths(fastify, userSessions) {
         }
     });
 
-    fastify.get("/", {
-        preHandler: authMiddleware(),
-        handler: (req, res) => {
-            return res.sendFile("main/files/pages/home.html", publicPath);
+    fastify.get("/", async (req, res) => {
+        const loggedIn = await isUserLoggedIn(req);
+
+        if (!loggedIn) {
+            return res.sendFile("main/files/frontend/home.html", publicPath);
         }
+
+        return res.sendFile("main/files/pages/home.html", publicPath);
     });
 
     fastify.get("/a", {

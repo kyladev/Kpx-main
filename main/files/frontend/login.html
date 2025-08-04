@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Login - Knetwork</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/main/files/frontend/favicon.ico">
     <style>
         body {
             margin: 0;
@@ -36,7 +36,7 @@
 
         input[type="text"],
         input[type="password"] {
-            width: 100%;
+            width: 93.5%;
             padding: 12px;
             margin-bottom: 20px;
             border: 1px solid #ccc;
@@ -77,6 +77,23 @@
             text-decoration: underline;
         }
 
+        .contact-info {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .contact-info a {
+            color: #0078D4;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
         @media (max-width: 480px) {
             .login-container {
                 padding: 20px;
@@ -87,6 +104,8 @@
 
 <body>
     <div class="login-container">
+        <h1 style="font-size: 40px;">KNETWORK</h1>
+        <hr style="width: 100%; border: 1px solid #ccc; margin: 10px 0;">
         <h1>Log into your account</h1>
         <form action="/login" method="POST">
             <input type="text" id="user" name="user" placeholder="Username" required>
@@ -95,6 +114,12 @@
         </form>
         <div class="signup-link">
             <p>Don't have an account? <a href="/register">Create one</a></p>
+        </div>
+        <div class="contact-info">
+            <p>Need help accessing your account? <br>
+                Contact the administrator at <a
+                    href="mailto:support@knetwork.dev">support@knetwork.dev</a>
+            </p>
         </div>
     </div>
 </body>

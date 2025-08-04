@@ -1,6 +1,6 @@
 //Node imports
 import { createServer } from "node:http";
-import { join } from "node:path";
+import * as path from 'node:path';
 import constants from 'node:constants';
 import * as fs from 'node:fs';
 import { hostname } from "node:os";
@@ -17,6 +17,8 @@ import fastifyFormbody from '@fastify/formbody';
 
 //UV imports
 import { uvPath } from "@titaniumnetwork-dev/ultraviolet";
+import pkg from '@titaniumnetwork-dev/ultraviolet';
+const { Ultraviolet } = pkg;
 import { epoxyPath } from "@mercuryworkshop/epoxy-transport";
 import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
 import wisp from "wisp-server-node";
@@ -57,8 +59,6 @@ const fastify = Fastify({
   },
 });
 
-// const uv = createUvServer();
-
 fastify.register(fastifyStatic, {
   root: publicPath,
   decorateReply: true,
@@ -87,7 +87,7 @@ fastify.addHook('preHandler', async (request, reply) => {
     console.log('Cookies: Invalid signed cookie(s)', { username, sessionId });
     reply.clearCookie('Session');
     reply.clearCookie('User');
-    return reply.redirect('/error');
+    return reply.redirect('/login');
   }
 
   const validSession = userSessions.get(username);
@@ -98,7 +98,7 @@ fastify.addHook('preHandler', async (request, reply) => {
     console.log(`Invalid session for user ${username}. Forcing logout.`);
     reply.clearCookie('Session');
     reply.clearCookie('User');
-    return reply.redirect('/error');
+    return reply.redirect('/login');
   }
 });
 
