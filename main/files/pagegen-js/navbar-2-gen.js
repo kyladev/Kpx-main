@@ -139,8 +139,8 @@ function addnav2() {
     navTable.appendChild(li1);
     navTable.appendChild(li2);
     navTable.appendChild(li3);
-    navTable.appendChild(li4);
     navTable.appendChild(li5);
+    navTable.appendChild(li4);
     navTable.appendChild(hr1);
 
     navTable.appendChild(li6);

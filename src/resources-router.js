@@ -1,6 +1,6 @@
 import { authMiddleware, publicPath } from './run-settings.js';
 
-export default async function resources_router(fastify, options) {
+export default async function resources_router(fastify) {
     fastify.get("/", {
         preHandler: authMiddleware(),
         handler: (req, res) => {

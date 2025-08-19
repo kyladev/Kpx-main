@@ -3,7 +3,8 @@
 
 <head>
   <script src="https://kit.fontawesome.com/5be346f7c3.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,200&icon_names=gamepad,home,info,language,menu,search,settings,view_comfy_alt"/>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,200&icon_names=gamepad,home,info,language,menu,search,settings,view_comfy_alt" />
   <link rel="stylesheet" href="/main/files/css/home.css">
   <link rel="stylesheet" href="/main/files/css/req.css">
   <link rel="stylesheet" href="/main/files/css/particles.css">
@@ -12,6 +13,21 @@
   <link id="ficon" rel="icon" type="image/x-icon" href="">
   <script src="/main/files/js/cloak.js"></script>
   <script src="/main/files/js/panic.js"></script>
+  <script type="module" src="/main/files/js/encryption.js"></script>
+  <script type="module">
+    import { initSession, postRequest, getRequest } from "/main/files/js/encryption.js";
+
+    (async () => {
+      const sid = crypto.randomUUID();
+      const e2ee = await initSession(sid);
+
+      const postResp = await postRequest(e2ee, sid, { type: 'newPost', content: 'hello world' });
+      console.log('POST response:', postResp);
+
+      const getResp = await getRequest(e2ee, sid, { type: 'newRequest', id: 123});
+      console.log('GET response:', getResp);
+    })();
+  </script>
 </head>
 
 <body>

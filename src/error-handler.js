@@ -1,4 +1,11 @@
 export default function errorHandler(error, request, reply) {
+  //rate limit error
+  if (error.statusCode === 429) {
+    reply.code(429).type('text/html')
+      .send('<h1>429 Rate Limited</h1><p>You have hit the rate limit, please slow down.</p>');
+    logToFile('warning', `rate limit reached ${request.ip}`);
+  }
+  //other errors
   if (error.validation || error.code === 'FST_ERR_VALIDATION') {
     reply.code(400).type('text/html')
       .send('<h1>400 Bad Request</h1><p>Invalid request data.</p>');
@@ -14,5 +21,6 @@ export default function errorHandler(error, request, reply) {
   } else {
     reply.code(500).type('text/html')
       .send('<h1>500 Server Error</h1><p>An unexpected error occurred.</p>');
-  }
+    logToFile('warning', `sent an unexpected error to ${request.ip} with error ${error}`);
+  } 
 }

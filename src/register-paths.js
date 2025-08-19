@@ -1,7 +1,9 @@
-import { authMiddleware, authMiddlewareAdmin, publicPath, require_pass, isUserLoggedIn } from './run-settings.js';
-import { readFile, appendFile } from 'fs/promises';
+import { authMiddleware, publicPath, require_pass, isUserLoggedIn, logToFile } from './run-settings.js';
+import { readFile } from 'fs/promises';
 import crypto from 'node:crypto';
 import path from "path";
+import bcrypt from "bcrypt";
+import { loginSchema } from './sanitizer.js';
 
 //import user data (passwords, usernames, etc.)
 const usersFilePath = path.join(process.cwd(), 'src/userdata.json');
@@ -87,6 +89,13 @@ export default async function register_paths(fastify, userSessions) {
         }
     });
 
+    fastify.get("/st", {
+        preHandler: authMiddleware(),
+        handler: (req, res) => {
+            return res.sendFile("main/files/pages/settings.html", publicPath);
+        }
+    });
+
     fastify.get("/sc", {
         preHandler: authMiddleware(),
         handler: (req, res) => {
@@ -97,6 +106,7 @@ export default async function register_paths(fastify, userSessions) {
     fastify.get("/login", (req, res) => {
         if (require_pass === false) {
             res.redirect('/');
+            logToFile('important', `TESTING: user redirected to homepage from ${request.ip} due to testing mode (password requirement is off, this is dangerous)\n`);
         }
         else {
             return res.sendFile("main/files/frontend/login.html", publicPath);
@@ -110,130 +120,54 @@ export default async function register_paths(fastify, userSessions) {
     });
 
     // POST /login route
+
     fastify.post('/login', async (request, reply) => {
-        const { user, pass } = request.body;
+        //sanitize input of login page
+        const { error, value } = loginSchema.validate(request.body, { abortEarly: false });
+        if (error) {
+            //invalid input, redirect or return error
+            logToFile("warning", `Validation failed from ${request.ip}, potential attack: ${error.details}\n`);
+            return reply.redirect('/login');
+        }
+
+        //sanitized input set as username and password
+        const { user, pass } = value;
 
         try {
             const data = await readFile(usersFilePath, 'utf-8');
             const json = JSON.parse(data);
             const storedUser = json.Users?.[user];
 
-            if (storedUser && storedUser.password === pass) {
-                const sessionId = crypto.randomUUID();
-                userSessions.set(user, sessionId);
+            if (storedUser) {
+                // Compare the provided password with the stored hash
+                const match = await bcrypt.compare(pass, storedUser.passwordHash);
 
-                console.log("Cookie session:", sessionId);
+                if (match) {
+                    //update last login date
+                    storedUser.lastlogin = new Date().toISOString();
 
-                reply
-                    .setCookie('Session', sessionId, {
-                        signed: true,
-                        maxAge: 3600,
-                        httpOnly: true,
-                        path: '/'
-                    })
-                    .setCookie('User', user, {
-                        signed: true,
-                        maxAge: 3600,
-                        httpOnly: true,
-                        path: '/'
-                    });
+                    // Passwords match, proceed with session logic
+                    const sessionId = crypto.randomUUID();
+                    userSessions.set(user, sessionId);
 
-                appendFile("src/logs.txt", `${user} has logged in: ${new Date()}\n`);
-                console.log("sign in logged:", user, new Date());
+                    reply
+                        .setCookie('Session', sessionId, { signed: true, httpOnly: true, path: '/' })
+                        .setCookie('User', user, { signed: true, httpOnly: true, path: '/' })
+                        .redirect('/');
 
-                reply.type('text/html').send(`
-        <script>
-          window.location.href = "/";
-        </script>
-      `);
+                    logToFile("info", `${user} has logged in from ${request.ip}\n`);
+                    console.log("sign in logged:", user, new Date());
+                } else {
+                    // Passwords do not match
+                    reply.redirect('/login');
+                }
             } else {
+                // User not found
                 reply.redirect('/login');
             }
         } catch (err) {
+            logToFile("error", `Login error ${request.ip} due to ${err}\n`);
             console.error("Login error:", err);
-            reply.status(500).send("Internal Server Error");
-        }
-    });
-
-    //server utility paths
-
-    fastify.get('/admin/logs', {
-        preHandler: authMiddlewareAdmin(),
-        handler: async (request, reply) => {
-            try {
-                const logPath = path.join(__dirname, 'logs.txt');
-                const data = await fs.promises.readFile(logPath, 'utf8');
-
-                reply
-                    .type('text/html')
-                    .send(`
-          <!DOCTYPE html>
-          <html>
-            <body>
-              <pre>${data}</pre>
-            </body>
-          </html>
-        `);
-            } catch (err) {
-                request.log.error(err);
-                reply.code(500).send('Error reading log file');
-            }
-        }
-    });
-
-    fastify.get("/admin", {
-        preHandler: authMiddlewareAdmin(),
-        handler: (req, res) => {
-            return res.sendFile("main/files/pages/utility/adminhub.html", publicPath);
-        }
-    });
-
-    fastify.get("/admin/login", {
-        preHandler: authMiddlewareAdmin(),
-        handler: (req, res) => {
-            return res.sendFile("main/files/pages/utility/adminlogin.html", publicPath);
-        }
-    });
-
-    fastify.post('/admin/login', async (request, reply) => {
-        const { user, pass } = request.body;
-
-        try {
-            const data = await readFile(usersFilePath, 'utf-8');
-            const json = JSON.parse(data);
-            const storedAdmin = json.Admins?.[user];
-
-            if (storedAdmin && storedAdmin.password === pass) {
-                const sessionId = crypto.randomUUID();
-                console.log("Admin cookie session:", sessionId);
-
-                reply
-                    .setCookie('Session', sessionId, {
-                        signed: true,
-                        maxAge: 3600, // 1 hour
-                        httpOnly: true,
-                        path: '/admin'
-                    })
-                    .setCookie('User', user, {
-                        signed: true,
-                        maxAge: 3600,
-                        httpOnly: true,
-                        path: '/admin'
-                    });
-
-                await appendFile("src/logs.txt", `${user} has logged in on admin page: ${new Date()}\n`);
-                console.log("Sign in on admin page logged:", user, new Date());
-
-                reply.type('text/html').send(`
-        <script>
-          window.location.href = "/admin";
-        </script>
-      `);
-            } else {
-                reply.redirect('/admin/login');
-            }
-        } catch (err) {
-            console.error("Admin login error:", err);
             reply.status(500).send("Internal Server Error");
         }
     });

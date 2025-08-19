@@ -4,9 +4,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const url_input = document.getElementById("uv-address");
     const searchUrl = "https://duckduckgo.com/";
     if (params.get("q")) {
-        url_input.value = params.get("q");
-        let url = params.get("q");
-        if (!params.get("q").includes(".")) {
+        url_input.value = atob(params.get("q"));
+        let url = atob(params.get("q"));
+        if (!atob(params.get("q")).includes(".")) {
             url = searchUrl + encodeURIComponent(url);
         } else {
             if (!params.get("q").startsWith("http://") && !params.get("q").startsWith("https://")) { // if no http or https is detected, add https automatically
