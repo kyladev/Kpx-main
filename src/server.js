@@ -3,7 +3,7 @@
 import { createServer } from 'node:http';
 import constants from 'node:constants';
 import * as fs from 'node:fs';
-import { hostname } from "node:os";
+// import { fetch } from 'node:f'
 
 //Misc imports
 import tls from 'tls';
@@ -166,6 +166,20 @@ try {
   process.exit(1);
 }
 logToFile('info', `proxy paths registered at ${getUptimeMs()}Ms`);
+
+fastify.get('/proxy', async (req, reply) => {
+  console.log("path triggered");
+  const target = req.query.url;
+  const response = await fetch(target, {
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Spoofed by Proxy)',
+    }
+  });
+  reply.type(response.headers.get('content-type')).send(await response.text());
+  console.log("header spoofed at " + req.url);
+});
+
+
 
 //start session cleaner
 setInterval(cleanupOldSessions, CLEANUP_INTERVAL);

@@ -1,4 +1,5 @@
 import { SESSION_TIMEOUT, CLEANUP_INTERVAL } from "./run-settings.js";
+import { userSessions } from "./server.js";
 
 // Add or update a session
 export function setUserSession(user, sessionId) {
