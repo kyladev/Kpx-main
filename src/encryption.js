@@ -1,5 +1,6 @@
 import { E2EE } from 'e2ee.js';
 import { logToFile } from './run-settings.js';
+import { readFile } from 'fs/promises'
 
 export default async function startEncryption(fastify) {
 
@@ -63,7 +64,7 @@ export default async function startEncryption(fastify) {
             if (payload.type === 'newRequest') {
                 response = { id: payload.id, response: 'Response Successful' };
             } else {
-                response = { ok: false, error: 'unknown request'};
+                response = { ok: false, error: 'unknown request' };
             }
 
             const encResp = await e2ee.encrypt(JSON.stringify(response));
@@ -73,4 +74,44 @@ export default async function startEncryption(fastify) {
             logToFile('warning', `unexpected encryption header for GET request from ${request.ip}`);
         }
     });
+    fastify.get('/e2ee/file', async (req, reply) => {
+        const { sid, ciphertext } = req.query;
+        const e2ee = sessions.get(sid);
+        if (!e2ee) return reply.code(403).send();
+
+        try {
+            const decrypted = await e2ee.decrypt(ciphertext);
+            const payload = JSON.parse(decrypted);
+
+            const fileMap = {
+                'test': 'src/test.txt',
+                'style': './files/style.css',
+                'app': './files/app.js',
+                'logo': './files/logo.png'
+            };
+
+            if (payload.type !== 'getFile' || !payload.id || !fileMap[payload.id]) {
+                return reply.code(400).send({ error: 'invalid request' });
+            }
+
+            // Read the mapped file
+            const fileBuffer = await readFile(fileMap[payload.id]);
+            const base64File = fileBuffer.toString('base64');
+
+
+            const response = {
+                filename: fileMap[payload.id].split('/').pop(),
+                data: base64File
+            };
+
+            const encResp = await e2ee.encrypt(JSON.stringify(response));
+            reply.send({ sid, ciphertext: encResp });
+
+        } catch (err) {
+            logToFile('error', `file transfer failed: ${err.message}`);
+            reply.code(400).send();
+        }
+    });
 }
+
+

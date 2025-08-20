@@ -126,7 +126,7 @@ export default async function register_paths(fastify, userSessions) {
         const { error, value } = loginSchema.validate(request.body, { abortEarly: false });
         if (error) {
             //invalid input, redirect or return error
-            logToFile("warning", `Validation failed from ${request.ip}, potential attack: ${error.details}\n`);
+            logToFile("warning", `Validation failed from ${request.ip}, potential attack: ${error.details}`);
             return reply.redirect('/login');
         }
 
@@ -155,7 +155,7 @@ export default async function register_paths(fastify, userSessions) {
                         .setCookie('User', user, { signed: true, httpOnly: true, path: '/' })
                         .redirect('/');
 
-                    logToFile("info", `${user} has logged in from ${request.ip}\n`);
+                    logToFile("info", `${user} has logged in from ${request.ip}`);
                     console.log("sign in logged:", user, new Date());
                 } else {
                     // Passwords do not match
@@ -166,7 +166,7 @@ export default async function register_paths(fastify, userSessions) {
                 reply.redirect('/login');
             }
         } catch (err) {
-            logToFile("error", `Login error ${request.ip} due to ${err}\n`);
+            logToFile("error", `Login error ${request.ip} due to ${err}`);
             console.error("Login error:", err);
             reply.status(500).send("Internal Server Error");
         }

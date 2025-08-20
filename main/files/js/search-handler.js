@@ -2,9 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const connection = new BareMux.BareMuxConnection("/baremux/worker.js")
     const wispUrl = (location.protocol === "https:" ? "wss" : "ws") + "://" + location.host + "/wisp/";
     const bareUrl = (location.protocol === "https:" ? "https" : "http") + "://" + location.host + "/bare/"
-    document // makes it so you can press enter to submit as opposed to just being able to press a button
-        .getElementById("uv-address")
-        .addEventListener("keydown", function (event) {
+    document.getElementById("uv-address").addEventListener("keydown", function (event) {
             if (event.key === "Enter") {
                 event.preventDefault();
                 document.getElementById("searchButton").click();

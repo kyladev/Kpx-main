@@ -3,7 +3,7 @@
  * Distributed with Ultraviolet and compatible with most configurations.
  */
 console.log("loaded sw register script");
-const stockSW = "/main/swfetch.js";
+const stockSW = "/main/sw.js";
 
 /**
  * List of hostnames that are allowed to run serviceworkers on http://

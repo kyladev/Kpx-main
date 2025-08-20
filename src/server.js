@@ -20,6 +20,8 @@ import fastifyRateLimit from "@fastify/rate-limit";
 import { uvPath } from "@titaniumnetwork-dev/ultraviolet";
 import { epoxyPath } from "@mercuryworkshop/epoxy-transport";
 import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
+import pkg from "@titaniumnetwork-dev/ultraviolet";
+const Ultraviolet = pkg;
 import wisp from "wisp-server-node";
 
 //Server resources
@@ -35,8 +37,8 @@ export const userSessions = new Map(); // { username: sessionId }
 const cookieKey = await crypto.randomBytes(64);
 
 const httpsOptions = {
-  key: fs.readFileSync('/etc/letsencrypt/live/testinghostdomain.zapto.org/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/testinghostdomain.zapto.org/fullchain.pem'),
+  key: fs.readFileSync('/etc/letsencrypt/live/testhostdomain.ddns.net/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/testhostdomain.ddns.net/fullchain.pem'),
   minVersion: 'TLSv1.2', // Don't allow TLSv1.1 or older
   ciphers: tls.DEFAULT_CIPHERS,
   honorCipherOrder: true,
@@ -166,20 +168,6 @@ try {
   process.exit(1);
 }
 logToFile('info', `proxy paths registered at ${getUptimeMs()}Ms`);
-
-fastify.get('/proxy', async (req, reply) => {
-  console.log("path triggered");
-  const target = req.query.url;
-  const response = await fetch(target, {
-    headers: {
-      'User-Agent': 'Mozilla/5.0 (Spoofed by Proxy)',
-    }
-  });
-  reply.type(response.headers.get('content-type')).send(await response.text());
-  console.log("header spoofed at " + req.url);
-});
-
-
 
 //start session cleaner
 setInterval(cleanupOldSessions, CLEANUP_INTERVAL);

@@ -14,6 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById("uv-address").value = url;
             }
         }
+    } else {
+        document.getElementById("uv-address").value = '';
+        document.getElementById("uv-frame").src = '/main/files/pages/emptytab.html';
     }
 
     if (url_input.value === "") {
@@ -24,15 +27,4 @@ document.addEventListener("DOMContentLoaded", function () {
         manual_submit();
         console.log("clicked button");
     }
-
-    document.getElementById("uv-frame").addEventListener("load", () => {
-        if (document.getElementById("uv-frame").src.split("/uv/service/")[1] === undefined) {
-            console.log("undefined url, skipping decoding");
-            return;
-        }
-        const encodedPath = document.getElementById("uv-frame").src.split("/uv/service/")[1];
-        console.log("Iframe source changed to:", encodedPath);
-        console.log(__uv$config.decodeUrl(encodedPath));
-        document.getElementById("uv-address").value = __uv$config.decodeUrl(encodedPath);
-    });
 });
