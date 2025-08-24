@@ -51,7 +51,7 @@
 <script src="/main/files/js/particles/particles-js.js"></script>
 <script src="/main/files/js/particles/settings-particles.js"></script>
 <script type="module">
-  import { initSession, postRequest, getRequest, fileRequest } from "/main/files/js/encryption.js";
+  import { initSession, postRequest, getRequest, fileRequest, readBlobAsText, injectFileContentToDOM } from "/main/files/js/encryption.js";
 
   (async () => {
     const sid = crypto.randomUUID();
@@ -63,9 +63,12 @@
     const getResp = await getRequest(e2ee, sid, { type: 'newRequest', id: 123 });
     console.log('GET response:', getResp);
 
-    const fileResp = await fileRequest(e2ee, sid, "test");
-    console.log('File response:', fileResp);
+    // const fileResp = await fileRequest(e2ee, sid, "test");
+    // console.log('File response:', fileResp);
+
+    // injectFileContentToDOM(e2ee, sid, "test", document.getElementById("temp"));
   })();
 </script>
+<script id="temp"></script>
 
 </html>

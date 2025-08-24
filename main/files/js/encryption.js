@@ -43,22 +43,13 @@ export async function getRequest(e2ee, sid, payload) {
 
 export async function readBlobAsText(blob) {
   return new Promise((resolve, reject) => {
-    // Create a new FileReader instance
     const reader = new FileReader();
-
-    // Set up the onload event handler
     reader.onload = (event) => {
-      // Resolve the promise with the result (the file's content)
       resolve(event.target.result);
     };
-
-    // Set up the onerror event handler for error handling
     reader.onerror = (error) => {
-      // Reject the promise if an error occurs
       reject(error);
     };
-
-    // Read the blob as text
     reader.readAsText(blob);
   });
 }
@@ -74,9 +65,8 @@ export async function fileRequest(e2ee, sid, fileId) {
 
   // Fetch file response
   const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(`File request failed: ${res.status}`);
-  }
+  if (!res.ok) throw new Error(`File request failed: ${res.status}`);
+
   const { ciphertext } = await res.json();
 
   // Decrypt file data
@@ -86,21 +76,120 @@ export async function fileRequest(e2ee, sid, fileId) {
   // Convert base64 to Blob
   const binary = atob(data);
   const bytes = new Uint8Array(binary.length);
-  for (let i = 0; i < binary.length; i++) {
-    bytes[i] = binary.charCodeAt(i);
-  }
+  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
   const blob = new Blob([bytes]);
 
-  try {
-    const fileContent = await readBlobAsText(blob);
-    console.log(`Contents of ${filename}:`, fileContent);
-    // You can now use fileContent as the text string of your file
-    return { filename, blob, fileContent }; // Return the content along with the filename and blob
-  } catch (error) {
-    console.error("Failed to read the blob:", error);
-    return { filename, blob };
+  const extension = filename.split('.').pop().toLowerCase();
+
+  let text
+  switch (extension) {
+    case 'css':
+    case 'html':
+    case 'js':
+      text = readBlobAsText(blob);
+      return { filename, blob, content: text };
+    case 'txt':
+      text = readBlobAsText(blob);
+      return { filename, blob, content: text };
+    case 'json':
+      text = await readBlobAsText(blob);
+      const json = JSON.parse(text);
+      return { filename, blob, content: json };
+    case 'png':
+    case 'jpg':
+    case 'jpeg':
+    case 'gif':
+      // Image files: return blob only
+      return { filename, blob };
+
+    default:
+      // Fallback: try reading as text
+      try {
+        text = await readBlobAsText(blob);
+        return { filename, blob, content: text };
+      } catch {
+        return { filename, blob };
+      }
   }
 }
+
+export async function injectFileContentToDOM(e2ee, sid, fileId, target) {
+  const { filename, content } = await fileRequest(e2ee, sid, fileId);
+  const extension = filename.split('.').pop().toLowerCase();
+
+  // Resolve the target element
+  if (!target) throw new Error(`Target element "${target}" not found`);
+
+  // Ensure content is resolved (in case readBlobAsText returned a Promise)
+  const resolvedContent = typeof content === 'string' ? content : await content;
+
+  switch (extension) {
+    case 'css':
+      if (target.tagName.toLowerCase() === 'style') {
+        target.textContent = resolvedContent;
+      } else {
+        throw new Error(`Expected a <style> element for CSS injection`);
+      }
+      break;
+
+    case 'js':
+      if (target.tagName.toLowerCase() === 'script') {
+        target.textContent = resolvedContent;
+      } else {
+        throw new Error(`Expected a <script> element for JS injection`);
+      }
+      break;
+
+    default:
+      throw new Error(`Unsupported file type for DOM injection: ${extension}`);
+  }
+
+  return { filename, injected: true };
+}
+
+export async function injectHtmlFileToDOM(e2ee, sid, fileId, target) {
+  const { filename, content } = await fileRequest(e2ee, sid, fileId);
+  const extension = filename.split('.').pop().toLowerCase();
+
+  if (extension !== 'html') {
+    throw new Error(`Only HTML files can be injected with this function`);
+  }
+
+  if (!target) throw new Error(`Target element "${target}" not found`);
+
+  // Resolve the content (in case it's a Promise or Blob)
+  let resolvedContent;
+  if (typeof content === 'string') {
+    resolvedContent = content;
+  } else if (content instanceof Blob) {
+    resolvedContent = await content.text();
+  } else {
+    resolvedContent = await content;
+  }
+
+  // If target is the whole document, replace the main page content
+  if (target === document) {
+    document.open();
+    document.write(resolvedContent);
+    document.close();
+  } else {
+    // Assume target is an iframe
+    if (target.tagName.toLowerCase() !== 'iframe') {
+      throw new Error(`Target element must be an <iframe> or document`);
+    }
+
+    // Use a Blob URL for security & proper loading
+    const blob = new Blob([resolvedContent], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    target.src = url;
+
+    // Optional: revoke the URL after iframe has loaded
+    target.onload = () => URL.revokeObjectURL(url);
+  }
+
+  return { filename, injected: true };
+}
+
 
 // example usage
 // (async () => {
