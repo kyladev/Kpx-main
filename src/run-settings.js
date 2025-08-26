@@ -5,7 +5,8 @@ import { appendFile } from 'fs/promises';
 export const require_pass = true;
 
 //root of everything publicly accessible
-export const publicPath = process.cwd();
+export const publicPath = process.cwd() + "/public";
+export const rootPath = process.cwd();
 
 //session cleanup timing and session timeout
 export const SESSION_TIMEOUT = 15 * 60 * 1000; 

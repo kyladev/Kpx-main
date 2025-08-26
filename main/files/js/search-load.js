@@ -1,5 +1,5 @@
 // import { Ultraviolet } from "@titaniumnetwork-dev/ultraviolet";
-document.addEventListener("DOMContentLoaded", function () {
+// document.addEventListener("DOMContentLoaded", function () {
     const params = new URLSearchParams(window.location.search);
     const url_input = document.getElementById("uv-address");
     const searchUrl = "https://duckduckgo.com/";
@@ -27,4 +27,4 @@ document.addEventListener("DOMContentLoaded", function () {
         manual_submit();
         console.log("clicked button");
     }
-});
+// });

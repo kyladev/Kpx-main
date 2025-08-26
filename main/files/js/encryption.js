@@ -190,6 +190,47 @@ export async function injectHtmlFileToDOM(e2ee, sid, fileId, target) {
   return { filename, injected: true };
 }
 
+export async function imageRequest(e2ee, sid, fileId) {
+  // Encrypt payload describing which file ID to fetch
+  const payload = { type: 'getFile', id: fileId };
+  const ct = await e2ee.encrypt(JSON.stringify(payload));
+
+  const url = new URL('/e2ee/image', window.location.origin);
+  url.searchParams.set('sid', sid);
+  url.searchParams.set('ciphertext', ct);
+
+  // Fetch file response
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`File request failed: ${res.status}`);
+
+  const { ciphertext } = await res.json();
+
+  // Decrypt file data
+  const pt = await e2ee.decrypt(ciphertext);
+  const { filename, mimeType, data } = JSON.parse(pt);
+
+  // Return the filename, mimeType, and the Base64 data string
+  return { filename, mimeType, data };
+}
+
+export async function injectImageToDOM(e2ee, sid, fileId, target) {
+  // Call the fileRequest function to get the Base64 data from the server.
+  const { filename, mimeType, data } = await imageRequest(e2ee, sid, fileId);
+
+  // Validate the target element is an <img> tag.
+  if (!target || target.tagName.toLowerCase() !== 'img') {
+    throw new Error('Target element must be an <img> tag.');
+  }
+
+  // Construct the data URI using the received mimeType and data.
+  const dataUri = `data:${mimeType};base64,${data}`;
+
+  // Set the src attribute of the <img> tag to the data URI.
+  target.src = dataUri;
+
+  return { filename, injected: true };
+}
+
 
 // example usage
 // (async () => {

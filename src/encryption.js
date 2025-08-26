@@ -1,8 +1,9 @@
 import { E2EE } from 'e2ee.js';
-import { logToFile } from './run-settings.js';
+import { logToFile, rootPath } from './run-settings.js';
 import { readFile } from 'fs/promises'
 import { require_pass } from './run-settings.js';
 import { userSessions } from './server.js';
+import path from 'path';
 
 const fileMap = {
     //fake frontend files
@@ -62,6 +63,46 @@ const fileMap = {
     'is-pjs': 'main/files/pagegen-js/lib/icon-section.js',
     'rp-pjs': 'main/files/pagegen-js/lib/resource-pages.js',
     'ss-pjs': 'main/files/pagegen-js/lib/settings-sections.js',
+    //UV files
+    'uv-cl': 'main/uv.client.js',
+    'uv-clm': 'main/uv.client.js.map',
+    'uv-s': 'main/search.js',
+    'uv-sw': 'main/sw.js',
+    'uv-bn': 'main/uv.bundle.js',
+    'uv-bnm': 'main/uv.bundle.js.map',
+    'uv-cfg': 'main/uv.config.js',
+    'uv-hd': 'main/uv.handler.js',
+    'uv-hdm': 'main/uv.handler.js.map',
+    'uv-usw': 'main/uv.sw.js',
+    'uv-uswm': 'main/uv.sw.js.map',
+    'uv-ix': 'main/index.js',
+    'uv-rs': 'main/register-sw.js',
+    //
+    //IMAGES
+    //
+    'gl-png': 'main/files/assets/googlelogo.png',
+    'bt-png': 'main/files/assets/bot.png',
+    'chpt-png': 'main/files/assets/chatgpt-logo.jpg',
+    'dsc-png': 'main/files/assets/discord-logo.png',
+    'extp-png': 'main/files/assets/extprint3r.png',
+    'frdns-png': 'main/files/assets/freedns.png',
+    'gth-png': 'main/files/assets/githublogo.png',
+    'hwai-png': 'main/files/assets/hwai.png',
+    'mhai-png': 'main/files/assets/mathai.png',
+    'plx-png': 'main/files/assets/plex.jpg',
+    'qlbt-png': 'main/files/assets/quillbot.png',
+    'sptf-png': 'main/files/assets/spotify.png',
+    'twt-png': 'main/files/assets/twitch-logo.png',
+    'vsc-png': 'main/files/assets/vscode.png',
+    'wnd-png': 'main/files/assets/windows.jpg',
+    'wndxp-png': 'main/files/assets/windowsxp.png',
+};
+const mimeTypes = {
+    '.jpg': 'image/jpeg',
+    '.jpeg': 'image/jpeg',
+    '.png': 'image/png',
+    '.gif': 'image/gif',
+    '.webp': 'image/webp',
 };
 
 async function validateAuth(req, reply, { api = false } = {}) {
@@ -74,13 +115,13 @@ async function validateAuth(req, reply, { api = false } = {}) {
     }
 
     if (!req.cookies.Session || !req.cookies.User) {
-    if (api) {
-      reply.code(401).send({ ok: false, error: "Unauthenticated" });
-    } else {
-      reply.redirect("/login");
+        if (api) {
+            reply.code(401).send({ ok: false, error: "Unauthenticated" });
+        } else {
+            reply.redirect("/login");
+        }
+        return { ok: false };
     }
-    return { ok: false };
-  }
 
     const signedSession = req.unsignCookie(req.cookies.Session);
     const signedUser = req.unsignCookie(req.cookies.User);
@@ -118,7 +159,7 @@ export default async function startEncryption(fastify) {
     logToFile('info', `starting encrytion backend`);
 
     const sessions = new Map(); //sid -> E2EE instance
-    
+
     fastify.post("/session/init", async (req, reply) => {
         const auth = await validateAuth(req, reply, { api: true });
         if (!auth.ok) {
@@ -226,6 +267,46 @@ export default async function startEncryption(fastify) {
 
             const response = {
                 filename: fileMap[payload.id].split('/').pop(),
+                data: base64File
+            };
+
+            const encResp = await e2ee.encrypt(JSON.stringify(response));
+            reply.send({ sid, ciphertext: encResp });
+
+        } catch (err) {
+            logToFile('error', `file transfer failed: ${err.message}`);
+            reply.code(400).send();
+        }
+    });
+    fastify.get('/e2ee/image', async (req, reply) => {
+        const auth = await validateAuth(req, reply, { api: true });
+        if (!auth.ok) {
+            reply.code(401).send({ ok: false, error: "unauthorized" });
+            return { ok: false };
+        }
+
+        const { sid, ciphertext } = req.query;
+        const e2ee = sessions.get(sid);
+        if (!e2ee) return reply.code(403).send();
+
+        try {
+            const decrypted = await e2ee.decrypt(ciphertext);
+            const payload = JSON.parse(decrypted);
+
+            if (payload.type !== 'getFile' || !payload.id || !fileMap[payload.id]) {
+                return reply.code(400).send({ error: 'invalid request' });
+            }
+
+            const filePath = fileMap[payload.id];
+            const fileExtension = path.extname(filePath).toLowerCase();
+            const mimeType = mimeTypes[fileExtension] || 'application/octet-stream';
+
+            const fileBuffer = await readFile(filePath);
+            const base64File = fileBuffer.toString('base64');
+
+            const response = {
+                filename: path.basename(filePath),
+                mimeType: mimeType,
                 data: base64File
             };
 

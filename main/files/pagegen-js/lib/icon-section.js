@@ -6,6 +6,7 @@ function create_section(link, imgsrc, text) {
 
     sectiondiv.classList.add("siteicon-container")
     img.classList.add("siteicon");
+    img.id = imgsrc;
     desc.classList.add("sitename");
     content.href = link;
     img.src = imgsrc;

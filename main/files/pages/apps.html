@@ -2,49 +2,87 @@
 <html>
 
 <head>
-  <script src="https://kit.fontawesome.com/5be346f7c3.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,200&icon_names=gamepad,home,info,language,menu,settings,view_comfy_alt"/>
-  <link rel="stylesheet" href="/main/files/css/apps.css">
-  <link rel="stylesheet" href="/main/files/css/req.css">
-  <link rel="stylesheet" href="/main/files/css/nav.css">
-  <title>KPX</title>
-  <link id="ficon" rel="icon" type="image/x-icon" href="">
-  <script src="/main/files/js/cloak.js"></script>
-  <script src="/main/files/js/panic.js"></script>
+  <title id="title"></title>
+  <link rel="icon" id="ficon" type="image/x-icon">
+  <link rel="stylesheet" id="css1"></link>
+  <style id="css2"></style>
+  <style id="css3"></style>
+  <style id="css4"></style>
+  <style id="css5"></style>
+  <script id="script1"></script>
+  <script id="script2"></script>
+  <div id="loading-screen"><div class="loader"></div><p id="loading-text">Initializing...</div><style id="loading-css">#loading-screen{z-index:100000;position:fixed;top:0;left:0;width:100%;height:100%;background:#0e0e0e;color:#e0e0e0;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:9999;font-family:sans-serif}.loader{border:6px solid #333;border-top:6px solid #0fc;border-radius:50%;width:48px;height:48px;animation:spin .5s linear infinite;margin-bottom:16px}@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}#loading-text{font-size:1rem;text-align:center;max-width:80%}</style>
+  <script type="module" src="/e2ee/dist/e2ee.esm.js"></script>
+  <script type="module">
+    async function loadScriptById(id, src) { return new Promise((resolve, reject) => { const el = document.getElementById(id); if (!el) { return reject(new Error(`Element #${id} not found`)) } if (el.src && el.src === src) { return resolve(); } el.src = src; el.onload = () => resolve(); el.onerror = () => reject(new Error(`Failed to load ${src}`)) }) }
+    import{E2EE}from '/e2ee/dist/e2ee.esm.js';export async function initSession(sid){const e2ee=new E2EE();await e2ee.generateKeyPair();const clientPub=await e2ee.exportPublicKey();const res=await fetch('/session/init',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sid,clientPub})});const{serverPub}=await res.json();await e2ee.setRemotePublicKey(serverPub);return e2ee}export async function postRequest(e2ee,sid,payload){const ct=await e2ee.encrypt(JSON.stringify(payload));const res=await fetch('/e2ee',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sid,ciphertext:ct})});const{ciphertext}=await res.json();const pt=await e2ee.decrypt(ciphertext);return JSON.parse(pt)}export async function getRequest(e2ee,sid,payload){const ct=await e2ee.encrypt(JSON.stringify(payload));const url=new URL('/e2ee',window.location.origin);url.searchParams.set('sid',sid);url.searchParams.set('ciphertext',ct);const res=await fetch(url);const{ciphertext}=await res.json();const pt=await e2ee.decrypt(ciphertext);return JSON.parse(pt)}export async function readBlobAsText(blob){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=(event)=>{resolve(event.target.result)};reader.onerror=(error)=>{reject(error)};reader.readAsText(blob)})}export async function fileRequest(e2ee,sid,fileId){const payload={type:'getFile',id:fileId};const ct=await e2ee.encrypt(JSON.stringify(payload));const url=new URL('/e2ee/file',window.location.origin);url.searchParams.set('sid',sid);url.searchParams.set('ciphertext',ct);const res=await fetch(url);if(!res.ok){throw new Error(`File request failed: ${res.status }`)}const{ciphertext}=await res.json();const pt=await e2ee.decrypt(ciphertext);const{filename,data}=JSON.parse(pt);const binary=atob(data);const bytes=new Uint8Array(binary.length);for(let i=0;i<binary.length;i+=1){bytes[i]=binary.charCodeAt(i)}const blob=new Blob([bytes]);const extension=filename.split('.').pop().toLowerCase();let text;switch(extension){case 'css':case 'html':case 'js':text=readBlobAsText(blob);return{filename,blob,content:text};case 'txt':text=readBlobAsText(blob);return{filename,blob,content:text};case 'json':text=await readBlobAsText(blob);const json=JSON.parse(text);return{filename,blob,content:json};case 'png':case 'jpg':case 'jpeg':case 'gif':return{filename,blob};default:try{text=await readBlobAsText(blob);return{filename,blob,content:text}}catch{return{filename,blob}}}}export async function injectFileContentToDOM(e2ee,sid,fileId,target){const{filename,content}=await fileRequest(e2ee,sid,fileId);const extension=filename.split('.').pop().toLowerCase();if(!target){throw new Error(`Target element "${ target }" not found`)}const resolvedContent=typeof content==='string'?content:await content;switch(extension){case 'css':if(target.tagName.toLowerCase()==='style'){target.textContent=resolvedContent}else{throw new Error(`Expected a <style> element for CSS injection`)}break;case 'js':if(target.tagName.toLowerCase()==='script'){target.textContent=resolvedContent}else{throw new Error(`Expected a <script> element for JS injection`)}break;default:throw new Error(`Unsupported file type for DOM injection: ${ extension }`)}return{filename,injected:true}}export async function injectHtmlFileToDOM(e2ee,sid,fileId,target){const{filename,content}=await fileRequest(e2ee,sid,fileId);const extension=filename.split('.').pop().toLowerCase();if(extension!=='html'){throw new Error(`Only HTML files can be injected with this function`)}if(!target){throw new Error(`Target element "${ target }" not found`)}let resolvedContent;if(typeof content==='string'){resolvedContent=content}else if(content instanceof Blob){resolvedContent=await content.text()}else{resolvedContent=await content}if(target===document){document.open();document.write(resolvedContent);document.close()}else{if(target.tagName.toLowerCase()!=='iframe'){throw new Error(`Target element must be an <iframe> or document`)}const blob=new Blob([resolvedContent],{type:'text/html'});const url=URL.createObjectURL(blob);target.src=url;target.onload=()=>URL.revokeObjectURL(url)}return{filename,injected:true}}export async function imageRequest(e2ee,sid,fileId){const payload={type:'getFile',id:fileId};const ct=await e2ee.encrypt(JSON.stringify(payload));const url=new URL('/e2ee/image',window.location.origin);url.searchParams.set('sid',sid);url.searchParams.set('ciphertext',ct);const res=await fetch(url);if(!res.ok){throw new Error(`File request failed: ${res.status }`)}const{ciphertext}=await res.json();const pt=await e2ee.decrypt(ciphertext);const{filename,mimeType,data}=JSON.parse(pt);return{filename,mimeType,data}}export async function injectImageToDOM(e2ee,sid,fileId,target){const{filename,mimeType,data}=await imageRequest(e2ee,sid,fileId);if(!target||target.tagName.toLowerCase()!=='img'){throw new Error('Target element must be an <img> tag.')}const dataUri=`data:${ mimeType };base64,${ data }`;target.src=dataUri;return{filename,injected:true}}      document.getElementById("loading-text").innerText = "Starting end-to-end encryption session...";
+    (async function () {
+      document.getElementById("loading-text").innerText = "Starting end-to-end encryption session...";
+      const sid = crypto.randomUUID();
+      const e2ee = await initSession(sid);
+      console.log("initaited E2EE session");
+      document.getElementById("loading-text").innerText = "Bootstrapping files...";
+      await injectFileContentToDOM(e2ee, sid, "a-css", document.getElementById("css2"));
+      await injectFileContentToDOM(e2ee, sid, "r-css", document.getElementById("css3"));
+      await injectFileContentToDOM(e2ee, sid, "p-css", document.getElementById("css4"));
+      await injectFileContentToDOM(e2ee, sid, "n-css", document.getElementById("css5"));
+      await injectFileContentToDOM(e2ee, sid, "c-js", document.getElementById("script1"));
+      await injectFileContentToDOM(e2ee, sid, "p-js", document.getElementById("script2"));
+      document.getElementById("css1").href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,200&icon_names=gamepad,home,info,language,menu,search,settings,view_comfy_alt";
+      document.getElementById("title").innerText = "KPX";
+      await injectFileContentToDOM(e2ee, sid, "is-pjs", document.getElementById("script3"));
+      await injectFileContentToDOM(e2ee, sid, "a-pjs", document.getElementById("script4"));
+      await injectFileContentToDOM(e2ee, sid, "nv2-pjs", document.getElementById("script5"));
+      await injectFileContentToDOM(e2ee, sid, "r-js", document.getElementById("script6"));      
+      document.getElementById("loading-text").innerText = "Loading particles.js...";
+      await loadScriptById("script7", "https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js");
+      document.getElementById("loading-text").innerText = "Injecting dependent scripts...";
+      await injectFileContentToDOM(e2ee, sid, "pj-js", document.getElementById("script8"));
+      await injectFileContentToDOM(e2ee, sid, "sp-js", document.getElementById("script9"));
+      addnav2();
+      document.getElementById("loading-text").innerText = "Finalizing...";
+      document.getElementById("loading-screen").style = 'display:none;';
+      document.getElementById("nav-container").style = '';
+      console.log("finished loading");
+      document.getElementById("loading-screen").remove();
+      document.getElementById("loading-css").remove();
+      injectImageToDOM(e2ee, sid, "gth-png", document.getElementById("img1"));
+      injectImageToDOM(e2ee, sid, "wnd-png", document.getElementById("img2"));
+      injectImageToDOM(e2ee, sid, "wndxp-png", document.getElementById("img3"));
+      injectImageToDOM(e2ee, sid, "chpt-png", document.getElementById("img4"));
+      injectImageToDOM(e2ee, sid, "dsc-png", document.getElementById("img5"));
+      injectImageToDOM(e2ee, sid, "sptf-png", document.getElementById("img6"));
+      injectImageToDOM(e2ee, sid, "plx-png", document.getElementById("img7"));
+      injectImageToDOM(e2ee, sid, "frdns-png", document.getElementById("img8"));
+      injectImageToDOM(e2ee, sid, "extp-png", document.getElementById("img9"));
+      injectImageToDOM(e2ee, sid, "hwai-png", document.getElementById("img10"));
+      injectImageToDOM(e2ee, sid, "mhai-png", document.getElementById("img11"));
+      injectImageToDOM(e2ee, sid, "qlbt-png", document.getElementById("img12"));
+      injectImageToDOM(e2ee, sid, "vsc-png", document.getElementById("img13"));
+    })();
+  </script>
 </head>
 
 <body>
   <div id="particles-js" style="position: absolute; top: 0%; width: 100%; height: 100%;">
     <canvas class="particles-js-canvas-el"></canvas>
   </div>
-  <div id="nav-container">
-    <!--navbar generated here-->
-  </div>
+  <div id="nav-container" style="display: none;"></div>
   <h1>KPX</h1>
   <h3 class="subheading">Apps & Sites</h3>
   <div id="siteicons">
     <div class="siteicons-header">
       <input placeholder="Search for an app...">
     </div>
-    <div class="siteicons-grid">
-      <!--icons generated here-->
-      <!--maybe add fmhy github instead of site (blocked) https://github.com/fmhy/edit-->
-    </div>
+    <div class="siteicons-grid"></div>
   </div>
+  <script id="script3"></script>
+  <script id="script4"></script>
+  <script id="script5"></script>
+  <script id="script6"></script>
+  <script id="script7"></script>
+  <script id="script8"></script>
+  <script id="script9"></script>
 </body>
-<!--pagegen scripts-->
-<script src="/main/files/pagegen-js/lib/icon-section.js"></script>
-<script src="/main/files/pagegen-js/app-gen.js"></script>
-<script src="/main/files/pagegen-js/navbar-2-gen.js"></script>
-<script>
-    addnav2();
-</script>
-<!--general scripts-->
-<script src="/main/files/js/req.js"></script>
-<!--particle scripts-->
-<script src=" https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js "></script>
-<script src="/main/files/js/particles/particles-js.js"></script>
-<link rel="stylesheet" href="/main/files/css/particles.css">
-<script src="/main/files/js/particles/settings-particles.js"></script>
 
 </html>

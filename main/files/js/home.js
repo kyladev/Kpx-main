@@ -14,12 +14,12 @@ function addlinkstoui(userurl, userimage, usercustomname) {
 }
 
 function addsite() {
-  let customurl = prompt("Enter the url of the site:");
+  let customurl = btoa(prompt("Enter the url of the site:"));
   if (!customurl) {
     alert("Invalid");
     return;
   }
-  let customimage = prompt("Enter an image url for the site:");
+  let customimage = prompt("Enter the value of an image as base64:");
   if (!customimage) {
     alert("Invalid");
     return;
@@ -32,7 +32,7 @@ function addsite() {
   let newlink = {
     url: customurl,
     image: customimage,
-    name: customname
+    name: customname,
   };
   let savedlinks = JSON.parse(localStorage.getItem('customurls')) || [];
   savedlinks.push(newlink);

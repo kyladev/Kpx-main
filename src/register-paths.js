@@ -1,9 +1,12 @@
-import { authMiddleware, publicPath, require_pass, isUserLoggedIn, logToFile } from './run-settings.js';
+import { authMiddleware, rootPath, require_pass, isUserLoggedIn, logToFile } from './run-settings.js';
 import { readFile } from 'fs/promises';
 import crypto from 'node:crypto';
 import path from "path";
 import bcrypt from "bcrypt";
 import { loginSchema } from './sanitizer.js';
+import { readFileSync } from 'node:fs';
+
+const template = readFileSync("src/getpage.html", "utf8");
 
 //import user data (passwords, usernames, etc.)
 const usersFilePath = path.join(process.cwd(), 'src/userdata.json');
@@ -12,7 +15,8 @@ export default async function register_paths(fastify, userSessions) {
     fastify.get("/s", {
         preHandler: authMiddleware(),
         handler: (req, res) => {
-            return res.sendFile("main/files/pages/search.html", publicPath);
+            const html = template.replace("__PAGE_ID__", "s-html");
+            return res.type("text/html").send(html);
         }
     });
 
@@ -20,86 +24,67 @@ export default async function register_paths(fastify, userSessions) {
         const loggedIn = await isUserLoggedIn(req);
 
         if (!loggedIn) {
-            return res.sendFile("main/files/frontend/home.html", publicPath);
+            return res.sendFile("public/home.html", rootPath);
         }
 
-        return res.sendFile("main/files/pages/home.html", publicPath);
+        // return res.sendFile("main/files/pages/home.html", rootPath);
+        const html = template.replace("__PAGE_ID__", "h-html");
+        return res.type("text/html").send(html);
     });
 
     fastify.get("/a", {
         preHandler: authMiddleware(),
         handler: (req, res) => {
-            return res.sendFile("main/files/pages/apps.html", publicPath);
+            const html = template.replace("__PAGE_ID__", "a-html");
+            return res.type("text/html").send(html);
         }
     });
 
     fastify.get("/a/v", {
         preHandler: authMiddleware(),
         handler: (req, res) => {
-            return res.sendFile("main/files/pages/appview.html", publicPath);
-        }
-    });
-
-    fastify.get("/t", {
-        preHandler: authMiddleware(),
-        handler: (req, res) => {
-            return res.sendFile("main/files/pages/tools.html", publicPath);
-        }
-    });
-
-    fastify.get("/t/v", {
-        preHandler: authMiddleware(),
-        handler: (req, res) => {
-            return res.sendFile("main/files/pages/appview.html", publicPath);
+            const html = template.replace("__PAGE_ID__", "av-html");
+            return res.type("text/html").send(html);
         }
     });
 
     fastify.get("/g", {
         preHandler: authMiddleware(),
         handler: (req, res) => {
-            return res.sendFile("main/files/pages/games.html", publicPath);
+            const html = template.replace("__PAGE_ID__", "g-html");
+            return res.type("text/html").send(html);
         }
     });
 
     fastify.get("/g/p", {
         preHandler: authMiddleware(),
         handler: (req, res) => {
-            return res.sendFile("main/files/pages/gameview.html", publicPath);
-        }
-    });
-
-    fastify.get("/b", {
-        preHandler: authMiddleware(),
-        handler: (req, res) => {
-            return res.sendFile("main/files/pages/inprogress.html", publicPath);
+            const html = template.replace("__PAGE_ID__", "gv-html");
+            return res.type("text/html").send(html);
         }
     });
 
     fastify.get("/i", {
         preHandler: authMiddleware(),
         handler: (req, res) => {
-            return res.sendFile("main/files/pages/info.html", publicPath);
-        }
-    });
-
-    fastify.get("/i/c", {
-        preHandler: authMiddleware(),
-        handler: (req, res) => {
-            return res.sendFile("main/files/pages/changelog.html", publicPath);
+            const html = template.replace("__PAGE_ID__", "i-html");
+            return res.type("text/html").send(html);
         }
     });
 
     fastify.get("/st", {
         preHandler: authMiddleware(),
         handler: (req, res) => {
-            return res.sendFile("main/files/pages/settings.html", publicPath);
+            const html = template.replace("__PAGE_ID__", "st-html");
+            return res.type("text/html").send(html);
         }
     });
 
     fastify.get("/sc", {
         preHandler: authMiddleware(),
         handler: (req, res) => {
-            return res.sendFile("main/files/pages/security.html", publicPath);
+            const html = template.replace("__PAGE_ID__", "sc-html");
+            return res.type("text/html").send(html);
         }
     });
 
@@ -109,13 +94,13 @@ export default async function register_paths(fastify, userSessions) {
             logToFile('important', `TESTING: user redirected to homepage from ${request.ip} due to testing mode (password requirement is off, this is dangerous)\n`);
         }
         else {
-            return res.sendFile("main/files/frontend/login.html", publicPath);
+            return res.sendFile("public/login.html", rootPath);
         }
     });
 
     fastify.get("/register", {
         handler: (req, res) => {
-            return res.sendFile("main/files/frontend/register.html", publicPath);
+            return res.sendFile("public/register.html", rootPath);
         }
     });
 

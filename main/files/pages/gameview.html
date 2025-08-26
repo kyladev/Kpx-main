@@ -2,56 +2,44 @@
 <html>
 
 <head>
-  <script src="https://kit.fontawesome.com/5be346f7c3.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="/main/files/css/apps.css">
-  <link rel="stylesheet" href="/main/files/css/req.css">
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    document.addEventListener("DOMContentLoaded", function () {
-      document.getElementById("gameiframe").src = "/main/files/games/" + params.get("game");
-
-      if (!localStorage.getItem("show-game-nav") || localStorage.getItem("show-game-nav") === "true") {
-        addnav();
-      }
-      if (localStorage.getItem("show-game-nav") === "false") {
-        console.log("navbar generation skipped");
-        return;
-      }
-    })
+  <title id="title"></title>
+  <link id="ficon" rel="icon" type="image/x-icon" href="" />
+  <style id="css1"></style>
+  <style id="css2"></style>
+  <script id="script1">const params=new URLSearchParams(window.location.search);document.addEventListener("DOMContentLoaded",function(){document.getElementById("frame").src="/main/files/g-lib/"+params.get("q")});</script>
+  <script id="script2"></script>
+  <script id="script3"></script>
+  <div id="loading-screen"><div class="loader"></div><p id="loading-text">Initializing...</div><style id="loading-css">#loading-screen{z-index:100000;position:fixed;top:0;left:0;width:100%;height:100%;background:#0e0e0e;color:#e0e0e0;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:9999;font-family:sans-serif}.loader{border:6px solid #333;border-top:6px solid #0fc;border-radius:50%;width:48px;height:48px;animation:spin .5s linear infinite;margin-bottom:16px}@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}#loading-text{font-size:1rem;text-align:center;max-width:80%}</style>
+  <script type="module" src="./e2ee/dist/e2ee.esm.js"></script>
+  <script type="module">
+    async function loadScriptById(id, src) { return new Promise((resolve, reject) => { const el = document.getElementById(id); if (!el) { return reject(new Error(`Element #${id} not found`)) } if (el.src && el.src === src) { return resolve(); } el.src = src; el.onload = () => resolve(); el.onerror = () => reject(new Error(`Failed to load ${src}`)) }) }
+    (function(_0x2779b4,_0xb59166){const _0x160157=_0x2fb4,_0x2414ab=_0x2779b4();while(!![]){try{const _0x2b85c0=parseInt(_0x160157(0x120))/0x1+parseInt(_0x160157(0x11d))/0x2*(-parseInt(_0x160157(0x10f))/0x3)+-parseInt(_0x160157(0x114))/0x4*(parseInt(_0x160157(0x106))/0x5)+-parseInt(_0x160157(0x10b))/0x6+parseInt(_0x160157(0x119))/0x7*(-parseInt(_0x160157(0x115))/0x8)+parseInt(_0x160157(0xfa))/0x9*(parseInt(_0x160157(0x127))/0xa)+parseInt(_0x160157(0x128))/0xb;if(_0x2b85c0===_0xb59166)break;else _0x2414ab['push'](_0x2414ab['shift']());}catch(_0x493b4e){_0x2414ab['push'](_0x2414ab['shift']());}}}(_0x3dc7,0x719ac));function _0x3dc7(){const _0x16280b=['428600AvqSqY','Expected\x20a\x20<style>\x20element\x20for\x20CSS\x20injection','setRemotePublicKey','status','onload','src','open','210070nkACWU','24600081QnQsLC','textContent','parse','getFile','/e2ee/file','text','data:','tagName','application/json','css','split','target','set','charCodeAt','onerror','Unsupported\x20file\x20type\x20for\x20DOM\x20injection:\x20','location','style','length','result','9kFVGxZ','Target\x20element\x20\x22','createObjectURL','decrypt','close','toLowerCase','json','png','stringify','Only\x20HTML\x20files\x20can\x20be\x20injected\x20with\x20this\x20function','\x22\x20not\x20found','string','602270gAQkRa','searchParams','html','/session/init','img','1204638jVvKGQ','pop','script','Target\x20element\x20must\x20be\x20an\x20<img>\x20tag.','39vaBbDR','encrypt','sid','revokeObjectURL','Expected\x20a\x20<script>\x20element\x20for\x20JS\x20injection','28WqqWSy','8QAYaum','exportPublicKey',';base64,','origin','3739246XzKQQW','/e2ee','iframe','ciphertext','98850Qxhyuc','POST','text/html'];_0x3dc7=function(){return _0x16280b;};return _0x3dc7();}import{E2EE}from'/e2ee/dist/e2ee.esm.js';export async function initSession(_0x283645){const _0x5d1f95=_0x2fb4,_0x451f82=new E2EE();await _0x451f82['generateKeyPair']();const _0x20b84b=await _0x451f82[_0x5d1f95(0x116)](),_0x5dc51b=await fetch(_0x5d1f95(0x109),{'method':_0x5d1f95(0x11e),'headers':{'Content-Type':'application/json'},'body':JSON[_0x5d1f95(0x102)]({'sid':_0x283645,'clientPub':_0x20b84b})}),{serverPub:_0x4ed1ef}=await _0x5dc51b['json']();return await _0x451f82[_0x5d1f95(0x122)](_0x4ed1ef),_0x451f82;}export async function postRequest(_0x3637ad,_0x2d3d8b,_0x441044){const _0x3e8710=_0x2fb4,_0x55e58b=await _0x3637ad[_0x3e8710(0x110)](JSON['stringify'](_0x441044)),_0x1b7a33=await fetch(_0x3e8710(0x11a),{'method':_0x3e8710(0x11e),'headers':{'Content-Type':_0x3e8710(0xee)},'body':JSON['stringify']({'sid':_0x2d3d8b,'ciphertext':_0x55e58b})}),{ciphertext:_0x2fbdf0}=await _0x1b7a33[_0x3e8710(0x100)](),_0x2c8cdd=await _0x3637ad['decrypt'](_0x2fbdf0);return JSON[_0x3e8710(0x12a)](_0x2c8cdd);}export async function getRequest(_0x59cfc8,_0x15bb5c,_0xf33b3){const _0x6e44fa=_0x2fb4,_0x38cb83=await _0x59cfc8[_0x6e44fa(0x110)](JSON[_0x6e44fa(0x102)](_0xf33b3)),_0x570bd1=new URL(_0x6e44fa(0x11a),window['location'][_0x6e44fa(0x118)]);_0x570bd1[_0x6e44fa(0x107)][_0x6e44fa(0xf2)](_0x6e44fa(0x111),_0x15bb5c),_0x570bd1[_0x6e44fa(0x107)][_0x6e44fa(0xf2)]('ciphertext',_0x38cb83);const _0x19d4ac=await fetch(_0x570bd1),{ciphertext:_0x5729d4}=await _0x19d4ac[_0x6e44fa(0x100)](),_0x2331ef=await _0x59cfc8[_0x6e44fa(0xfd)](_0x5729d4);return JSON[_0x6e44fa(0x12a)](_0x2331ef);}export async function readBlobAsText(_0x23877d){return new Promise((_0x3ac06f,_0x35db0)=>{const _0x11c3b8=_0x2fb4,_0x4d831e=new FileReader();_0x4d831e[_0x11c3b8(0x124)]=_0x557943=>{const _0x3a6300=_0x11c3b8;_0x3ac06f(_0x557943[_0x3a6300(0xf1)][_0x3a6300(0xf9)]);},_0x4d831e[_0x11c3b8(0xf4)]=_0x3dfbda=>{_0x35db0(_0x3dfbda);},_0x4d831e['readAsText'](_0x23877d);});}function _0x2fb4(_0x5789e7,_0x1fb4d1){const _0x3dc724=_0x3dc7();return _0x2fb4=function(_0x2fb4e8,_0x2b9d8f){_0x2fb4e8=_0x2fb4e8-0xeb;let _0x38a308=_0x3dc724[_0x2fb4e8];return _0x38a308;},_0x2fb4(_0x5789e7,_0x1fb4d1);}export async function fileRequest(_0x7cbc35,_0x9fda85,_0x2fcae3){const _0x2a5444=_0x2fb4,_0x417e18={'type':_0x2a5444(0x12b),'id':_0x2fcae3},_0x31b2a2=await _0x7cbc35[_0x2a5444(0x110)](JSON['stringify'](_0x417e18)),_0x6105a7=new URL(_0x2a5444(0x12c),window[_0x2a5444(0xf6)][_0x2a5444(0x118)]);_0x6105a7['searchParams'][_0x2a5444(0xf2)]('sid',_0x9fda85),_0x6105a7[_0x2a5444(0x107)][_0x2a5444(0xf2)](_0x2a5444(0x11c),_0x31b2a2);const _0x4dc31b=await fetch(_0x6105a7);if(!_0x4dc31b['ok'])throw new Error('File\x20request\x20failed:\x20'+_0x4dc31b[_0x2a5444(0x123)]);const {ciphertext:_0x3f001c}=await _0x4dc31b[_0x2a5444(0x100)](),_0x8a7a24=await _0x7cbc35['decrypt'](_0x3f001c),{filename:_0x549eff,data:_0x432016}=JSON[_0x2a5444(0x12a)](_0x8a7a24),_0x97d8cd=atob(_0x432016),_0x599078=new Uint8Array(_0x97d8cd[_0x2a5444(0xf8)]);for(let _0xd8d71=0x0;_0xd8d71<_0x97d8cd['length'];_0xd8d71++)_0x599078[_0xd8d71]=_0x97d8cd[_0x2a5444(0xf3)](_0xd8d71);const _0x1e7ffb=new Blob([_0x599078]),_0x4f8784=_0x549eff[_0x2a5444(0xf0)]('.')['pop']()[_0x2a5444(0xff)]();let _0x33f011;switch(_0x4f8784){case _0x2a5444(0xef):case'html':case'js':_0x33f011=readBlobAsText(_0x1e7ffb);return{'filename':_0x549eff,'blob':_0x1e7ffb,'content':_0x33f011};case'txt':_0x33f011=readBlobAsText(_0x1e7ffb);return{'filename':_0x549eff,'blob':_0x1e7ffb,'content':_0x33f011};case _0x2a5444(0x100):_0x33f011=await readBlobAsText(_0x1e7ffb);const _0x592d0d=JSON[_0x2a5444(0x12a)](_0x33f011);return{'filename':_0x549eff,'blob':_0x1e7ffb,'content':_0x592d0d};case _0x2a5444(0x101):case'jpg':case'jpeg':case'gif':return{'filename':_0x549eff,'blob':_0x1e7ffb};default:try{return _0x33f011=await readBlobAsText(_0x1e7ffb),{'filename':_0x549eff,'blob':_0x1e7ffb,'content':_0x33f011};}catch{return{'filename':_0x549eff,'blob':_0x1e7ffb};}}}export async function injectFileContentToDOM(_0x3bb056,_0x309b33,_0xe4f6f0,_0x5e3b76){const _0x913473=_0x2fb4,{filename:_0x254bf2,content:_0x47841a}=await fileRequest(_0x3bb056,_0x309b33,_0xe4f6f0),_0x118cd1=_0x254bf2[_0x913473(0xf0)]('.')[_0x913473(0x10c)]()['toLowerCase']();if(!_0x5e3b76)throw new Error(_0x913473(0xfb)+_0x5e3b76+_0x913473(0x104));const _0x2b5411=typeof _0x47841a===_0x913473(0x105)?_0x47841a:await _0x47841a;switch(_0x118cd1){case _0x913473(0xef):if(_0x5e3b76[_0x913473(0xed)][_0x913473(0xff)]()===_0x913473(0xf7))_0x5e3b76[_0x913473(0x129)]=_0x2b5411;else throw new Error(_0x913473(0x121));break;case'js':if(_0x5e3b76[_0x913473(0xed)]['toLowerCase']()===_0x913473(0x10d))_0x5e3b76[_0x913473(0x129)]=_0x2b5411;else throw new Error(_0x913473(0x113));break;default:throw new Error(_0x913473(0xf5)+_0x118cd1);}return{'filename':_0x254bf2,'injected':!![]};}export async function injectHtmlFileToDOM(_0x4671f9,_0x1c4488,_0x1ec60e,_0x1d3ae2){const _0x35994c=_0x2fb4,{filename:_0x1180da,content:_0x3879f0}=await fileRequest(_0x4671f9,_0x1c4488,_0x1ec60e),_0x5698ea=_0x1180da[_0x35994c(0xf0)]('.')[_0x35994c(0x10c)]()[_0x35994c(0xff)]();if(_0x5698ea!==_0x35994c(0x108))throw new Error(_0x35994c(0x103));if(!_0x1d3ae2)throw new Error(_0x35994c(0xfb)+_0x1d3ae2+_0x35994c(0x104));let _0x3cbc21;if(typeof _0x3879f0==='string')_0x3cbc21=_0x3879f0;else _0x3879f0 instanceof Blob?_0x3cbc21=await _0x3879f0[_0x35994c(0xeb)]():_0x3cbc21=await _0x3879f0;if(_0x1d3ae2===document)document[_0x35994c(0x126)](),document['write'](_0x3cbc21),document[_0x35994c(0xfe)]();else{if(_0x1d3ae2[_0x35994c(0xed)][_0x35994c(0xff)]()!==_0x35994c(0x11b))throw new Error('Target\x20element\x20must\x20be\x20an\x20<iframe>\x20or\x20document');const _0x582540=new Blob([_0x3cbc21],{'type':_0x35994c(0x11f)}),_0xcbc05c=URL[_0x35994c(0xfc)](_0x582540);_0x1d3ae2[_0x35994c(0x125)]=_0xcbc05c,_0x1d3ae2[_0x35994c(0x124)]=()=>URL[_0x35994c(0x112)](_0xcbc05c);}return{'filename':_0x1180da,'injected':!![]};}export async function injectImageToDOM(_0x383256,_0x49325a,_0x4a2b10,_0x57795a){const _0x2088c4=_0x2fb4,{filename:_0x30c447,mimeType:_0x21f753,data:_0x18df5d}=await fileRequest(_0x383256,_0x49325a,_0x4a2b10);if(!_0x57795a||_0x57795a['tagName'][_0x2088c4(0xff)]()!==_0x2088c4(0x10a))throw new Error(_0x2088c4(0x10e));const _0xbe6c0d=_0x2088c4(0xec)+_0x21f753+_0x2088c4(0x117)+_0x18df5d;return _0x57795a['src']=_0xbe6c0d,{'filename':_0x30c447,'injected':!![]};}    (async () => {
+      document.getElementById("loading-text").innerText = "Starting end-to-end encryption session...";
+      const sid = crypto.randomUUID();
+      const e2ee = await initSession(sid);
+      console.log("initaited E2EE session");
+      document.getElementById("loading-text").innerText = "Bootstrapping files...";
+      await injectFileContentToDOM(e2ee, sid, "a-css", document.getElementById("css1"));
+      await injectFileContentToDOM(e2ee, sid, "r-css", document.getElementById("css2"));
+      await injectFileContentToDOM(e2ee, sid, "c-js", document.getElementById("script2"));
+      await injectFileContentToDOM(e2ee, sid, "p-js", document.getElementById("script3"));
+      document.getElementById("title").innerText = "KPX";
+      document.getElementById("loading-text").innerText = "Finalizing...";
+      document.getElementById("loading-screen").style = 'display:none;';
+      document.getElementById("nav-container").style = '';
+      console.log("finished loading");
+      document.getElementById("loading-screen").remove();
+      document.getElementById("loading-css").remove();
+    })();
   </script>
-  <title>KPX</title>
-  <link id="ficon" rel="icon" type="image/x-icon" href="">
-  <script src="/main/files/js/cloak.js"></script>
-  <script src="/main/files/js/panic.js"></script>
 </head>
 
 <body style="background-color: black;">
   <div id="nav-container">
     <!--navbar generated here-->
   </div>
-  <iframe id="gameiframe" src=""></iframe>
+  <iframe id="frame" src=""></iframe>
+  <style>body{width:100%;height:100%;}#frame{width:100vw;height:100vh;border:none;}</style>
 </body>
-<script src="/main/files/pagegen-js/navbar-1-gen.js"></script>
-<script>
-  if (!localStorage.getItem("show-game-nav") || localStorage.getItem("show-game-nav") === "false") {
-    return;
-  }
-  else {
-    addnav();
-  }
-</script>
-<script src="/main/files/js/req.js"></script>
-<style>
-  body {
-    width: 100%;
-    height: 100%;
-  }
-
-  #gameiframe {
-    width: 100vw;
-    height: 100vh;
-    border: none;
-  }
-</style>
 
 </html>
