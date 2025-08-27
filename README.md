@@ -31,6 +31,8 @@ Run the server with:
 npm start
 ```
 
+You will need an SSL certificate, and then set the path to it's keys in `src/server.js`, I personally set it up with Certbot, which means just running the server will not work, as the path to my testing domain's SSL certs don't exist on your computer.
+
 ## Credits
 
 - Me - Backend + Frontend coding
