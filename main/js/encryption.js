@@ -1,4 +1,4 @@
-import { E2EE } from './e2ee/dist/e2ee.esm.js';
+import { E2EE } from '/e2ee/dist/e2ee.esm.js';
 
 
 export async function initSession(sid) {
@@ -55,7 +55,6 @@ export async function readBlobAsText(blob) {
 }
 
 export async function fileRequest(e2ee, sid, fileId) {
-  // Encrypt payload describing which file ID to fetch
   const payload = { type: 'getFile', id: fileId };
   const ct = await e2ee.encrypt(JSON.stringify(payload));
 
@@ -63,17 +62,14 @@ export async function fileRequest(e2ee, sid, fileId) {
   url.searchParams.set('sid', sid);
   url.searchParams.set('ciphertext', ct);
 
-  // Fetch file response
   const res = await fetch(url);
   if (!res.ok) throw new Error(`File request failed: ${res.status}`);
 
   const { ciphertext } = await res.json();
 
-  // Decrypt file data
   const pt = await e2ee.decrypt(ciphertext);
   const { filename, data } = JSON.parse(pt);
 
-  // Convert base64 to Blob
   const binary = atob(data);
   const bytes = new Uint8Array(binary.length);
   for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
@@ -99,11 +95,9 @@ export async function fileRequest(e2ee, sid, fileId) {
     case 'jpg':
     case 'jpeg':
     case 'gif':
-      // Image files: return blob only
       return { filename, blob };
 
     default:
-      // Fallback: try reading as text
       try {
         text = await readBlobAsText(blob);
         return { filename, blob, content: text };
@@ -117,10 +111,8 @@ export async function injectFileContentToDOM(e2ee, sid, fileId, target) {
   const { filename, content } = await fileRequest(e2ee, sid, fileId);
   const extension = filename.split('.').pop().toLowerCase();
 
-  // Resolve the target element
   if (!target) throw new Error(`Target element "${target}" not found`);
 
-  // Ensure content is resolved (in case readBlobAsText returned a Promise)
   const resolvedContent = typeof content === 'string' ? content : await content;
 
   switch (extension) {
@@ -157,7 +149,6 @@ export async function injectHtmlFileToDOM(e2ee, sid, fileId, target) {
 
   if (!target) throw new Error(`Target element "${target}" not found`);
 
-  // Resolve the content (in case it's a Promise or Blob)
   let resolvedContent;
   if (typeof content === 'string') {
     resolvedContent = content;
@@ -167,23 +158,19 @@ export async function injectHtmlFileToDOM(e2ee, sid, fileId, target) {
     resolvedContent = await content;
   }
 
-  // If target is the whole document, replace the main page content
   if (target === document) {
     document.open();
     document.write(resolvedContent);
     document.close();
   } else {
-    // Assume target is an iframe
     if (target.tagName.toLowerCase() !== 'iframe') {
       throw new Error(`Target element must be an <iframe> or document`);
     }
 
-    // Use a Blob URL for security & proper loading
     const blob = new Blob([resolvedContent], { type: 'text/html' });
     const url = URL.createObjectURL(blob);
     target.src = url;
 
-    // Optional: revoke the URL after iframe has loaded
     target.onload = () => URL.revokeObjectURL(url);
   }
 
@@ -191,7 +178,6 @@ export async function injectHtmlFileToDOM(e2ee, sid, fileId, target) {
 }
 
 export async function imageRequest(e2ee, sid, fileId) {
-  // Encrypt payload describing which file ID to fetch
   const payload = { type: 'getFile', id: fileId };
   const ct = await e2ee.encrypt(JSON.stringify(payload));
 
@@ -199,33 +185,26 @@ export async function imageRequest(e2ee, sid, fileId) {
   url.searchParams.set('sid', sid);
   url.searchParams.set('ciphertext', ct);
 
-  // Fetch file response
   const res = await fetch(url);
   if (!res.ok) throw new Error(`File request failed: ${res.status}`);
 
   const { ciphertext } = await res.json();
 
-  // Decrypt file data
   const pt = await e2ee.decrypt(ciphertext);
   const { filename, mimeType, data } = JSON.parse(pt);
 
-  // Return the filename, mimeType, and the Base64 data string
   return { filename, mimeType, data };
 }
 
 export async function injectImageToDOM(e2ee, sid, fileId, target) {
-  // Call the fileRequest function to get the Base64 data from the server.
   const { filename, mimeType, data } = await imageRequest(e2ee, sid, fileId);
 
-  // Validate the target element is an <img> tag.
   if (!target || target.tagName.toLowerCase() !== 'img') {
     throw new Error('Target element must be an <img> tag.');
   }
 
-  // Construct the data URI using the received mimeType and data.
   const dataUri = `data:${mimeType};base64,${data}`;
 
-  // Set the src attribute of the <img> tag to the data URI.
   target.src = dataUri;
 
   return { filename, injected: true };

@@ -1,7 +1,6 @@
 @media (max-width: 480px) {
   .sections {
     width: 100%;
-    /* One per row on mobile */
   }
 }
 
@@ -56,7 +55,6 @@
 .right-items {
   display: flex;
   gap: 10px;
-  /* space between right-aligned items */
   align-items: center;
 }
 
@@ -64,7 +62,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* Ensures vertical alignment */
   border-bottom: #333333 1px solid;
   border-top: #333333 1px solid;
   padding-top: 10px;

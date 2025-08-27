@@ -1,5 +1,4 @@
 function backgroundcolorset() {
-    //default is #202020
     const color = document.getElementById("backgroundcolor").value;
     const csstext = `
     body {
@@ -25,7 +24,6 @@ function backgroundcolorset() {
     update_background_style();
 }
 function secondarycolorset() {
-    //default is #303030
     const color = document.getElementById("secondarycolor").value;
     const csstext = `
     .sections-container {
@@ -57,7 +55,6 @@ function secondarycolorset() {
     update_secondary_style();
 }
 function tertiarycolorset() {
-    //default is #404040
     const color = document.getElementById("backgroundcolor").value;
     const csstext = `
     .shortcut {
@@ -89,7 +86,6 @@ function textcolorset() {
 }
 
 
-//working on these functions, they are for the search page
 function btextcolorset() {
     let color = document.getElementById("b-textcolor").value;
     localStorage.setItem("b-text", color);

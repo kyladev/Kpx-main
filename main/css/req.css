@@ -48,12 +48,10 @@ input {
 
 a:link {
     color: white;
-    /* Unvisited link color */
 }
 
 a:visited {
     color: white;
-    /* Visited link color */
 }
 
 .navbar {
@@ -72,7 +70,6 @@ a:visited {
     border-bottom-right-radius: 7px;
 }
 
-/* Icon: always visible and centered in the square */
 .menu-icon {
     padding-left: 15px;
     justify-content: center;
@@ -84,7 +81,6 @@ a:visited {
     z-index: 1100;
     transition: transform 0.3s ease;
     pointer-events: none;
-    /* Prevents accidental blocking of clicks */
 }
 
 .innericon {
@@ -99,25 +95,21 @@ a:visited {
     text-align: center;
 }
 
-/* Rotate when expanded */
 .navbar.expanded .menu-icon {
     transform: rotate(180deg);
     padding-right: 15px;
 }
 
-/* Nav links container */
 .nav-links {
     list-style: none;
     display: flex;
     flex-direction: row;
     margin-left: -45px;
-    /* leave space for icon */
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-/* Reveal links on expand */
 .navbar.expanded {
     width: 850px;
 }

@@ -1,9 +1,6 @@
-/* Main container */
 #siteicons {
     margin: 2.5vh auto 0 auto;
-    /* Push down from top */
     max-height: 60vh;
-    /* Still limit height */
     width: 80vw;
     box-sizing: border-box;
     background-color: #303030;
@@ -14,8 +11,6 @@
     overflow: hidden;
 }
 
-
-/* Sticky header */
 .siteicons-header {
     background-color: #404040;
     padding: 10px 20px;
@@ -25,7 +20,6 @@
     border-bottom: 1px solid #555;
 }
 
-/* Grid area */
 .siteicons-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
@@ -35,7 +29,6 @@
     flex: 1;
 }
 
-/* Each icon container */
 .siteicon-container {
     background-color: #404040;
     border: 2px solid #555555;
@@ -48,7 +41,6 @@
     margin: 5px;
 }
 
-/* Icon image */
 .siteicon {
     width: 40%;
     border-radius: 10px;
@@ -57,20 +49,17 @@
     margin-left: 30%;
 }
 
-/* Hover effect */
 .siteicon-container:hover {
     transform: scale(1.05);
     box-shadow: 0 0 0 4px white;
 }
 
-/* Site name */
 .sitename {
     margin-top: 10px;
     color: white;
     font-size: 14px;
 }
 
-/* Responsive images inside */
 #siteicons a img {
     max-width: 100%;
     height: auto;

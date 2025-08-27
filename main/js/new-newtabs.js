@@ -10,19 +10,15 @@ function addiframe(first) {
     const container = document.getElementById("frame-container");
     const tabId = "iframe-" + Date.now();
     if (first === true) {
-        // The first iframe is immediately the active one
         iframe.id = "uv-frame";
         iframe.style.display = 'block';
         const initialUrl = params.get("q") || "";
-        // tab.dataset.url = initialUrl;
         if (initialUrl !== "") {
-            // tab.history.push(initialUrl);
             iframe.src = __uv$config.prefix + __uv$config.encodeUrl(initialUrl);
         } else {
             iframe.src = blankpage;
         }
     } else {
-        // All other iframes start as inactive
         iframe.id = tabId;
         iframe.classList.add('inactive-frame');
         iframe.style.display = 'none';
@@ -53,11 +49,10 @@ function getrealurl() {
 }
 
 function addtab(first, url = '') {
-    // Create tab element
     let tab = document.createElement("div");
     let close = document.createElement("div");
     let span = document.createElement("span");
-    let favicon = document.createElement("img"); // favicon holder
+    let favicon = document.createElement("img"); //favicon holder
     const params = new URLSearchParams(window.location.search);
 
     if (first === true) {
@@ -74,7 +69,7 @@ function addtab(first, url = '') {
 
     span.innerText = "New Tab";
     close.innerText = "x";
-    favicon.src = "/favicon.ico"; // fallback favicon
+    favicon.src = "/favicon.ico";
 
     close.onclick = function (e) {
         e.stopPropagation();
@@ -85,16 +80,13 @@ function addtab(first, url = '') {
         changetab(el.currentTarget);
     };
 
-    //initialize tab history and dataset
     tab.history = [];
     tab.dataset.url = '';
 
-    //create a new iframe for this tab
     let iframe = document.createElement("iframe");
     const container = document.getElementById("frame-container");
     const tabId = "iframe-" + Date.now();
 
-    //the tab identifier is its data attribute
     tab.dataset.iframeId = tabId;
 
     if (first === true) {
@@ -122,21 +114,18 @@ function addtab(first, url = '') {
         iframe.src = blankpage;
     }
 
-    //append elements (favicon -> span -> close)
     tab.appendChild(favicon);
     tab.appendChild(span);
     tab.appendChild(close);
     document.getElementById("browsertabs").appendChild(tab);
     container.appendChild(iframe);
 
-    //if not the first tab, call changetab to make it active
     if (!first) {
         changetab(tab);
     }
 
     tabcount++;
 
-    // handle updates on iframe load
     document.getElementById("uv-frame").addEventListener("load", () => {
         const frame = document.getElementById("uv-frame");
 
@@ -170,10 +159,8 @@ function addtab(first, url = '') {
         const span = activeTab.querySelector(".tabtitle");
         span.innerText = title;
 
-        // try to fetch favicon from the document
         let iconEl = frame.contentDocument.querySelector("link[rel*='icon']");
         let faviconUrl = iconEl ? iconEl.href : "/favicon.ico";
-        // faviconUrl = __uv$config.prefix + __uv$config.encodeUrl(faviconUrl);
         const faviconEl = activeTab.querySelector(".tabfavicon");
         faviconEl.src = faviconUrl;
     });
@@ -190,7 +177,6 @@ function closetab(button) {
     const index = tabs.indexOf(tab);
 
     if (tabcount <= 1) {
-        // Can't close the last tab
         return;
     }
 
@@ -212,28 +198,20 @@ function closetab(button) {
 }
 
 function changetab(currentTarget) {
-    // Find the currently active tab and iframe
     const currentactiveTab = document.querySelector(".tabactive");
     const currentactiveIframe = document.getElementById("uv-frame");
 
     if (currentactiveTab && currentactiveIframe) {
-        // Set the old iframe's ID back to its unique identifier
         currentactiveIframe.id = currentactiveTab.dataset.iframeId;
-        // Add the inactive class
         currentactiveIframe.classList.add('inactive-frame');
-        // Hide the old iframe
         currentactiveIframe.style.display = 'none';
-
-        // Update the old tab's class
         currentactiveTab.classList.remove("tabactive");
         currentactiveTab.classList.add("tabs");
     }
 
-    // Update the new tab's class
     currentTarget.classList.remove("tabs");
     currentTarget.classList.add("tabactive");
 
-    // Get the new iframe and update its properties
     const newIframeId = currentTarget.dataset.iframeId;
     const newIframe = document.getElementById(newIframeId);
     if (newIframe) {
@@ -242,12 +220,10 @@ function changetab(currentTarget) {
         newIframe.style.display = 'block';
     }
 
-    // Update the search bar value
     const url = currentTarget.dataset.url;
     const searchbar = document.getElementById("uv-address");
     searchbar.value = url;
 
-    // Add URL to history if it's different from the last
     if (!currentTarget.history) currentTarget.history = [];
     const history = currentTarget.history;
     if (history.length === 0 || history[history.length - 1] !== url) {
@@ -296,10 +272,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (!activeTab) return;
 
-        // The active iframe is always 'uv-frame'
         const iframe = document.getElementById("uv-frame");
 
-        // Only update if the URL is non-empty
         if (newUrl) {
             activeTab.dataset.url = newUrl;
             if (!activeTab.history) activeTab.history = [];

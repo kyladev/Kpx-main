@@ -14,5 +14,4 @@ function applycloak() {
         return;
     }
 }
-// document.addEventListener("DOMContentLoaded", applycloak);
 applycloak();

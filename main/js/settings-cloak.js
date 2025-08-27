@@ -128,7 +128,7 @@ document.getElementById("faviconchooser").addEventListener("change", function ()
         link.href = e.target.result;
     };
 
-    reader.readAsDataURL(file); // Convert file to base64 URL
+    reader.readAsDataURL(file);
 });
 
 function handleunload() {

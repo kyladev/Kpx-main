@@ -55,7 +55,6 @@
 
 #shortc {
   position: relative;
-  /* or absolute/fixed/sticky */
   z-index: 100;
   text-align: center;
   padding-top: 20px;
@@ -98,7 +97,6 @@
   align-self: center;
   display: flex;
   position: relative;
-  /* or absolute/fixed/sticky */
   z-index: 100;
 }
 

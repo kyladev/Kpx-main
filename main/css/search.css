@@ -6,7 +6,6 @@
     bottom: 0;
     width: 100%;
     top: 6em;
-    /* top UI height */
     height: 90%;
     border: none;
     background-color: #141414;
@@ -63,16 +62,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Center horizontally */
     height: 30px;
     width: 30px;
     border: none;
     background-color: #383838;
     color: white;
     font-size: 18px;
-    /* Optional: adjust for better visual balance */
     border-radius: 5px;
-    /* Optional: move here so it applies always */
     cursor: pointer;
     transition: 0.3s ease-in-out;
     margin-top: -1em;
@@ -137,9 +133,7 @@
 .tab-container {
     display: flex;
     align-items: center;
-    /* Aligns #browsertabs and #addtab vertically */
     gap: 1em;
-    /* Optional: spacing between tabs and + button */
     padding: 0.15em;
     width: 100%;
     box-sizing: border-box;

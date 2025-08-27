@@ -2,8 +2,6 @@
 
 Kpx is a proxy based on **Ultraviolet**, featuring end-to-end encryption for all files, optional user accounts with hashed passwords, and a **one-session-per-account policy** to prevent server overload. It includes a customizable fake frontend to help avoid detection, ensuring that no proxy files are stored in publicly accessible folders—so unauthenticated users cannot access any pages.  
 
-On the server side, a built-in **Markov babbler** randomizes elements on pages, helping avoid basic fingerprinting attempts. Categorized logs are included for easier debugging.
-
 ---
 
 ## Requirements
@@ -29,3 +27,12 @@ Run the server with:
 
 ```bash
 npm start
+```
+
+## Credits
+
+- Me - Backend + Frontend coding
+
+- Ultraviolet - The actual proxy inside of the website
+
+- Vincent Garreau - JS Particles
