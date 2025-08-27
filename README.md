@@ -1,6 +1,6 @@
 # Kpx
 
-Kpx is a proxy based on **Ultraviolet**, featuring end-to-end encryption for all files, optional user accounts with hashed passwords, and a **one-session-per-account policy** to prevent server overload. It includes a customizable fake frontend to help avoid detection, ensuring that no proxy files are stored in publicly accessible folders so unauthenticated users cannot access any pages.  
+Kpx is a proxy based on **Scramjet**, featuring end-to-end encryption for all files, optional user accounts with hashed passwords, and a **one-session-per-account policy** to prevent server overload. It includes a customizable fake frontend to help avoid detection, ensuring that no proxy files are stored in publicly accessible folders so unauthenticated users cannot access any pages.  
 
 Development for switching to Scramjet is currently happening on the `Scramjet-Version` branch, Ultraviolet will soon not be supported by this project.
 
@@ -34,11 +34,3 @@ npm start
 ```
 
 You will need an SSL certificate, and then set the path to it's keys in `src/server.js`, I personally set it up with Certbot, which means just running the server will not work, as the path to my testing domain's SSL certs don't exist on your computer.
-
-## Credits
-
-- Me - Backend + Frontend coding
-
-- Ultraviolet - The actual proxy inside of the website
-
-- Vincent Garreau - JS Particles

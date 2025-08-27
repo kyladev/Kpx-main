@@ -7,9 +7,9 @@ async function manual_submit() {
 		throw err;
 	}
 
-	const url = search(document.getElementById("uv-address").value, document.getElementById("uv-search-engine").value);
+	const url = search(document.getElementById("sj-address").value, document.getElementById("sj-search-engine").value);
 
-	let frame = document.getElementById("uv-frame");
+	let frame = document.getElementById("sj-frame");
 	frame.style.display = "block";
 	let wispUrl = (location.protocol === "https:" ? "wss" : "ws") + "://" + location.host + "/wisp/";
 	if (await connection.getTransport() !== "/epoxy/index.mjs") {

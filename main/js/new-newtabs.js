@@ -10,7 +10,7 @@ function addiframe(first) {
     const container = document.getElementById("frame-container");
     const tabId = "iframe-" + Date.now();
     if (first === true) {
-        iframe.id = "uv-frame";
+        iframe.id = "sj-frame";
         iframe.style.display = 'block';
         const initialUrl = params.get("q") || "";
         if (initialUrl !== "") {
@@ -31,7 +31,7 @@ function getrealurl() {
     const searchUrl = "https://duckduckgo.com/";
     const params = new URLSearchParams(window.location.search);
     if (params.get("q")) {
-        document.getElementById("uv-address").value = atob(params.get("q"));
+        document.getElementById("sj-address").value = atob(params.get("q"));
         let initialUrl = atob(params.get("q"));
         console.log(initialUrl);
         if (!atob(params.get("q")).includes(".")) {
@@ -90,21 +90,21 @@ function addtab(first, url = '') {
     tab.dataset.iframeId = tabId;
 
     if (first === true) {
-        iframe.id = "uv-frame";
+        iframe.id = "sj-frame";
         iframe.style.display = 'block';
         let initialUrl = getrealurl();
         if (initialUrl === 'no-valid-url-query-is-blank') {
             iframe.src = blankpage;
-            document.getElementById('uv-address').value = '';
+            document.getElementById('sj-address').value = '';
         } else {
             tab.dataset.url = initialUrl;
             if (initialUrl !== "") {
                 tab.history.push(initialUrl);
                 iframe.src = __uv$config.prefix + __uv$config.encodeUrl(initialUrl);
-                document.getElementById('uv-address').value = initialUrl;
+                document.getElementById('sj-address').value = initialUrl;
             } else {
                 iframe.src = blankpage;
-                document.getElementById('uv-address').value = '';
+                document.getElementById('sj-address').value = '';
             }
         }
     } else {
@@ -126,8 +126,8 @@ function addtab(first, url = '') {
 
     tabcount++;
 
-    document.getElementById("uv-frame").addEventListener("load", () => {
-        const frame = document.getElementById("uv-frame");
+    document.getElementById("sj-frame").addEventListener("load", () => {
+        const frame = document.getElementById("sj-frame");
 
         if (!frame.src.includes("/uv/service/")) {
             console.log("Not a UV URL, skipping history update.");
@@ -138,7 +138,7 @@ function addtab(first, url = '') {
         const decodedUrl = __uv$config.decodeUrl(encodedPath);
 
         console.log("Iframe source changed to:", decodedUrl);
-        document.getElementById("uv-address").value = decodedUrl;
+        document.getElementById("sj-address").value = decodedUrl;
 
         const activeTab = document.querySelector(".tabactive");
 
@@ -199,7 +199,7 @@ function closetab(button) {
 
 function changetab(currentTarget) {
     const currentactiveTab = document.querySelector(".tabactive");
-    const currentactiveIframe = document.getElementById("uv-frame");
+    const currentactiveIframe = document.getElementById("sj-frame");
 
     if (currentactiveTab && currentactiveIframe) {
         currentactiveIframe.id = currentactiveTab.dataset.iframeId;
@@ -215,13 +215,13 @@ function changetab(currentTarget) {
     const newIframeId = currentTarget.dataset.iframeId;
     const newIframe = document.getElementById(newIframeId);
     if (newIframe) {
-        newIframe.id = "uv-frame";
+        newIframe.id = "sj-frame";
         newIframe.classList.remove('inactive-frame');
         newIframe.style.display = 'block';
     }
 
     const url = currentTarget.dataset.url;
-    const searchbar = document.getElementById("uv-address");
+    const searchbar = document.getElementById("sj-address");
     searchbar.value = url;
 
     if (!currentTarget.history) currentTarget.history = [];
@@ -259,7 +259,7 @@ function traverse_history(tab, direction) {
 
     if (newUrl) {
         tab.dataset.url = newUrl;
-        document.getElementById("uv-address").value = newUrl;
+        document.getElementById("sj-address").value = newUrl;
         document.getElementById("searchButton").click();
     }
 }
@@ -267,12 +267,12 @@ function traverse_history(tab, direction) {
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("searchButton").addEventListener("click", function () {
         const activeTab = document.querySelector(".tabactive");
-        const searchbar = document.getElementById("uv-address");
+        const searchbar = document.getElementById("sj-address");
         const newUrl = searchbar.value.trim();
 
         if (!activeTab) return;
 
-        const iframe = document.getElementById("uv-frame");
+        const iframe = document.getElementById("sj-frame");
 
         if (newUrl) {
             activeTab.dataset.url = newUrl;

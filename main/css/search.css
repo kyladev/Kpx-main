@@ -139,7 +139,7 @@
     box-sizing: border-box;
 }
 
-#uv-frame {
+#sj-frame {
   border: none;
   position: absolute;
   top: 6em;
@@ -149,18 +149,18 @@
   background-color: #111;
 }
 
-#uv-error {
+#sj-error {
   color: #ff6666 !important;
   white-space: pre-wrap;
 }
 
-#uv-error-code {
+#sj-error-code {
   font-size: 12px;
   color: #fff;
   font-family: "Courier New", Courier, monospace;
 }
 
-#uv-register-sw {
+#sj-register-sw {
   color: white;
   background: #555555;
   cursor: pointer;
@@ -172,15 +172,15 @@
   display: none;
 }
 
-#uv-register-sw:active {
+#sj-register-sw:active {
   background: #333333;
 }
 
-#uv-register-sw.show {
+#sj-register-sw.show {
   display: block;
 }
 
-#uv-address {
+#sj-address {
   flex: 1;
   flex-basis: auto;
   max-width: 50em;
