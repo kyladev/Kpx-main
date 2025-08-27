@@ -7,6 +7,8 @@ import * as fs from 'node:fs';
 //Misc imports
 import tls from 'tls';
 import crypto from 'node:crypto';
+import { dirname, join } from "path";
+import { createRequire } from "module";
 
 //Fastify imports
 import Fastify from "fastify";
@@ -15,13 +17,10 @@ import fastifyCookie from '@fastify/cookie';
 import fastifyFormbody from '@fastify/formbody';
 import fastifyRateLimit from "@fastify/rate-limit";
 
-//UV imports
-import { uvPath } from "@titaniumnetwork-dev/ultraviolet";
+//Proxy imports
 import { epoxyPath } from "@mercuryworkshop/epoxy-transport";
 import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
-import pkg from "@titaniumnetwork-dev/ultraviolet";
-const Ultraviolet = pkg;
-import wisp from "wisp-server-node";
+import { server as wisp, logging } from "@mercuryworkshop/wisp-js/server";
 
 //Server resources
 import { publicPath, CLEANUP_INTERVAL, logToFile } from './run-settings.js';
@@ -31,6 +30,20 @@ import startEncryption from "./encryption.js";
 import { cleanupOldSessions } from "./sessioncleaner.js";
 
 export const userSessions = new Map(); // { username: sessionId }
+
+const require = createRequire(import.meta.url);
+
+const scramjetDistPath = join(
+  dirname(require.resolve("@mercuryworkshop/scramjet/package.json")),
+  "dist"
+);
+
+logging.set_level(logging.NONE);
+Object.assign(wisp.options, {
+  allow_udp_streams: false,
+  hostname_blacklist: [/example\.com/],
+  dns_servers: ["1.1.1.3", "1.0.0.3"]
+});
 
 const cookieKey = await crypto.randomBytes(64);
 
@@ -144,8 +157,8 @@ try {
   });
 
   fastify.register(fastifyStatic, {
-    root: uvPath,
-    prefix: "/uv/",
+    root: scramjetDistPath,
+    prefix: "/scram/",
     decorateReply: false,
   });
 

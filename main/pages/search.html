@@ -10,13 +10,11 @@
   <script id="script3"></script>
   <script id="script4"></script>
   <script id="script5"></script>
-  <script id="script6" type="text/plain"></script>
-  <script id="script7" type="text/plain"></script>
-  <script id="script8" type="text/plain"></script>
+  <script id="script6"></script>
+  <script id="script7"></script>
+  <script id="script8"></script>
   <script id="script9"></script>
-  <script id="script10" type="text/plain"></script>
-  <script id="script11" type="text/plain"></script>
-  <script id="script12" type="text/plain"></script>
+  <script id="script10"></script>
   <style id="css1"></style>
   <style id="css2"></style>
   <script id="script13"></script>
@@ -31,32 +29,30 @@
       const e2ee = await initSession(sid);
       console.log("initaited E2EE session");
       document.getElementById("loading-text").innerText = "Bootstrapping files... \n\n(THIS WILL NOT WORK IF YOU ARE NOT AUTHENTICATED)";
-      document.getElementById("script1").src = '/baremux/index.js';
-      document.getElementById("script2").src = '/epoxy/index.js';
-      await injectFileContentToDOM(e2ee, sid, "nnt-js", document.getElementById("script9"));
-      await injectFileContentToDOM(e2ee, sid, "uv-bn", document.getElementById("script3"));
-      await injectFileContentToDOM(e2ee, sid, "uv-cl", document.getElementById("script4"));
-      await injectFileContentToDOM(e2ee, sid, "uv-cfg", document.getElementById("script5"));
-      await injectFileContentToDOM(e2ee, sid, "uv-rs", document.getElementById("script6"));
-      await injectFileContentToDOM(e2ee, sid, "uv-s", document.getElementById("script7"));
-      await injectFileContentToDOM(e2ee, sid, "uv-ix", document.getElementById("script8"));
+      document.getElementById("script1").src = '/scram/scramjet.all.js';
+      document.getElementById("script2").src = '/baremux/index.js';
+      document.getElementById("script3").src = '/epoxy/index.js';
+      await injectFileContentToDOM(e2ee, sid, "nnt-js", document.getElementById("script7"));
+      await injectFileContentToDOM(e2ee, sid, "sj-rsw", document.getElementById("script4"));
+      await injectFileContentToDOM(e2ee, sid, "sj-s", document.getElementById("script5"));
+      await injectFileContentToDOM(e2ee, sid, "sj-ix", document.getElementById("script6"));
       document.getElementById("title").innerText = "KPX";
       addtab(true); 
       document.getElementById("searchButton").click();
-      await injectFileContentToDOM(e2ee, sid, "sf-js", document.getElementById("script11"));
-      await injectFileContentToDOM(e2ee, sid, "sl-js", document.getElementById("script12"));
-      await injectFileContentToDOM(e2ee, sid, "c-js", document.getElementById("script13"));
+      await injectFileContentToDOM(e2ee, sid, "sf-js", document.getElementById("script8"));
+      await injectFileContentToDOM(e2ee, sid, "sl-js", document.getElementById("script9"));
+      await injectFileContentToDOM(e2ee, sid, "c-js", document.getElementById("script10"));
       await injectFileContentToDOM(e2ee, sid, "s-css", document.getElementById("css1"));
       await injectFileContentToDOM(e2ee, sid, "r-css", document.getElementById("css2"));
-      (function() {
-         const order = ["script1","script2","script3","script4","script6","script7","script8","script10","script11","script12"];
-         const scripts = order.map(id => document.getElementById(id));
-         let combined = scripts.map(s => s.textContent).join("\n");
-         const merged = document.createElement("script");
-         merged.textContent = combined;
-         scripts.forEach(s => s.remove());
-         document.head.appendChild(merged);
-       })();
+      // (function() {
+      //    const order = ["script2","script3","script4","script6","script8"];
+      //    const scripts = order.map(id => document.getElementById(id));
+      //    let combined = scripts.map(s => s.textContent).join("\n");
+      //    const merged = document.createElement("script");
+      //    merged.textContent = combined;
+      //    scripts.forEach(s => s.remove());
+      //    document.head.appendChild(merged);
+      //  })();
       document.getElementById("loading-text").innerText = "Finalizing...";
       document.getElementById("loading-screen").style = 'display:none;';
       console.log("finished loading");
@@ -77,11 +73,11 @@
       <i class="fa-solid fa-arrow-left" id="backhistory"></i>
       <i class="fa-solid fa-arrow-right" id="forwardhistory"></i>
       <i class="fa-solid fa-arrow-rotate-right"
-        onclick="document.getElementById('uv-frame').contentDocument.location.reload()"></i>
+        onclick="document.getElementById('sj-frame').contentDocument.location.reload()"></i>
     </div>
-    <form id="uv-form" class="flex-center">
-      <input id="uv-search-engine" value="https://duckduckgo.com/%s" type="hidden" />
-      <input id="uv-address" type="text" placeholder="Search the web..." />
+    <form id="sj-form" class="flex-center">
+      <input id="sj-search-engine" value="https://duckduckgo.com/%s" type="hidden" />
+      <input id="sj-address" type="text" placeholder="Search the web..." />
     </form>
     <div id="buttons-right">
       <!-- <i class="fa-solid fa-star"></i>
@@ -93,8 +89,8 @@
     </div>
   </div>
   <div class="desc left-margin">
-    <p id="uv-error"></p>
-    <pre id="uv-error-code"></pre>
+    <p id="sj-error"></p>
+    <pre id="sj-error-code"></pre>
   </div>
   <button id="searchButton" style='display: none;'></button>
   <select id="switcher" style="display: none;">

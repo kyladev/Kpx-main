@@ -1,6 +1,6 @@
 {
 	"name": "KPX",
-	"description": "A proxy based off of Ultraviolet.",
+	"description": "A proxy based off of Scramjet.",
 	"repository": "https://github.com/s-krealk/Kpx-main",
-	"keywords": ["kpx", "ultraviolet", "proxy"]
+	"keywords": ["kpx", "scramjet", "proxy"]
 }
