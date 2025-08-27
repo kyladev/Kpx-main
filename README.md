@@ -1,6 +1,6 @@
 # Kpx
 
-Kpx is a proxy based on **Ultraviolet**, featuring end-to-end encryption for all files, optional user accounts with hashed passwords, and a **one-session-per-account policy** to prevent server overload. It includes a customizable fake frontend to help avoid detection, ensuring that no proxy files are stored in publicly accessible folders—so unauthenticated users cannot access any pages.  
+Kpx is a proxy based on **Ultraviolet**, featuring end-to-end encryption for all files, optional user accounts with hashed passwords, and a **one-session-per-account policy** to prevent server overload. It includes a customizable fake frontend to help avoid detection, ensuring that no proxy files are stored in publicly accessible folders so unauthenticated users cannot access any pages.  
 
 ---
 
