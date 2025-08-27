@@ -1,7 +1,0 @@
-2025-08-26T16:46:17.299Z [ERROR] file transfer failed: path is not defined
-2025-08-26T16:48:38.531Z [ERROR] file transfer failed: path is not defined
-2025-08-26T16:51:11.294Z [ERROR] file transfer failed: path is not defined
-2025-08-26T16:51:57.779Z [ERROR] file transfer failed: The argument 'encoding' is invalid encoding. Received '/Users/kylakreal/Kproxy-main'
-2025-08-26T17:19:40.107Z [ERROR] file transfer failed: ENOENT: no such file or directory, open 'main/files/assets/windows.png'
-2025-08-26T17:19:40.108Z [ERROR] file transfer failed: ENOENT: no such file or directory, open 'main/files/assets/chatgpt-logo.png'
-2025-08-26T17:19:40.109Z [ERROR] file transfer failed: ENOENT: no such file or directory, open 'main/files/assets/plex.png'

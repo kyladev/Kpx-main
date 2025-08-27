@@ -1,5 +1,9 @@
 let tabcount = 0;
 
+const html = `<!doctypehtml><h1>Search or type a URL above to get started!</h1><style>body{font-family:Verdana;text-align:center;background-color:#000;color:#fff}</style>`;
+const blob = new Blob([html], { type: 'text/html' });
+const blankpage = URL.createObjectURL(blob);
+
 function addiframe(first) {
     const params = new URLSearchParams(window.location.search);
     let iframe = document.createElement("iframe");
@@ -15,14 +19,14 @@ function addiframe(first) {
             // tab.history.push(initialUrl);
             iframe.src = __uv$config.prefix + __uv$config.encodeUrl(initialUrl);
         } else {
-            iframe.src = "/main/files/pages/emptytab.html";
+            iframe.src = blankpage;
         }
     } else {
         // All other iframes start as inactive
         iframe.id = tabId;
         iframe.classList.add('inactive-frame');
         iframe.style.display = 'none';
-        iframe.src = "/main/files/pages/emptytab.html";
+        iframe.src = blankpage;
     }
     container.appendChild(iframe);
 }
@@ -48,115 +52,6 @@ function getrealurl() {
     }
 }
 
-// function addtab(first, url = '') {
-//     // Create tab element
-//     let tab = document.createElement("div");
-//     let close = document.createElement("div");
-//     let span = document.createElement("span");
-//     const params = new URLSearchParams(window.location.search);
-
-//     if (first === true) {
-//         tab.classList.add("tabactive");
-//     } else {
-//         tab.classList.add("tabs");
-//     }
-
-//     close.classList.add("closebutton");
-//     span.classList.add("tabtitle");
-
-//     span.innerText = "New Tab";
-//     close.innerText = "x";
-
-//     close.onclick = function (e) {
-//         e.stopPropagation();
-//         closetab(this);
-//     };
-
-//     tab.onclick = function (el) {
-//         changetab(el.currentTarget);
-//     };
-
-//     //initialize tab history and dataset
-//     tab.history = [];
-//     tab.dataset.url = '';
-
-//     //create a new iframe for this tab
-//     let iframe = document.createElement("iframe");
-//     const container = document.getElementById("frame-container");
-//     const tabId = "iframe-" + Date.now();
-
-//     //the tab identifier is its data attribute
-//     tab.dataset.iframeId = tabId;
-
-//     if (first === true) {
-//         //the first iframe is immediately the active one
-//         iframe.id = "uv-frame";
-//         iframe.style.display = 'block';
-//         let initialUrl = getrealurl();
-//         tab.dataset.url = initialUrl;
-//         if (initialUrl !== "") {
-//             tab.history.push(initialUrl);
-//             iframe.src = __uv$config.prefix + __uv$config.encodeUrl(initialUrl);
-//             document.getElementById('uv-address').value = initialUrl;
-//         } else {
-//             iframe.src = "/main/files/pages/emptytab.html";
-//             document.getElementById('uv-address').value = '';
-//         }
-//     } else {
-//         //all other iframes start as inactive
-//         iframe.id = tabId;
-//         iframe.classList.add('inactive-frame');
-//         iframe.style.display = 'none';
-//         iframe.src = "/main/files/pages/emptytab.html";
-//     }
-
-//     //append elements
-//     tab.appendChild(span);
-//     tab.appendChild(close);
-//     document.getElementById("browsertabs").appendChild(tab);
-//     container.appendChild(iframe);
-
-//     //if not the first tab, call changetab to make it active
-//     if (!first) {
-//         changetab(tab);
-//     }
-
-//     tabcount++;
-
-//     document.getElementById("uv-frame").addEventListener("load", () => {
-//         const frame = document.getElementById("uv-frame");
-
-//         if (!frame.src.includes("/uv/service/")) {
-//             console.log("Not a UV URL, skipping history update.");
-//             return;
-//         }
-
-//         const encodedPath = frame.src.split("/uv/service/")[1];
-//         const decodedUrl = __uv$config.decodeUrl(encodedPath);
-
-//         console.log("Iframe source changed to:", decodedUrl);
-//         document.getElementById("uv-address").value = decodedUrl;
-
-//         const activeTab = document.querySelector(".tabactive");
-
-//         if (activeTab) {
-//             activeTab.dataset.url = decodedUrl;
-
-//             if (!activeTab.history) {
-//                 activeTab.history = [];
-//             }
-
-//             const last = activeTab.history[activeTab.history.length - 1];
-//             if (last !== decodedUrl) {
-//                 activeTab.history.push(decodedUrl);
-//             }
-//         }
-
-//         const title = frame.contentDocument.title;
-//         const span = activeTab.querySelector("span");
-//         span.innerText = title;
-//     });
-// }
 function addtab(first, url = '') {
     // Create tab element
     let tab = document.createElement("div");
@@ -207,7 +102,7 @@ function addtab(first, url = '') {
         iframe.style.display = 'block';
         let initialUrl = getrealurl();
         if (initialUrl === 'no-valid-url-query-is-blank') {
-            iframe.src = "/main/files/pages/emptytab.html";
+            iframe.src = blankpage;
             document.getElementById('uv-address').value = '';
         } else {
             tab.dataset.url = initialUrl;
@@ -216,7 +111,7 @@ function addtab(first, url = '') {
                 iframe.src = __uv$config.prefix + __uv$config.encodeUrl(initialUrl);
                 document.getElementById('uv-address').value = initialUrl;
             } else {
-                iframe.src = "/main/files/pages/emptytab.html";
+                iframe.src = blankpage;
                 document.getElementById('uv-address').value = '';
             }
         }
@@ -224,7 +119,7 @@ function addtab(first, url = '') {
         iframe.id = tabId;
         iframe.classList.add('inactive-frame');
         iframe.style.display = 'none';
-        iframe.src = "/main/files/pages/emptytab.html";
+        iframe.src = blankpage;
     }
 
     //append elements (favicon -> span -> close)
@@ -422,7 +317,7 @@ document.addEventListener("DOMContentLoaded", function () {
             activeTab.history.push("");
 
             if (iframe) {
-                iframe.src = "/main/files/pages/emptytab.html";
+                iframe.src = blankpage;
             }
         }
     });

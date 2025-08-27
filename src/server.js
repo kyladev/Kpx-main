@@ -1,6 +1,6 @@
 //IMPORTS
 //Node imports
-import { createServer } from 'node:http';
+import { createServer } from 'node:https';
 import constants from 'node:constants';
 import * as fs from 'node:fs';
 // import { fetch } from 'node:f'
@@ -82,7 +82,7 @@ await fastify.register(fastifyCookie, {
 logToFile('info', `fastify cookies registered at ${getUptimeMs()}Ms`);
 
 await fastify.register(fastifyRateLimit, {
-  max: 100,
+  max: 1000,
   timeWindow: '1 minute'
 });
 logToFile('info', `rate limiter started ${getUptimeMs()}Ms`);
@@ -189,7 +189,7 @@ function shutdown() {
 }
 
 //proxy MUST be on 8080 for Ultraviolet to work
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 443;
 
 fastify.listen({
   port: PORT,

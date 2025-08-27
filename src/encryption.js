@@ -1,5 +1,5 @@
 import { E2EE } from 'e2ee.js';
-import { logToFile, rootPath } from './run-settings.js';
+import { logToFile } from './run-settings.js';
 import { readFile } from 'fs/promises'
 import { require_pass } from './run-settings.js';
 import { userSessions } from './server.js';
@@ -96,6 +96,11 @@ const fileMap = {
     'vsc-png': 'main/files/assets/vscode.png',
     'wnd-png': 'main/files/assets/windows.jpg',
     'wndxp-png': 'main/files/assets/windowsxp.png',
+    //game images
+    'cl-img': 'main/files/g-lib/celeste/celeste.png',
+    '28-img': 'main/files/g-lib/2048/2048.png',
+    'swpr-img': 'main/files/g-lib/minesweeper/minesweeper.png',
+    'trs-img': 'main/files/g-lib/tetris/assets/blocks/custom/square.png'
 };
 const mimeTypes = {
     '.jpg': 'image/jpeg',
