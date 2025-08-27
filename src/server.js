@@ -1,9 +1,8 @@
 //IMPORTS
 //Node imports
-import { createServer } from 'node:https';
+import { createServer } from 'node:http';
 import constants from 'node:constants';
 import * as fs from 'node:fs';
-// import { fetch } from 'node:f'
 
 //Misc imports
 import tls from 'tls';
@@ -28,7 +27,6 @@ import wisp from "wisp-server-node";
 import { publicPath, CLEANUP_INTERVAL, logToFile } from './run-settings.js';
 import register_paths from "./register-paths.js";
 import errorHandler from "./error-handler.js";
-import resources_router from "./resources-router.js";
 import startEncryption from "./encryption.js";
 import { cleanupOldSessions } from "./sessioncleaner.js";
 
@@ -133,7 +131,6 @@ try {
   fastify.register(async () => {
     await startEncryption(fastify);
   }, { prefix: '/' });
-  fastify.register(resources_router, { prefix: '/r' });
   logToFile('info', `url paths registered at ${getUptimeMs()}Ms`);
 } catch (error) {
   logToFile('error', `failed to register url paths at ${getUptimeMs()}Ms`);
@@ -188,8 +185,9 @@ function shutdown() {
   process.exit(0);
 }
 
-//proxy MUST be on 8080 for Ultraviolet to work
-const PORT = process.env.PORT || 443;
+//the site MUST have https to work on the browser since it uses the 'crypto' function
+//Ultraviolet also MUST run on 8080, i highly reccomend using a reverse proxy to route from 8080 to 443
+const PORT = process.env.PORT || 8080;
 
 fastify.listen({
   port: PORT,

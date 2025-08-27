@@ -1,14 +1,15 @@
 import { authMiddleware, rootPath, require_pass, isUserLoggedIn, logToFile } from './run-settings.js';
-import { readFile } from 'fs/promises';
+import { readFile, writeFile } from 'fs/promises';
 import crypto from 'node:crypto';
 import path from "path";
 import bcrypt from "bcrypt";
 import { loginSchema } from './sanitizer.js';
 import { readFileSync } from 'node:fs';
 
+//template for page to securely get the main HTML doc
 const template = readFileSync("src/getpage.html", "utf8");
 
-//import user data (passwords, usernames, etc.)
+//import user data
 const usersFilePath = path.join(process.cwd(), 'src/userdata.json');
 
 export default async function register_paths(fastify, userSessions) {
@@ -27,7 +28,6 @@ export default async function register_paths(fastify, userSessions) {
             return res.sendFile("public/home.html", rootPath);
         }
 
-        // return res.sendFile("main/files/pages/home.html", rootPath);
         const html = template.replace("__PAGE_ID__", "h-html");
         return res.type("text/html").send(html);
     });
@@ -104,18 +104,17 @@ export default async function register_paths(fastify, userSessions) {
         }
     });
 
-    // POST /login route
-
+    //POST /login route
     fastify.post('/login', async (request, reply) => {
         //sanitize input of login page
         const { error, value } = loginSchema.validate(request.body, { abortEarly: false });
         if (error) {
-            //invalid input, redirect or return error
+            //invalid credenitals, if there is an error, somebody may be trying attack/break into the site
             logToFile("warning", `Validation failed from ${request.ip}, potential attack: ${error.details}`);
             return reply.redirect('/login');
         }
 
-        //sanitized input set as username and password
+        //sanitized input as username and password
         const { user, pass } = value;
 
         try {
@@ -124,14 +123,15 @@ export default async function register_paths(fastify, userSessions) {
             const storedUser = json.Users?.[user];
 
             if (storedUser) {
-                // Compare the provided password with the stored hash
+                //compare with stored hash
                 const match = await bcrypt.compare(pass, storedUser.passwordHash);
 
                 if (match) {
-                    //update last login date
-                    storedUser.lastlogin = new Date().toISOString();
+                    //update last login date (unix time)
+                    storedUser.lastlogin = Math.floor(Date.now() / 1000);
+                    const updatedJson = JSON.stringify(json, null, 2);
+                    writeFile(usersFilePath, updatedJson, 'utf-8');
 
-                    // Passwords match, proceed with session logic
                     const sessionId = crypto.randomUUID();
                     userSessions.set(user, sessionId);
 
@@ -143,14 +143,15 @@ export default async function register_paths(fastify, userSessions) {
                     logToFile("info", `${user} has logged in from ${request.ip}`);
                     console.log("sign in logged:", user, new Date());
                 } else {
-                    // Passwords do not match
+                    //passwords don't match
                     reply.redirect('/login');
                 }
             } else {
-                // User not found
+                //user not found
                 reply.redirect('/login');
             }
         } catch (err) {
+            //error, something went wrong in the backend (probably)
             logToFile("error", `Login error ${request.ip} due to ${err}`);
             console.error("Login error:", err);
             reply.status(500).send("Internal Server Error");

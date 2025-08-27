@@ -52,14 +52,14 @@ document.getElementById("datalinkbutton").addEventListener("click", function () 
     makefinallink();
 });
 
-create_section(false, false, "Open in file", "Appears offline with full functionality, open the file in your browser.", "", "sections-container", 0, "fileopen-container");
-const filelink = document.createElement("a");
-const filebutton = document.createElement("button");
-filelink.href = "/main/files/pages/misc/iframe-download.html";
-filelink.download = "kpx-file";
-filebutton.innerText = "Download";
-filelink.appendChild(filebutton);
-document.getElementById("fileopen-container").appendChild(filelink);
+// create_section(false, false, "Open in file", "Appears offline with full functionality, open the file in your browser.", "", "sections-container", 0, "fileopen-container");
+// const filelink = document.createElement("a");
+// const filebutton = document.createElement("button");
+// filelink.href = "/main/files/pages/misc/iframe-download.html";
+// filelink.download = "kpx-file";
+// filebutton.innerText = "Download";
+// filelink.appendChild(filebutton);
+// document.getElementById("fileopen-container").appendChild(filelink);
 
 create_section(false, false, "Panic site", "Appears offline with full functionality, open the file in your browser.", "", "sections-container", 0, "panicsite-container");
 add_input(document.getElementById("panicsite-container"), "cpanicselector", "text", "panicconfirm");

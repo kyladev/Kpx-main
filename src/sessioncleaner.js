@@ -1,4 +1,4 @@
-import { SESSION_TIMEOUT, CLEANUP_INTERVAL } from "./run-settings.js";
+import { SESSION_TIMEOUT } from "./run-settings.js";
 import { userSessions } from "./server.js";
 const MAX_SESSION_LIFETIME = 60 * 60 * 1000; // 60m absolute lifetime
 
