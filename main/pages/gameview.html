@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title id="title"></title>
+  <title id="title">KPX</title>
   <link id="ficon" rel="icon" type="image/x-icon" href="" />
   <style id="css1"></style>
   <style id="css2"></style>
@@ -24,7 +24,6 @@
       await injectFileContentToDOM(e2ee, sid, "r-css", document.getElementById("css2"));
       await injectFileContentToDOM(e2ee, sid, "c-js", document.getElementById("script2"));
       await injectFileContentToDOM(e2ee, sid, "p-js", document.getElementById("script3"));
-      document.getElementById("title").innerText = "KPX";
       document.getElementById("loading-text").innerText = "Finalizing...";
       document.getElementById("loading-screen").style = 'display:none;';
       document.getElementById("nav-container").style = '';

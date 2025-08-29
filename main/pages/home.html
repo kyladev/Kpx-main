@@ -7,7 +7,7 @@
   <style id="css3"></style>
   <style id="css4"></style>
   <style id="css5"></style>
-  <title id="title"></title>
+  <title id="title">KPX</title>
   <link rel="icon" id="ficon" type="image/x-icon">
   <script id="script1"></script>
   <script id="script2"></script>
@@ -28,7 +28,6 @@
       await injectFileContentToDOM(e2ee, sid, "c-js", document.getElementById("script1"));
       await injectFileContentToDOM(e2ee, sid, "p-js", document.getElementById("script2"));
       document.getElementById("css1").href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,200&icon_names=gamepad,home,info,language,menu,search,settings,view_comfy_alt";
-      document.getElementById("title").innerText = "KPX";
       await injectFileContentToDOM(e2ee, sid, "nv2-pjs", document.getElementById("script3"));
       await injectFileContentToDOM(e2ee, sid, "hs-pjs", document.getElementById("script4"));
       document.getElementById("script5").innerText = `addnav2();//add_shortcut("/s?q=Z29vZ2xlLmNvbQ==", "/main/assets/googlelogo.png", "Google");add_shortcut_add_button();`;
@@ -39,7 +38,6 @@
       document.getElementById("loading-text").innerText = "Injecting dependent scripts...";
       await injectFileContentToDOM(e2ee, sid, "pj-js", document.getElementById("script9"));
       await injectFileContentToDOM(e2ee, sid, "sp-js", document.getElementById("script10"));
-      // await injectImageToDOM(e2ee, sid, "gl-png", document.getElementById("testimg"));
       document.getElementById("loading-text").innerText = "Finalizing...";
       document.getElementById("loading-screen").style = 'display:none;';
       document.getElementById("nav-container").style = '';

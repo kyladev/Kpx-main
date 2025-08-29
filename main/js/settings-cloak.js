@@ -26,8 +26,8 @@ function settitle() {
     switch (titleval) {
         case "Google Search":
             document.getElementById("ficon").setAttribute("href", "https://www.google.com/favicon.ico");
-            document.title = "calculator - Google Search";
-            localStorage.setItem('cloak', "calculator - Google Search");
+            document.title = "Google";
+            localStorage.setItem('cloak', "Google");
             localStorage.setItem('ficon', "https://www.google.com/favicon.ico");
             break;
         case "Gmail":

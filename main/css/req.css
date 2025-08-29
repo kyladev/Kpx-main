@@ -1,9 +1,22 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
 
+/*definitions for global color config*/
+
+:root {
+    --background: #151515;
+    --text: #ffffff;
+    --box-shadows: #ffffff;
+    --inputs: #202020;
+    --subheadings: #404040;
+}
+
+
+/*just stuff that is used everywhere*/
+
 body {
     font-family: Verdana;
-    background-color: #151515;
-    color: #ffffff;
+    background-color: var(--background);
+    color: var(--text);
     margin: 0px;
     padding: 0px;
     height: 100%;
@@ -18,32 +31,15 @@ h1 {
 }
 
 input {
-    background-color: #202020;
+    background-color: var(--inputs);
 }
 
 .subheading {
     text-align: center;
     margin-bottom: 20px;
-    color: #404040;
+    color: var(--subheadings);
     z-index: 10;
     position: relative;
-}
-
-.fa-solid {
-    color: white;
-    margin: 4px;
-    font-size: 16px;
-    transition: 0.15s ease-in-out;
-    z-index: 1;
-}
-
-.fa-solid:hover {
-    color: #252525;
-    margin: 4px;
-    font-size: 16px;
-    transition: 0.15s ease-in-out;
-    z-index: 1100;
-    z-index: 1;
 }
 
 a:link {

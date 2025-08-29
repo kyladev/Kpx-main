@@ -1,5 +1,5 @@
 //create top level custom colors section
-create_section(true, false, "Custom Colors", "", "top-ccolor-text", "sections-container", 0, "top-ccolor-section-items");
+create_section(true, false, "Custom Colors (WIP)", "", "top-ccolor-text", "sections-container", 0, "top-ccolor-section-items");
 
 //create background color section
 create_section(false, true, "Background Color", "Current: #202020", "background-text", "sections-container", 0, "background-section-items");

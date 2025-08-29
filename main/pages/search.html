@@ -3,8 +3,9 @@
 
 <head>
   <meta charset="utf-8" />
-  <title id="title"></title>
+  <title id="title">KPX</title>
   <link rel="icon" id="ficon" type="image/x-icon">
+  <link rel="stylesheet" id="css0">
   <script id="script1"></script>
   <script id="script2"></script>
   <script id="script3"></script>
@@ -32,11 +33,11 @@
       document.getElementById("script1").src = '/scram/scramjet.all.js';
       document.getElementById("script2").src = '/baremux/index.js';
       document.getElementById("script3").src = '/epoxy/index.js';
+      document.getElementById("css0").href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,200&icon_names=arrow_back,arrow_forward,home,refresh";
       await injectFileContentToDOM(e2ee, sid, "nnt-js", document.getElementById("script7"));
       await injectFileContentToDOM(e2ee, sid, "sj-rsw", document.getElementById("script4"));
       await injectFileContentToDOM(e2ee, sid, "sj-s", document.getElementById("script5"));
       await injectFileContentToDOM(e2ee, sid, "sj-ix", document.getElementById("script6"));
-      document.getElementById("title").innerText = "KPX";
       addtab(true); 
       document.getElementById("searchButton").click();
       await injectFileContentToDOM(e2ee, sid, "sf-js", document.getElementById("script8"));
@@ -44,15 +45,6 @@
       await injectFileContentToDOM(e2ee, sid, "c-js", document.getElementById("script10"));
       await injectFileContentToDOM(e2ee, sid, "s-css", document.getElementById("css1"));
       await injectFileContentToDOM(e2ee, sid, "r-css", document.getElementById("css2"));
-      // (function() {
-      //    const order = ["script2","script3","script4","script6","script8"];
-      //    const scripts = order.map(id => document.getElementById(id));
-      //    let combined = scripts.map(s => s.textContent).join("\n");
-      //    const merged = document.createElement("script");
-      //    merged.textContent = combined;
-      //    scripts.forEach(s => s.remove());
-      //    document.head.appendChild(merged);
-      //  })();
       document.getElementById("loading-text").innerText = "Finalizing...";
       document.getElementById("loading-screen").style = 'display:none;';
       console.log("finished loading");
@@ -70,22 +62,24 @@
   <div id="searchbox" style="margin-top: 1.25em;">
     <div id="buttons-left">
       <!-- <i class="fa-solid fa-table-list"></i> -->
-      <i class="fa-solid fa-arrow-left" id="backhistory"></i>
-      <i class="fa-solid fa-arrow-right" id="forwardhistory"></i>
-      <i class="fa-solid fa-arrow-rotate-right"
-        onclick="document.getElementById('sj-frame').contentDocument.location.reload()"></i>
+      <span class="material-symbols-outlined" id="backhistory">
+        arrow_back
+      </span>
+      <span class="material-symbols-outlined" id="forwardhistory">
+        arrow_forward
+      </span>
+      <span class="material-symbols-outlined" onclick="document.getElementById('sj-frame').contentDocument.location.reload()">
+        refresh
+      </span>
     </div>
-    <form id="sj-form" class="flex-center">
+     <form id="sj-form" class="flex-center">
       <input id="sj-search-engine" value="https://duckduckgo.com/%s" type="hidden" />
       <input id="sj-address" type="text" placeholder="Search the web..." />
-    </form>
+     </form>
     <div id="buttons-right">
-      <!-- <i class="fa-solid fa-star"></i>
-      <i class="fa-solid fa-gear"></i>
-      <i class="fa-solid fa-code"></i> -->
-      <a href="/">
-        <i class="fa-solid fa-house"></i>
-      </a>
+      <span class="material-symbols-outlined" onclick="window.location.href='/'">
+        home
+      </span>
     </div>
   </div>
   <div class="desc left-margin">

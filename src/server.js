@@ -28,7 +28,7 @@ import register_paths from "./register-paths.js";
 import errorHandler from "./error-handler.js";
 import startEncryption from "./encryption.js";
 import { cleanupOldSessions } from "./sessioncleaner.js";
-import { TLS_CERT, TLS_KEY } from './run-settings.js';
+import { TLS_CERT, TLS_KEY, rateLimit } from './run-settings.js';
 
 //Reverse proxy
 import { startReverseProxy } from './reverse-proxy.js';
@@ -101,7 +101,7 @@ await fastify.register(fastifyCookie, {
 logToFile('info', `fastify cookies registered at ${getUptimeMs()}Ms`);
 
 await fastify.register(fastifyRateLimit, {
-  max: 1000,
+  max: rateLimit,
   timeWindow: '1 minute'
 });
 logToFile('info', `rate limiter started ${getUptimeMs()}Ms`);

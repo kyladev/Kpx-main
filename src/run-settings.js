@@ -1,9 +1,17 @@
 import { userSessions } from './server.js';
 import { appendFile } from 'fs/promises';
 
+//
+//CONFIG
+//
+
 //Paths to SSL certificates
 export const TLS_KEY = "/etc/letsencrypt/live/testhostdomain.ddns.net/privkey.pem";
 export const TLS_CERT = "/etc/letsencrypt/live/testhostdomain.ddns.net/fullchain.pem";
+
+export const loggingEnabled = true; //if logging is enabled
+
+export const rateLimit = 1000; //this is how many requests can be made by someone per minute in the rate limiter
 
 //turn to false to not require logging in
 export const require_pass = true;
@@ -13,10 +21,24 @@ export const publicPath = process.cwd() + "/public";
 export const rootPath = process.cwd();
 
 //session cleanup timing and session timeout
-export const SESSION_TIMEOUT = 15 * 60 * 1000; 
-export const CLEANUP_INTERVAL = 5 * 60 * 1000;
+export const SESSION_TIMEOUT = 15 * 60 * 1000; //how long it takes for a session to timeout (default is 15 minutes)
+export const CLEANUP_INTERVAL = 5 * 60 * 1000; //the interval of when to clean old sessions, deleting them (default is 5 minutes)
+
+//password/username length requirements
+export const min_username_len = 3;
+export const max_username_len = 30;
+export const min_password_len = 8;
+export const max_password_len = 128;
+
+//
+//END OF CONFIG
+//
 
 export function logToFile(level, message) {
+    if (!loggingEnabled) {
+      return;
+    }
+
     const timestamp = new Date().toISOString();
     const logMessage = `${timestamp} [${level.toUpperCase()}] ${message}\n`;
 

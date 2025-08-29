@@ -1,6 +1,6 @@
 create_section(false, false, "Tab Cloak", "Changes the appearance of your tab", "", "sections-container", 0, "cloak-section-items");
 add_select_body(document.getElementById("cloak-section-items"), "cloakselect", "cloakset");
-add_select_option(document.getElementById("cloakselect"), "Google Search", "Google Search (calculator)");
+add_select_option(document.getElementById("cloakselect"), "Google Search", "Google Search");
 add_select_option(document.getElementById("cloakselect"), "Gmail", "Gmail");
 add_select_option(document.getElementById("cloakselect"), "Google Docs", "Google Docs");
 add_select_option(document.getElementById("cloakselect"), "Google Slides", "Google Slides");
@@ -61,7 +61,7 @@ document.getElementById("datalinkbutton").addEventListener("click", function () 
 // filelink.appendChild(filebutton);
 // document.getElementById("fileopen-container").appendChild(filelink);
 
-create_section(false, false, "Panic site", "Appears offline with full functionality, open the file in your browser.", "", "sections-container", 0, "panicsite-container");
+create_section(false, false, "Panic site", "The site to redirect to when your panic key is", "", "sections-container", 0, "panicsite-container");
 add_input(document.getElementById("panicsite-container"), "cpanicselector", "text", "panicconfirm");
 document.getElementById("panicconfirm").addEventListener("click", function () {
     setpanicsite();
