@@ -1,0 +1,11 @@
+2025-08-29T05:28:25.585Z [IMPORTANT] beginning server startup
+2025-08-29T05:28:25.594Z [IMPORTANT] Server startup completed in 8.46475Ms, server listening on port 8080
+2025-08-29T05:28:25.603Z [IMPORTANT] Reverse proxy startup completed in 18.15625Ms, server listening on port 8080
+2025-08-29T05:29:29.791Z [IMPORTANT] beginning server startup
+2025-08-29T05:29:29.799Z [IMPORTANT] Server startup completed in 8.552625Ms, server listening on port 8080
+2025-08-29T05:29:29.805Z [IMPORTANT] Reverse proxy startup completed in 14.18725Ms, server listening on port 8080
+2025-08-29T05:39:29.823Z [IMPORTANT] beginning server startup
+2025-08-29T05:39:29.838Z [IMPORTANT] Server startup completed in 14.880875Ms, server listening on port 8080
+2025-08-29T05:43:08.734Z [IMPORTANT] beginning server startup
+2025-08-29T05:43:08.743Z [IMPORTANT] Server startup completed in 9.041583Ms, server listening on port 8080
+2025-08-29T05:43:08.743Z [IMPORTANT] Skipped initalizing reverse proxy, listening on 8080 at 9.094291Ms

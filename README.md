@@ -2,16 +2,22 @@
 
 Kpx is a proxy based on **Scramjet**, featuring end-to-end encryption for all files, optional user accounts with hashed passwords, and a **one-session-per-account policy** to prevent server overload. It includes a customizable fake frontend to help avoid detection, ensuring that no proxy files are stored in publicly accessible folders so unauthenticated users cannot access any pages.  
 
-Development for switching to Scramjet is currently happening on the `Scramjet-Version` branch, Ultraviolet will soon not be supported by this project.
+Development for Ultraviolet, and a depricated version can be found on the `old-ultraviolet` branch.
 
-For more detailed instructions on setup, see the **Setup** section at the bottom.
+For more detailed instructions on setup, see the **Setup** and **SSL Certificates** section at the bottom.
 
 ---
 
 ## Requirements
 
 - Must be run over **HTTPS** in the browser; otherwise, the `crypto` function will not be accessible to the website.  
-- The main Node.js server must run on **port 8080**. Using a reverse proxy to route from 8080 to 443 is highly recommended for production setups.
+- The main Node.js server must run on **port 8080**. The server code includes a built-in reverse proxy if you want to access it from outside the same computer you host on, but that means you need an **SSL Certificate** for a domain name you will use.
+
+---
+
+## Deployment
+
+This proxy must be deployed on non-static hosting platforms, such examples are self-hosting on your own computer (a guide on that is provided here), deploying to a cloud provider (AWS, Google Cloud Run, etc.), and just any platform that allows running a NodeJS server.
 
 ---
 
@@ -35,26 +41,35 @@ First, you need an SSL certificate if you are not accessing this proxy on the sa
 npm start
 ```
 
-If you are not, then you can either go with 2 options (assuming you host on your own computer); You can host with https or http on the main server, either way, you will need a reverse proxy. I have made one for this exact purpose at `https://github.com/kyladev/NodeJS-Reverse-Proxy`. You will need an SSL certificate for this.
+If you are not, then you can simply run the command below after setting up your SSL certifcate (see the "SSL Certificates" section below).
 
-**Note: you can avoid running a reverse proxy if you have your SSL certificate on the main server, but your links will have to include ':8080' at the end. ex: 'example.com:8080'; You still will need a SSL certificate, and this is not reccomended, as it makes it harder to find for users.**
+**Note: Change the path of the SSL certificate in the `src/run-settings.js` file**
 
-Run the reverse proxy with the example command in the README of the project, and start the server with the either of these 2:
-
-```bash
-npm start
-```
 ```bash
 node src/server.js --use-https
 ```
-
-If using the second option, you will need to replace the path for SSL certificates to your own in `src/server.js`. You also will need to do this with the reverse proxy. 
 
 **Note: testing and development is done on a Unix system.**
 
 What is likely is that it will not work because of the permissions needed to access the SSL certificates. A quick fix is to just run it as root, but this may be unsecure. You can also disable the permissions needed to access it, but that means your certificates could get stolen.
 
 It is reccomended that you create a user group with access to the certificates, give them ownership instead of the root, and then disable logging in for them.
+
+Otherwise, for a quick fix, just run the NodeJS app as root/admin.
+
+---
+
+## SSL Certificates
+
+**This guide is for if you are self hosting. If you use a cloud provider, SSL will usualy be handled by them**
+
+You will need a domain name for this. Getting started, you can use free domains from places like [NoIP](https://www.noip.com/), or you can buy your own.
+
+For SSL certificates, I highly suggest using Certbot. Visit their site with the link below, and follow the instructions for "other" software, on whatever OS you are running in the "system" box. Follow the setup for a standalone SSL certificate with your domain name.
+
+Now you need to find your public IP. To do this, simply go to [this website](https://whatsmyip.org), and set that as the IP where the domain name you have will be pointing to, with a type A DNS record.
+
+## General config
 
 To create new users, follow this format:
 
@@ -63,3 +78,5 @@ node util/makenewuser.js <username> <password>
 ```
 
 Both arguments must be strings.
+
+To configure most things, just go to the `src/run-settings.js` file.

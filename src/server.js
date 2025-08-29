@@ -28,6 +28,10 @@ import register_paths from "./register-paths.js";
 import errorHandler from "./error-handler.js";
 import startEncryption from "./encryption.js";
 import { cleanupOldSessions } from "./sessioncleaner.js";
+import { TLS_CERT, TLS_KEY } from './run-settings.js';
+
+//Reverse proxy
+import { startReverseProxy } from './reverse-proxy.js';
 
 const useHTTPS = process.argv.includes('--use-https');
 
@@ -59,13 +63,13 @@ function getUptimeMs() {
 
 const serverType = useHTTPS
   ? createServer({
-  key: fs.readFileSync('/etc/letsencrypt/live/test.com/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/test.com/fullchain.pem'),
-  minVersion: 'TLSv1.2', // Don't allow TLSv1.1 or older
-  ciphers: tls.DEFAULT_CIPHERS,
-  honorCipherOrder: true,
-  secureOptions: constants.SSL_OP_NO_SSLv2 | constants.SSL_OP_NO_SSLv3, // Disable SSLv2/v3
-})
+    key: fs.readFileSync(TLS_KEY),
+    cert: fs.readFileSync(TLS_CERT),
+    minVersion: 'TLSv1.2', // Don't allow TLSv1.1 or older
+    ciphers: tls.DEFAULT_CIPHERS,
+    honorCipherOrder: true,
+    secureOptions: constants.SSL_OP_NO_SSLv2 | constants.SSL_OP_NO_SSLv3, // Disable SSLv2/v3
+  })
   : createServer();
 
 const fastify = Fastify({
@@ -213,3 +217,19 @@ fastify.listen({
 
 logToFile('important', `Server startup completed in ${getUptimeMs()}Ms, server listening on port ${PORT}`);
 console.log(`Server startup completed in ${getUptimeMs()}Ms, server listening on port ${PORT}`);
+
+//BUILT-IN REVERSE PROXY
+//automatically listens to 443, takes proxy input from 8080
+if (useHTTPS) {
+  startReverseProxy({
+    target: "http://127.0.0.1:8080",
+    enableHttpRedirect: true,   // will start :80 redirect
+    tlsKey: TLS_KEY,
+    tlsCert: TLS_CERT,
+  });
+  logToFile('important', `Started reverse proxy in ${getUptimeMs()}Ms`);
+  console.log(`Started reverse proxy in ${getUptimeMs()}Ms`);
+} else {
+  logToFile('important', `Skipped initalizing reverse proxy, listening on ${PORT} at ${getUptimeMs()}Ms`);
+  console.log(`Skipped initalizing reverse proxy, listening on ${PORT} at ${getUptimeMs()}Ms`);
+}

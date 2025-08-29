@@ -1,6 +1,10 @@
 import { userSessions } from './server.js';
 import { appendFile } from 'fs/promises';
 
+//Paths to SSL certificates
+export const TLS_KEY = "/etc/letsencrypt/live/testhostdomain.ddns.net/privkey.pem";
+export const TLS_CERT = "/etc/letsencrypt/live/testhostdomain.ddns.net/fullchain.pem";
+
 //turn to false to not require logging in
 export const require_pass = true;
 

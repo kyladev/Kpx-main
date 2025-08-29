@@ -1,0 +1,45 @@
+2025-08-29T05:28:25.589Z [INFO] fastify options processed at 4.137542Ms
+2025-08-29T05:28:25.589Z [INFO] fastify started at 4.176084Ms
+2025-08-29T05:28:25.593Z [INFO] fastify cookies registered at 7.669292Ms
+2025-08-29T05:28:25.593Z [INFO] error handler registered at 8.005084Ms
+2025-08-29T05:28:25.593Z [INFO] url paths registered at 8.024875Ms
+2025-08-29T05:28:25.594Z [INFO] proxy paths registered at 8.273084Ms
+2025-08-29T05:28:25.593Z [INFO] prehandler registered at 7.982375Ms
+2025-08-29T05:28:25.593Z [INFO] rate limiter started 7.964875Ms
+2025-08-29T05:28:25.594Z [INFO] session cleaner started at 8.288584Ms
+2025-08-29T05:28:25.605Z [INFO] starting encrytion backend
+2025-08-29T05:28:25.610Z [INFO] fastify listening at 24.654042Ms
+2025-08-29T05:29:29.795Z [INFO] fastify options processed at 4.246917Ms
+2025-08-29T05:29:29.795Z [INFO] fastify started at 4.283625Ms
+2025-08-29T05:29:29.799Z [INFO] rate limiter started 7.999333Ms
+2025-08-29T05:29:29.799Z [INFO] fastify cookies registered at 7.69175Ms
+2025-08-29T05:29:29.799Z [INFO] error handler registered at 8.041583Ms
+2025-08-29T05:29:29.799Z [INFO] url paths registered at 8.062708Ms
+2025-08-29T05:29:29.799Z [INFO] session cleaner started at 8.432667Ms
+2025-08-29T05:29:29.807Z [INFO] starting encrytion backend
+2025-08-29T05:29:29.799Z [INFO] prehandler registered at 8.019292Ms
+2025-08-29T05:29:29.811Z [INFO] fastify listening at 20.028792Ms
+2025-08-29T05:29:29.799Z [INFO] proxy paths registered at 8.324208Ms
+2025-08-29T05:39:29.831Z [INFO] fastify options processed at 8.144417Ms
+2025-08-29T05:39:29.831Z [INFO] fastify started at 8.182042Ms
+2025-08-29T05:39:29.837Z [INFO] fastify cookies registered at 13.931417Ms
+2025-08-29T05:39:29.837Z [INFO] error handler registered at 14.415Ms
+2025-08-29T05:39:29.837Z [INFO] url paths registered at 14.439917Ms
+2025-08-29T05:39:29.837Z [INFO] prehandler registered at 14.387208Ms
+2025-08-29T05:39:29.837Z [INFO] session cleaner started at 14.754375Ms
+2025-08-29T05:39:29.837Z [INFO] proxy paths registered at 14.739083Ms
+2025-08-29T05:39:29.849Z [INFO] starting encrytion backend
+2025-08-29T05:39:29.852Z [INFO] fastify listening at 29.443833Ms
+2025-08-29T05:39:29.837Z [INFO] rate limiter started 14.358125Ms
+2025-08-29T05:39:34.034Z [INFO] missing cookies from user cookie undefined and session cookie undefined at 127.0.0.1
+2025-08-29T05:43:08.738Z [INFO] fastify options processed at 4.219333Ms
+2025-08-29T05:43:08.742Z [INFO] rate limiter started 8.371083Ms
+2025-08-29T05:43:08.738Z [INFO] fastify started at 4.263333Ms
+2025-08-29T05:43:08.742Z [INFO] fastify cookies registered at 8.043666Ms
+2025-08-29T05:43:08.742Z [INFO] error handler registered at 8.417375Ms
+2025-08-29T05:43:08.742Z [INFO] prehandler registered at 8.393708Ms
+2025-08-29T05:43:08.743Z [INFO] proxy paths registered at 8.810916Ms
+2025-08-29T05:43:08.743Z [INFO] session cleaner started at 8.891666Ms
+2025-08-29T05:43:08.745Z [INFO] starting encrytion backend
+2025-08-29T05:43:08.750Z [INFO] fastify listening at 16.118Ms
+2025-08-29T05:43:08.742Z [INFO] url paths registered at 8.442333Ms
