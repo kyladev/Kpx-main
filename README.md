@@ -37,18 +37,20 @@ npm start
 
 If you are not, then you can either go with 2 options (assuming you host on your own computer); You can host with https or http on the main server, either way, you will need a reverse proxy. I have made one for this exact purpose at `https://github.com/kyladev/NodeJS-Reverse-Proxy`. You will need an SSL certificate for this.
 
+**Note: you can avoid running a reverse proxy if you have your SSL certificate on the main server, but your links will have to include ':8080' at the end. ex: 'example.com:8080'; You still will need a SSL certificate, and this is not reccomended, as it makes it harder to find for users.**
+
 Run the reverse proxy with the example command in the README of the project, and start the server with the either of these 2:
 
 ```bash
 npm start
 ```
 ```bash
-node src/index.js --use-https
+node src/server.js --use-https
 ```
 
 If using the second option, you will need to replace the path for SSL certificates to your own in `src/server.js`. You also will need to do this with the reverse proxy. 
 
-Note: testing and development is done on a Unix system.
+**Note: testing and development is done on a Unix system.**
 
 What is likely is that it will not work because of the permissions needed to access the SSL certificates. A quick fix is to just run it as root, but this may be unsecure. You can also disable the permissions needed to access it, but that means your certificates could get stolen.
 
