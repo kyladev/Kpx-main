@@ -1,0 +1,17 @@
+the src folder is all backend type files like the server itself.
+
+the public folder contains any fake pages you want to be accessible to 
+anyone without logging in (if you have that enabled)
+
+my prebuilt pages that i personally use for the fake frontend are stored in the prebuilt folder,
+but the templates are stored in the public folder
+
+the main folder has all of the proxy files, but aren't accessible,
+they can only get out through the encrypted end point of the server
+
+the logs folder has all logs, you may want to clear these out occasionally,
+they are sorted by severity in this order:
+1: errors.log - something really went wrong
+2: warnings.log - something might be going wrong, more important notifications
+3: important.log - important info about the running server
+4: info.log - detailed info about the server running

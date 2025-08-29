@@ -53,3 +53,11 @@ Note: testing and development is done on a Unix system.
 What is likely is that it will not work because of the permissions needed to access the SSL certificates. A quick fix is to just run it as root, but this may be unsecure. You can also disable the permissions needed to access it, but that means your certificates could get stolen.
 
 It is reccomended that you create a user group with access to the certificates, give them ownership instead of the root, and then disable logging in for them.
+
+To create new users, follow this format:
+
+```bash
+node util/makenewuser.js <username> <password>
+```
+
+Both arguments must be strings.

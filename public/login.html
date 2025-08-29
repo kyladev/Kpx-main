@@ -3,124 +3,19 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Login - Knetwork</title>
+    <title>Example Login Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/assets/favicon.ico">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            background-color: #f4f6f8;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .login-container {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 24px;
-            font-size: 1.5rem;
-            color: #333;
-        }
-
-        input[type="text"],
-        input[type="password"] {
-            width: 93.5%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: #0078D4;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #005ea2;
-        }
-
-        .signup-link {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 0.95rem;
-            color: #555;
-        }
-
-        .signup-link a {
-            color: #0078D4;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .signup-link a:hover {
-            text-decoration: underline;
-        }
-
-        .contact-info {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 0.95rem;
-            color: #555;
-        }
-
-        .contact-info a {
-            color: #0078D4;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .contact-info a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 480px) {
-            .login-container {
-                padding: 20px;
-            }
-        }
-    </style>
 </head>
 
 <body>
-    <div class="login-container">
-        <h1 style="font-size: 40px;">KNETWORK</h1>
-        <hr style="width: 100%; border: 1px solid #ccc; margin: 10px 0;">
-        <h1>Log into your account</h1>
-        <form action="/login" method="POST">
-            <input type="text" id="user" name="user" placeholder="Username" required>
-            <input type="password" id="pass" name="pass" placeholder="Password" required>
-            <button type="submit">Login</button>
-        </form>
-        <div class="signup-link">
-            <p>Don't have an account? <a href="/register">Create one</a></p>
-        </div>
-        <div class="contact-info">
-            <p>Need help accessing your account? <br>
-                Contact the administrator at <a
-                    href="mailto:support@knetwork.dev">support@knetwork.dev</a>
-            </p>
-        </div>
+    <h1>This is an example login page template.</h1>
+    <h2>Log in</h2>
+    <form action="/login" method="POST">
+        <input type="text" id="user" name="user" placeholder="Username" required>
+        <input type="password" id="pass" name="pass" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
     </div>
 </body>
 
