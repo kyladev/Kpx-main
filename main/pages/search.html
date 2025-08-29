@@ -43,9 +43,10 @@
       await injectFileContentToDOM(e2ee, sid, "sf-js", document.getElementById("script8"));
       await injectFileContentToDOM(e2ee, sid, "sl-js", document.getElementById("script9"));
       await injectFileContentToDOM(e2ee, sid, "c-js", document.getElementById("script10"));
-      await injectFileContentToDOM(e2ee, sid, "s-css", document.getElementById("css1"));
-      await injectFileContentToDOM(e2ee, sid, "r-css", document.getElementById("css2"));
+      await injectFileContentToDOM(e2ee, sid, "r-css", document.getElementById("css1"));
+      await injectFileContentToDOM(e2ee, sid, "s-css", document.getElementById("css2"));
       document.getElementById("loading-text").innerText = "Finalizing...";
+      (function(){const root=document.querySelector(':root');for(let i=0;i<localStorage.length;i+=1){const key=localStorage.key(i);const val=localStorage.getItem(key);if(key.startsWith("--")){root.style.setProperty(key,val);console.log(`applied custom color setting ${ key } set to ${ val }`)}}console.log("applied custom colors")})();
       document.getElementById("loading-screen").style = 'display:none;';
       console.log("finished loading");
       document.getElementById("loading-screen").remove();

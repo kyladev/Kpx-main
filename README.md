@@ -29,8 +29,6 @@ This project is still under development, and errors may occur. It has been teste
 
 - **Bad file loading timing**: May cause pages to break on the client side. This usually does not occur but is a potential issue.
 
-- **Custom colors**: I just haven't fixed them yet, this will be done soon.
-
 ---
 
 ## Setup

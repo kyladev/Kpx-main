@@ -3,22 +3,22 @@
     max-height: 60vh;
     width: 80vw;
     box-sizing: border-box;
-    background-color: #303030;
-    box-shadow: 0 0 8px #ffffff;
+    background-color: var(--layer-1);
+    box-shadow: 0 0 8px var(--box-shadows);
     border-radius: 20px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
 }
 
-.siteicons-header {
+/* .siteicons-header {
     background-color: #404040;
     padding: 10px 20px;
     position: sticky;
     top: 0;
     z-index: 10;
     border-bottom: 1px solid #555;
-}
+} */
 
 .siteicons-grid {
     display: grid;
@@ -30,8 +30,8 @@
 }
 
 .siteicon-container {
-    background-color: #404040;
-    border: 2px solid #555555;
+    background-color: var(--layer-2);
+    border: 2px solid var(--border-4);
     border-radius: 15px;
     padding: 10px;
     height: 135px;
@@ -51,12 +51,12 @@
 
 .siteicon-container:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 0 4px white;
+    box-shadow: 0 0 0 4px var(--box-shadows);
 }
 
 .sitename {
     margin-top: 10px;
-    color: white;
+    color: var(--text);
     font-size: 14px;
 }
 
@@ -71,29 +71,29 @@
 .sitename:link,
 .sitename:visited {
     text-align: center;
-    color: white;
+    color: var(--text);
     text-decoration: none !important;
 }
 
-input {
+/* input {
     padding: 8px;
     border-radius: 5px;
-    color: #ffffff;
+    color: var(--text);
     margin: 8px;
-    border: 1px solid #181818;
+    border: 1px solid var(--border-1);
     font-size: 14px;
     width: 400px;
     transition: 0.2s ease-in-out
 }
 
 input:hover {
-    background-color: #252525;
+    background-color: var(--hover-1);
     transition: 0.2s ease-in-out
 }
 
 input:focus {
-    background-color: #252525;
+    background-color: var(--hover-1);
     outline: 4px #7d7d7d;
-    border: 1px solid #7d7d7d;
+    border: 1px solid var(--hover-border);
     transition: 0.2s ease-in-out
-}
+} */

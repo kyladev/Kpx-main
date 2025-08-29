@@ -2,13 +2,13 @@
   width: 3em;
   height: 100vh;
   list-style-type: none;
-  background-color: #252525;
+  background-color: var(--nav-background);
   margin: 0;
   padding: 0;
   position: fixed;
   left: 0;
   top: 0;
-  border-right: #606060 solid 1px;
+  border-right: var(--nav-border) solid 1px;
   transition: width 0.3s ease;
   overflow-x: hidden;
   direction: ltr; 
@@ -26,7 +26,7 @@
 }
 
 .iconitem:hover {
-    background-color: #303030;
+    background-color: var(--nav-hover);
     transition: 0.1s 0.1s ease;
 }
 
@@ -34,7 +34,7 @@
   display: flex;
   align-items: center;
   gap: 0.5em;
-  color: white;
+  color: var(--text);
   text-decoration: none;
   padding: 0.75em;
   width: 100%;
@@ -60,25 +60,7 @@
   justify-content: flex-start;
   background: none;
   border: none;
-  color: white;
-  margin-left: -0.25em;
-  font-size: 1.5em;
-  padding: 0.75em;
-  width: 100%;
-  height: auto;
-  text-align: left;
-  cursor: pointer;
-  z-index: 0;
-  position: relative;
-}
-
-.testbutton {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  background: none;
-  border: none;
-  color: white;
+  color: var(--text);
   margin-left: -0.25em;
   font-size: 1.5em;
   padding: 0.75em;
@@ -91,7 +73,7 @@
 }
 
 hr {
-  border-color: #606060;
+  border-color: var(--nav-border);
   margin: 0.5em 0;
 }
 
@@ -105,7 +87,7 @@ a {
   display: flex;
   align-items: center;
   gap: 0.5em;
-  color: white;
+  color: var(--text);
   text-decoration: none;
   z-index: 1;
 }

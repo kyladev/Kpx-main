@@ -3,7 +3,7 @@
   padding-top: 40px;
   font-size: 60px;
   position: relative;
-  color: #ffffff;
+  color: var(--text);
 
 }
 
@@ -18,28 +18,28 @@
   width: 85vw;
   height: 35px;
   max-width: 800px;
-  border: 1px solid white;
+  border: 1px solid var(--border-2);
   border-radius: 25px;
-  background-color: #151515;
-  color: #ffffff;
+  background-color: var(--background);
+  color: var(--text);
   font-size: 16px;
-  box-shadow: 0 0 4px #303030;
+  box-shadow: 0 0 4px var(--layer-1);
   transition: border-color 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
   z-index: 1;
 }
 
 #searchbar:hover {
-  border: 1px solid white;
-  box-shadow: 0 0 5px white;
+  border: 1px solid var(--border-2);
+  box-shadow: 0 0 5px var(--box-shadows);
   transition: border-color 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 #searchbar:focus {
-  background-color: #202020;
-  outline: 4px white;
-  border: 1px solid white;
-  box-shadow: 0 0 7px white;
+  background-color: var(--inputs);
+  outline: 4px var(--border-2);
+  border: 1px solid var(--border-2);
+  box-shadow: 0 0 7px var(--box-shadows);
   transition: border-color 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
@@ -53,13 +53,13 @@
   z-index: 1;
 }
 
-#shortc {
+/* #shortc {
   position: relative;
   z-index: 100;
   text-align: center;
   padding-top: 20px;
   font-family: Arial;
-  color: #ffffff;
+  color: var(--text);
   align-items: center;
 }
 
@@ -71,7 +71,7 @@
   display: block;
   margin-left: 5px;
   margin-right: 5px;
-  color: #ffffff;
+  color: var(--text);
   text-align: center;
   background: #303030;
   border: #404040 2px solid;
@@ -98,16 +98,4 @@
   display: flex;
   position: relative;
   z-index: 100;
-}
-
-#ducklogo {
-  width: 40px;
-}
-
-#plus {
-  width: 40px;
-}
-
-#user {
-  color: #ffffff;
-}
+} */

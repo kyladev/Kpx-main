@@ -22,8 +22,8 @@
       const e2ee = await initSession(sid);
       console.log("initaited E2EE session");
       document.getElementById("loading-text").innerText = "Bootstrapping files...";
-      await injectFileContentToDOM(e2ee, sid, "a-css", document.getElementById("css2"));
-      await injectFileContentToDOM(e2ee, sid, "r-css", document.getElementById("css3"));
+      await injectFileContentToDOM(e2ee, sid, "r-css", document.getElementById("css2"));
+      await injectFileContentToDOM(e2ee, sid, "a-css", document.getElementById("css3"));
       await injectFileContentToDOM(e2ee, sid, "p-css", document.getElementById("css4"));
       await injectFileContentToDOM(e2ee, sid, "n-css", document.getElementById("css5"));
       await injectFileContentToDOM(e2ee, sid, "c-js", document.getElementById("script1"));
@@ -41,6 +41,7 @@
       await injectFileContentToDOM(e2ee, sid, "sp-js", document.getElementById("script9"));
       addnav2();
       document.getElementById("loading-text").innerText = "Finalizing...";
+      (function(){const root=document.querySelector(':root');for(let i=0;i<localStorage.length;i+=1){const key=localStorage.key(i);const val=localStorage.getItem(key);if(key.startsWith("--")){root.style.setProperty(key,val);console.log(`applied custom color setting ${ key } set to ${ val }`)}}console.log("applied custom colors")})();
       document.getElementById("loading-screen").style = 'display:none;';
       document.getElementById("nav-container").style = '';
       console.log("finished loading");

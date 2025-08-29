@@ -8,29 +8,11 @@
     top: 6em;
     height: 90%;
     border: none;
-    background-color: #141414;
-    z-index: 1;
-}
-
-.fa-solid {
-    color: white;
-    margin: 4px;
-    font-size: 16px;
-    transition: 0.15s ease-in-out;
-    z-index: 1;
-}
-
-.fa-solid:hover {
-    color: #252525;
-    margin: 4px;
-    font-size: 16px;
-    transition: 0.15s ease-in-out;
-    z-index: 1100;
+    background-color: var(--search-background);
     z-index: 1;
 }
 
 #searchbox {
-    background-color: #1d1d1d;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -61,8 +43,6 @@
     height: 0;
     border: 0;
     outline: 0;
-    color: #141414;
-    background-color: white;
     font-size: 0px;
 }
 
@@ -82,8 +62,8 @@
     height: 30px;
     width: 30px;
     border: none;
-    background-color: #383838;
-    color: white;
+    background-color: var(--search-button-1);
+    color: var(--text);
     font-size: 18px;
     border-radius: 5px;
     cursor: pointer;
@@ -92,7 +72,7 @@
 }
 
 #addtab:hover {
-    background-color: #303030;
+    background-color: var(--search-button-2);
 }
 
 .tabactive,
@@ -101,7 +81,7 @@
     justify-content: space-between;
     align-items: center;
     font-size: small;
-    background-color: #303030;
+    background-color: var((--search-button-2));
     padding: 4px 12px;
     border-radius: 5px;
     width: 160px;
@@ -112,11 +92,11 @@
 }
 
 .tabs:hover {
-    background-color: #363636;
+    background-color: var(--search-button-1);
 }
 
 .tabactive {
-    background-color: #6d6d6d;
+    background-color: var(--search-tab-active);
 }
 
 .tabtitle {
@@ -163,7 +143,7 @@
   left: 0;
   width: 100%;
   height: 90%;
-  background-color: #111;
+  background-color: #000000;
 }
 
 #sj-error {
@@ -207,8 +187,8 @@
   height: 1.5em;
   border: 0;
   outline: 0;
-  color: white;
-  background-color: #161616;
+  color: var(--text);
+  background-color: var(--search-input);
   font-size: 1.2em;
   border-radius: 5px;
 }

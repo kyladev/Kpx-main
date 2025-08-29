@@ -25,6 +25,7 @@
       await injectFileContentToDOM(e2ee, sid, "c-js", document.getElementById("script2"));
       await injectFileContentToDOM(e2ee, sid, "p-js", document.getElementById("script3"));
       document.getElementById("loading-text").innerText = "Finalizing...";
+      (function(){const root=document.querySelector(':root');for(let i=0;i<localStorage.length;i+=1){const key=localStorage.key(i);const val=localStorage.getItem(key);if(key.startsWith("--")){root.style.setProperty(key,val);console.log(`applied custom color setting ${ key } set to ${ val }`)}}console.log("applied custom colors")})();
       document.getElementById("loading-screen").style = 'display:none;';
       document.getElementById("nav-container").style = '';
       console.log("finished loading");
