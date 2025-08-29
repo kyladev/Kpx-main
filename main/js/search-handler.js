@@ -26,7 +26,7 @@ document.getElementById("searchButton").onclick = async function (event) {
     if (!await connection.getTransport()) {
         await connection.setTransport("/epoxy/index.mjs", [{ wisp: wispUrl }]);
     }
-    document.getElementById("sj-frame").src = __uv$config.prefix + __uv$config.encodeUrl(url);
+    document.getElementById("sj-frame").src = "/scram/" + encodeURIComponent(url);
 };
 document.getElementById("switcher").value = "epoxy";
 document.getElementById("switcher").onselect = async function (event) {

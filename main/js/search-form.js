@@ -19,5 +19,5 @@ async function manual_submit() {
 		return;
 	}
 
-	frame.src = __uv$config.prefix + __uv$config.encodeUrl(url);
+	frame.src = "/scram/" + encodeURIComponent(url);
 }

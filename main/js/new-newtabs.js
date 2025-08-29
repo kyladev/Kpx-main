@@ -14,7 +14,7 @@ function addiframe(first) {
         iframe.style.display = 'block';
         const initialUrl = params.get("q") || "";
         if (initialUrl !== "") {
-            iframe.src = __uv$config.prefix + __uv$config.encodeUrl(initialUrl);
+            iframe.src = "/scram/" + encodeURIComponent(initialUrl);
         } else {
             iframe.src = blankpage;
         }
@@ -100,7 +100,7 @@ function addtab(first, url = '') {
             tab.dataset.url = initialUrl;
             if (initialUrl !== "") {
                 tab.history.push(initialUrl);
-                iframe.src = __uv$config.prefix + __uv$config.encodeUrl(initialUrl);
+                iframe.src = "/scram/" + encodeURIComponent(initialUrl);
                 document.getElementById('sj-address').value = initialUrl;
             } else {
                 iframe.src = blankpage;
@@ -129,13 +129,13 @@ function addtab(first, url = '') {
     document.getElementById("sj-frame").addEventListener("load", () => {
         const frame = document.getElementById("sj-frame");
 
-        if (!frame.src.includes("/uv/service/")) {
-            console.log("Not a UV URL, skipping history update.");
+        if (!frame.src.includes("/scram/")) {
+            console.log("Not a SJ URL, skipping history update.");
             return;
         }
 
-        const encodedPath = frame.src.split("/uv/service/")[1];
-        const decodedUrl = __uv$config.decodeUrl(encodedPath);
+        const encodedPath = frame.src.split("/scram/")[1];
+        const decodedUrl = decodeURIComponent(encodedPath);
 
         console.log("Iframe source changed to:", decodedUrl);
         document.getElementById("sj-address").value = decodedUrl;
@@ -283,7 +283,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             if (iframe) {
-                iframe.src = __uv$config.prefix + __uv$config.encodeUrl(newUrl);
+                iframe.src = "/scram/" + encodeURIComponent(newUrl);
             }
         } else {
             activeTab.dataset.url = "";
