@@ -49,15 +49,6 @@ Object.assign(wisp.options, {
 
 const cookieKey = await crypto.randomBytes(64);
 
-const httpsOptions = {
-  key: fs.readFileSync('/etc/letsencrypt/live/test.com/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/test.com/fullchain.pem'),
-  minVersion: 'TLSv1.2', // Don't allow TLSv1.1 or older
-  ciphers: tls.DEFAULT_CIPHERS,
-  honorCipherOrder: true,
-  secureOptions: constants.SSL_OP_NO_SSLv2 | constants.SSL_OP_NO_SSLv3, // Disable SSLv2/v3
-}
-
 const startTime = process.hrtime.bigint()
 logToFile('important', `beginning server startup`);
 console.log(`beginning server startup`);
@@ -67,7 +58,14 @@ function getUptimeMs() {
 }
 
 const serverType = useHTTPS
-  ? createServer(httpsOptions)
+  ? createServer({
+  key: fs.readFileSync('/etc/letsencrypt/live/test.com/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/test.com/fullchain.pem'),
+  minVersion: 'TLSv1.2', // Don't allow TLSv1.1 or older
+  ciphers: tls.DEFAULT_CIPHERS,
+  honorCipherOrder: true,
+  secureOptions: constants.SSL_OP_NO_SSLv2 | constants.SSL_OP_NO_SSLv3, // Disable SSLv2/v3
+})
   : createServer();
 
 const fastify = Fastify({
