@@ -32,7 +32,7 @@ This project is still under development, and errors may occur. It has been teste
 First, you need an SSL certificate if you are not accessing this proxy on the same computer you host it on. If you do host on the same computer, simply run the code below, and go to `http://localhost:8080`.
 
 ```bash
-node src/server.js
+npm start
 ```
 
 If you are not, then you can either go with 2 options (assuming you host on your own computer); You can host with https or http on the main server, either way, you will need a reverse proxy. I have made one for this exact purpose at `https://github.com/kyladev/NodeJS-Reverse-Proxy`. You will need an SSL certificate for this.
