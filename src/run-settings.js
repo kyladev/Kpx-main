@@ -9,7 +9,7 @@ import { appendFile } from 'fs/promises';
 export const TLS_KEY = "/etc/letsencrypt/live/testhostdomain.ddns.net/privkey.pem";
 export const TLS_CERT = "/etc/letsencrypt/live/testhostdomain.ddns.net/fullchain.pem";
 
-export const loggingEnabled = true; //if logging is enabled
+export const loggingEnabled = false; //if logging is enabled
 
 export const rateLimit = 1000; //this is how many requests can be made by someone per minute in the rate limiter
 
