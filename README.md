@@ -6,6 +6,8 @@ Development for Ultraviolet, and a depricated version can be found on the `old-u
 
 For more detailed instructions on setup, see the **Setup** and **SSL Certificates** section at the bottom.
 
+A live demo that is usually working is available at `https://kpx-demo.knetwork.dev:8081/`. It is rate limited at 1000 requests per minute.
+
 ---
 
 ## Requirements
