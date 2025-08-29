@@ -29,6 +29,8 @@ import errorHandler from "./error-handler.js";
 import startEncryption from "./encryption.js";
 import { cleanupOldSessions } from "./sessioncleaner.js";
 
+const useHTTPS = process.argv.includes('--use-https');
+
 export const userSessions = new Map(); // { username: sessionId }
 
 const require = createRequire(import.meta.url);
@@ -48,8 +50,8 @@ Object.assign(wisp.options, {
 const cookieKey = await crypto.randomBytes(64);
 
 const httpsOptions = {
-  key: fs.readFileSync('/etc/letsencrypt/live/testhostdomain.ddns.net/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/testhostdomain.ddns.net/fullchain.pem'),
+  key: fs.readFileSync('/etc/letsencrypt/live/test.com/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/test.com/fullchain.pem'),
   minVersion: 'TLSv1.2', // Don't allow TLSv1.1 or older
   ciphers: tls.DEFAULT_CIPHERS,
   honorCipherOrder: true,
@@ -64,9 +66,13 @@ function getUptimeMs() {
   return Number(process.hrtime.bigint() - startTime) / 1_000_000;
 }
 
+const serverType = useHTTPS
+  ? createServer(httpsOptions)
+  : createServer();
+
 const fastify = Fastify({
   serverFactory: (handler) => {
-    return createServer(httpsOptions)
+    return serverType
       .on("request", (req, res) => {
         res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
         res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
